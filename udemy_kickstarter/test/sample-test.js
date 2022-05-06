@@ -26,6 +26,6 @@ describe('Campaign', ()=>{
       // const minimum_contribution = 
 
       expect(await campaign.minimum_contribution()).to.equal(100)
-      // console.log(test.toString())
+      console.log(await campaign.manager())
    })
 })
