@@ -8,7 +8,7 @@ contract Campaign {
       string description;
       uint value;
       address recipient;
-      bool complete;
+      bool completed;
    }
 
    modifier restricted() {
@@ -29,5 +29,18 @@ contract Campaign {
    function contribute() public payable{
       require(msg.value > minimum_contribution);
       approvers.push(msg.sender);
+   }
+
+   function createRequest(
+      string memory description,
+      uint value,
+      address recipient
+   ) public restricted{
+      Request memory newRequest = Request({
+         description: description,
+         value: value,
+         recipient: recipient,
+         completed: false
+      });
    }
 }
