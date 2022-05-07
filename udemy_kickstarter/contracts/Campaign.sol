@@ -4,6 +4,13 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 contract Campaign {
+   struct Request {
+      string description;
+      uint value;
+      address recipient;
+      bool complete;
+   }
+
    address public manager;
    uint public minimum_contribution;
    address[] public approvers;
