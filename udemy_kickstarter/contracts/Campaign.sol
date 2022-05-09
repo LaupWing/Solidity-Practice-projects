@@ -9,6 +9,8 @@ contract Campaign {
       uint value;
       address recipient;
       bool completed;
+      uint approvalCount;
+      mapping(address => bool) approvals;
    }
 
    modifier restricted() {
@@ -37,6 +39,7 @@ contract Campaign {
       uint value,
       address recipient
    ) public restricted{
+      require(approvers[msg.sender]);
       Request memory newRequest = Request({
          description: description,
          value: value,
