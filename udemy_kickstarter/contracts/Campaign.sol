@@ -44,7 +44,8 @@ contract Campaign {
          description: description,
          value: value,
          recipient: recipient,
-         completed: false
+         completed: false,
+         approvalCount: 0
       });
 
       requests.push(newRequest);
