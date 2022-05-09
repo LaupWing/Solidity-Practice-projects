@@ -19,7 +19,8 @@ contract Campaign {
    Request[] public requests;
    address public manager;
    uint public minimum_contribution;
-   address[] public approvers;
+   // address[] public approvers;
+   mapping (address => bool) approvers;
 
    constructor(uint minimum){
       manager = msg.sender;
@@ -28,7 +29,7 @@ contract Campaign {
 
    function contribute() public payable{
       require(msg.value > minimum_contribution);
-      approvers.push(msg.sender);
+      approvers[msg.sender] = true;
    }
 
    function createRequest(
