@@ -18,6 +18,7 @@ contract Campaign {
       _;
    }
 
+   uint numRequests;
    Request[] public requests;
    address public manager;
    uint public minimum_contribution;
@@ -35,19 +36,16 @@ contract Campaign {
    }
 
    function createRequest(
-      string memory description,
-      uint value,
-      address recipient
+      string memory _description,
+      uint _value,
+      address _recipient
    ) public restricted{
       require(approvers[msg.sender]);
-      Request memory newRequest = Request({
-         description: description,
-         value: value,
-         recipient: recipient,
-         completed: false,
-         approvalCount: 0
-      });
-
-      requests.push(newRequest);
+      Request storage newRequest = requests[numRequests++];
+      newRequest.description = _description;
+      newRequest.value = _value;
+      newRequest.recipient = _recipient;
+      newRequest.completed = false;
+      newRequest.approvalCount = 0;
    }
 }
