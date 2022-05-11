@@ -17,6 +17,7 @@ describe('Campaign', ()=>{
          
          expect(await campaign.minimum_contribution()).to.equal(100)
          expect(await campaign.name()).to.equal(name)
+         console.log(await campaign.connect(user1).customName('test2222222222222'))
       })
    })
 })
