@@ -4,9 +4,11 @@ const { ethers } = require("hardhat")
 describe('Campaign', ()=>{
    let campaign
    const name = 'Fictive game lol'
+   let deployer, user1, user2, users
 
    beforeEach(async()=>{
-      const CampaignFactory = await ethers.getContractFactory('Campaign')
+      const CampaignFactory = await ethers.getContractFactory('Campaign');
+      [deployer, user1, user2, ...users] = await ethers.getSigners();
       campaign = await CampaignFactory.deploy(name, 100)
    })
 
