@@ -10,6 +10,7 @@ describe('Campaign', ()=>{
       const CampaignFactory = await ethers.getContractFactory('Campaign');
       [deployer, user1, user2, ...users] = await ethers.getSigners();
       campaign = await CampaignFactory.deploy(name, 100)
+      console.log(ethers.utils.formatEther(await (await deployer.getBalance()).toString()))
    })
 
    describe('Deployment', async ()=>{
@@ -17,7 +18,6 @@ describe('Campaign', ()=>{
          
          expect(await campaign.minimum_contribution()).to.equal(100)
          expect(await campaign.name()).to.equal(name)
-         console.log(await campaign.connect(user1).customName('test2222222222222'))
       })
    })
 })
