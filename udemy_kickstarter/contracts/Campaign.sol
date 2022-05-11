@@ -18,6 +18,11 @@ contract Campaign {
       _;
    }
 
+   event NewContributor(
+      address contributor,
+      uint approverCount
+   );
+
    uint numRequests;
    Request[] public requests;
    address public manager;
