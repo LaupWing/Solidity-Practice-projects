@@ -76,7 +76,7 @@ contract Campaign {
       request.recipient.transfer(request.value);
    }
 
-   function customName(string memory name1) pure public returns(string memory _name) {
-      return name;
+   function customName(string memory value) view public returns(string memory _name) {
+      return string(bytes.concat(bytes(name),"-", bytes(value)));
    }
 }
