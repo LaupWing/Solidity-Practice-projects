@@ -3,23 +3,17 @@ const { ethers } = require("hardhat")
 
 describe('Campaign', ()=>{
    let campaign
+   const name = 'Fictive game lol'
 
    beforeEach(async()=>{
       const CampaignFactory = await ethers.getContractFactory('Campaign')
-      campaign = await CampaignFactory.deploy(100)
+      campaign = await CampaignFactory.deploy(name, 100)
    })
-   it('Should log out name', async()=>{
-      const Campaign = await ethers.getContractFactory('Campaign')
-      const campaign = await Campaign.deploy(100)
-      // const minimum_contribution = 
 
-      expect(await campaign.minimum_contribution()).to.equal(100)
-      console.log(await campaign.manager())
-   })
    describe('Deployment', async ()=>{
-      it('Should track name', async function(){
-         const name = 'Decentratwitter'
-
+      it('Should track name and minimum contribution', async function(){
+         
+         expect(await campaign.minimum_contribution()).to.equal(100)
          expect(await campaign.name()).to.equal(name)
       })
    })
