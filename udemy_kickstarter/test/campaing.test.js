@@ -2,6 +2,12 @@ const { expect } = require("chai")
 const { ethers } = require("hardhat")
 
 describe('Campaign', ()=>{
+   let campaign
+
+   beforeEach(async()=>{
+      const CampaignFactory = await ethers.getContractFactory('Campaign')
+      campaign = await CampaignFactory.deploy(100)
+   })
    it('Should log out name', async()=>{
       const Campaign = await ethers.getContractFactory('Campaign')
       const campaign = await Campaign.deploy(100)
