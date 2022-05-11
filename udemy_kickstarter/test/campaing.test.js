@@ -20,4 +20,10 @@ describe('Campaign', ()=>{
          expect(await campaign.name()).to.equal(name)
       })
    })
+
+   describe('Contribution', async ()=>{
+      it('Should successfully register new account with the correct contribution', async function(){
+         console.log(await campaign.connect(user1).contribute())
+      })
+   })
 })
