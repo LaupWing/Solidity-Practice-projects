@@ -22,13 +22,18 @@ contract Campaign {
    Request[] public requests;
    address public manager;
    uint public minimum_contribution;
+   string public name;
    // address[] public approvers;
    mapping (address => bool) approvers;
    uint public approversCount;
 
-   constructor(uint minimum){
+   constructor(
+      string memory _name, 
+      uint _minimum
+   ){
       manager = msg.sender;
-      minimum_contribution = minimum;
+      name = _name;
+      minimum_contribution = _minimum;
    }
 
    function contribute() public payable{

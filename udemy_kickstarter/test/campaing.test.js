@@ -16,4 +16,11 @@ describe('Campaign', ()=>{
       expect(await campaign.minimum_contribution()).to.equal(100)
       console.log(await campaign.manager())
    })
+   describe('Deployment', async ()=>{
+      it('Should track name', async function(){
+         const name = 'Decentratwitter'
+
+         expect(await campaign.name()).to.equal(name)
+      })
+   })
 })
