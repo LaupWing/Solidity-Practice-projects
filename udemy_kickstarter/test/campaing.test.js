@@ -24,9 +24,10 @@ describe('Campaign', ()=>{
    describe('Contribution', async ()=>{
       it('Should successfully register new account with the correct contribution', async ()=>{
          await campaign.connect(user1).contribute({value:200})
+         console.log((await campaign.approversCount()).toString())
       })
       it('Should unsuccessfully register new account with the incorrect contribution', async ()=>{
-         expect(await campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
+         await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
       })
    })
 })
