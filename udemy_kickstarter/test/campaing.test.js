@@ -22,11 +22,11 @@ describe('Campaign', ()=>{
    })
 
    describe('Contribution', async ()=>{
-      it('Should successfully register new account with the correct contribution', async function(){
+      it('Should successfully register new account with the correct contribution', async ()=>{
          await campaign.connect(user1).contribute({value:200})
       })
-      it('Should unsuccessfully register new account with the incorrect contribution', async function(){
-         await campaign.connect(user1).contribute({value:5})
+      it('Should unsuccessfully register new account with the incorrect contribution', async ()=>{
+         expect(await campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
       })
    })
 })
