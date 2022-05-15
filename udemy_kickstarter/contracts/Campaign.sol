@@ -52,7 +52,6 @@ contract Campaign {
       uint _value,
       address _recipient
    ) public restricted{
-      require(approvers[msg.sender]);
       Request storage newRequest = requests[numRequests++];
       newRequest.description = _description;
       newRequest.value = _value;
