@@ -30,7 +30,7 @@ contract Campaign {
    string public name;
    // address[] public approvers;
    mapping (address => bool) approvers;
-   mapping( uint => Request) requests;
+   mapping( uint => Request) public requests;
    uint public approversCount;
 
    constructor(
