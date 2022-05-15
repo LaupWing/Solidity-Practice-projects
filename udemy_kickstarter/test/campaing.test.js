@@ -30,4 +30,14 @@ describe('Campaign', ()=>{
          await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
       })
    })
+
+   describe('Creating request', async ()=>{
+      it('Should successfully create a new request', async ()=>{
+         await campaign.connect(deployer).createRequest('Test', 100, user1.address)
+         // expect((await campaign.approversCount()).toString()).to.equal('1')
+      })
+      // it('Should unsuccessfully create a new request', async ()=>{
+      //    await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
+      // })
+   })
 })
