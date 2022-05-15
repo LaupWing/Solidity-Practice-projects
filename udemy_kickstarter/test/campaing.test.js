@@ -33,6 +33,7 @@ describe('Campaign', ()=>{
 
    describe('Creating request', async ()=>{
       it('Should successfully create a new request', async ()=>{
+         console.log(user1.address)
          await campaign.connect(deployer).createRequest('Test', 100, user1.address)
          // expect((await campaign.approversCount()).toString()).to.equal('1')
       })
