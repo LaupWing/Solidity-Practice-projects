@@ -20,11 +20,11 @@ describe('Campaign', ()=>{
          expect(await campaign.name()).to.equal(name)
       })
    })
-
+   
    describe('Contribution', async ()=>{
       it('Should successfully register new account with the correct contribution', async ()=>{
          await campaign.connect(user1).contribute({value:200})
-         console.log((await campaign.approversCount()).toString())
+         expect((await campaign.approversCount()).toString()).to.equal('1')
       })
       it('Should unsuccessfully register new account with the incorrect contribution', async ()=>{
          await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
