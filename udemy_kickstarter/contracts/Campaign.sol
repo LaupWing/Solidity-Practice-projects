@@ -3,6 +3,19 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 
+contract CampaignFactory {
+   address[] public deployedCampaigns;
+
+   function createCampaign(string memory name, uint minimum) public{
+      address newCampaign = address(new Campaign(name, minimum, msg.sender));
+      deployedCampaigns.push(newCampaign);
+   }
+
+   function getDeployedCampaigns() public view returns (address[] memory){
+      return deployedCampaigns;
+   }
+}
+
 contract Campaign {
    struct Request {
       string description;
@@ -35,9 +48,10 @@ contract Campaign {
 
    constructor(
       string memory _name, 
-      uint _minimum
+      uint _minimum,
+      address creator
    ){
-      manager = msg.sender;
+      manager = creator;
       name = _name;
       minimum_contribution = _minimum;
    }
