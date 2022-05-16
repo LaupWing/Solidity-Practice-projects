@@ -23,6 +23,10 @@ describe('Campaign', ()=>{
          expect(await campaign.name()).to.equal(name)
 
       })
+      it('marks caller as the campaign manager', async ()=>{
+         const manager = await campaign.manager()
+         expect(deployer.address).to.equal(manager)
+      })
    })
    
    describe('Contribution', async ()=>{
