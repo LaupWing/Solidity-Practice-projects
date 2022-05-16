@@ -9,17 +9,18 @@ describe('Campaign', ()=>{
    let deployer, user1, user2, users
 
    beforeEach(async()=>{
-      console.log('heh');
       [deployer, user1, user2, ...users] = await ethers.getSigners();
       const Factory = await ethers.getContractFactory('CampaignFactory');
-      factory = await Factory.deploy(name, 100)
-      
+      factory = await Factory.deploy(name, 100);
+      [campaignAddress] = await factory.getDeployedCampaigns()
+      const test = await ethers.getContractAt('Campaign', campaignAddress)
+      console.log(await test.name())
       // console.log(ethers.utils.formatEther(await (await deployer.getBalance()).toString()))
    })
 
    describe('Deployment', async ()=>{
       it('Should track name and minimum contribution', async function(){
-         console.log(await campaign.getDeployedCampaigns())
+         // console.log(await campaign.getDeployedCampaigns())
       //    expect(await campaign.minimum_contribution()).to.equal(100)
          // expect(await campaign.name()).to.equal(name)
 
