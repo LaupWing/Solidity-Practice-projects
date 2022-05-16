@@ -18,7 +18,6 @@ describe('Campaign', ()=>{
 
    describe('Deployment', async ()=>{
       it('Should track name and minimum contribution', async function(){
-         // console.log(await campaign.getDeployedCampaigns())
          expect(await campaign.minimum_contribution()).to.equal(100)
          expect(await campaign.name()).to.equal(name)
 
@@ -43,7 +42,7 @@ describe('Campaign', ()=>{
       it('Should successfully create a new request', async ()=>{
          await campaign.connect(deployer).createRequest('Test', 100, user1.address)
          // await campaign.connect(user1).createRequest('Test', 100, user1.address)
-         console.log(await campaign.requests(1))
+         // console.log(await campaign.requests(1))
          // expect((await campaign.approversCount()).toString()).to.equal('1')
       })
       // it('Should unsuccessfully create a new request', async ()=>{
