@@ -37,11 +37,9 @@ contract Campaign {
    );
 
    uint numRequests;
-   // Request[] public requests;
    address public manager;
    uint public minimum_contribution;
    string public name;
-   // address[] public approvers;
    mapping (address => bool) approvers;
    mapping( uint => Request) public requests;
    uint public approversCount;
