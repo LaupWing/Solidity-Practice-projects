@@ -18,6 +18,8 @@ describe("Lottery", function () {
       })
       it('Manager should be the same as the deployer', async ()=>{
          expect(await lottery.manager()).to.equal(deployer.address)
+         await lottery.connect(user1).enter({value: '100'})
+         console.log(await lottery.getPlayers())
       })
    })
 })

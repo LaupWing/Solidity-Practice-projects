@@ -33,13 +33,13 @@ contract Lottery {
       players = new address payable[](0);
    }
 
-   function getPlayers() view public returns(address[] memory){
-      address[] memory _players;
+   function getPlayers() view public returns(address payable[] memory){
+      // address[] memory _players;
 
-      for(uint i=0; i<players.length; i++){
-         _players[i] = address(players[i]);
-      }
+      // for(uint i=0; i<players.length; i++){
+      //    _players[i] = address(players[i]);
+      // }
       
-      return _players;
+      return players;
    }
 }
