@@ -18,8 +18,13 @@ describe("Lottery", function () {
       })
       it('Manager should be the same as the deployer', async ()=>{
          expect(await lottery.manager()).to.equal(deployer.address)
-         await lottery.connect(user1).enter({value: '100'})
-         console.log(await lottery.getPlayers())
+      })
+      describe('enter', async()=>{
+         it('Should succesfully enter user1', async ()=>{
+            await lottery.connect(user1).enter({value: '300'});
+            const [_entee1] = await lottery.getPlayers() 
+            expect(_entee1).to.equal(user1.address)
+         })
       })
    })
 })
