@@ -32,4 +32,8 @@ contract Lottery {
       players[index].transfer(address(this).balance);
       players = new address payable[](0);
    }
+
+   function getPlayers() public returns(address[] memory){
+      return players;
+   }
 }
