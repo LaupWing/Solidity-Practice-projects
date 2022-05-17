@@ -15,8 +15,9 @@ describe("Lottery", function () {
    describe('Deployment', async ()=>{
       it('Should register minimum contribution', async ()=>{
          expect((await lottery.minimum()).toString()).to.equal(minimum)
-         console.log(deployer.address)
-         console.log(await lottery.manager())
+      })
+      it('Manager should be the same as the deployer', async ()=>{
+         expect(await lottery.manager()).to.equal(deployer.address)
       })
    })
 })
