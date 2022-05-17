@@ -8,6 +8,10 @@ contract Lottery {
    address payable[] public players;
    uint256 public minimum;
 
+   modifier restricted {
+      if(msg.sender == manager) _;
+   }
+
    constructor (uint _minimum){
       manager = msg.sender;
       minimum = _minimum;
@@ -23,7 +27,7 @@ contract Lottery {
       return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
    }
 
-   function pickWinner() public {
+   function pickWinner() public restricted {
       uint index = random() % players.length;
       players[index].transfer(address(this).balance);
       players = new address payable[](0);
