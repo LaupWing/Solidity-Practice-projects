@@ -5,7 +5,7 @@ import "hardhat/console.sol";
 
 contract Lottery {
    address public manager;
-   address[] public players;
+   address payable[] public players;
    uint256 public minimum;
 
    constructor (uint _minimum){
@@ -16,10 +16,16 @@ contract Lottery {
    function enter() public payable {
       require(msg.value > minimum, 'Doesnt met the enter fee');
 
-      players.push(msg.sender);
+      players.push(payable(msg.sender));
    }
 
    function random() public view returns(uint){
       return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
+   }
+
+   function pickWinner() public {
+      uint index = random() % players.length;
+      players[index].transfer(address(this).balance);
+      players = new address payable[](0);
    }
 }
