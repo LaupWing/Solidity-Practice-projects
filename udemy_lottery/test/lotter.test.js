@@ -19,18 +19,34 @@ describe("Lottery", function () {
       it('Manager should be the same as the deployer', async ()=>{
          expect(await lottery.manager()).to.equal(deployer.address)
       })
-      describe('enter', async()=>{
-         it('Should succesfully enter user1', async ()=>{
-            await lottery.connect(user1).enter({value: '300'});
-            const [_entee1] = await lottery.getPlayers()
-            expect(_entee1).to.equal(user1.address)
-         })
-         it('Should unsuccesfully enter user1 and be reverted', async ()=>{
-            await expect(lottery.connect(user1).enter({value: '100'}))
-               .to
-               .be
-               .revertedWith('Doesnt met the enter fee')
-         })
+   })
+   describe('enter', async()=>{
+      it('Should succesfully enter user1', async ()=>{
+         await lottery.connect(user1).enter({value: '300'});
+         const [_entee1] = await lottery.getPlayers()
+         expect(_entee1).to.equal(user1.address)
       })
+      it('Should unsuccesfully enter user1 and be reverted', async ()=>{
+         await expect(lottery.connect(user1).enter({value: '100'}))
+         .to
+         .be
+         .revertedWith('Doesnt met the enter fee')
+      })
+   })
+   describe('Picking a winner', async ()=>{
+      it('Manager can start lottery', async ()=>{
+         await lottery.connect(user1).enter({value: '300'});
+         const [_entee1] = await lottery.getPlayers()
+         
+         await lottery.connect(deployer).pickWinner()
+      })
+
+      it('Non-manager cant start lottery', async ()=>{
+         await lottery.connect(user1).enter({value: '300'});
+         const [_entee1] = await lottery.getPlayers()
+         
+         await lottery.connect(user1).pickWinner()
+      })
+
    })
 })

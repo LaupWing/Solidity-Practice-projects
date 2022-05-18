@@ -9,7 +9,8 @@ contract Lottery {
    uint256 public minimum;
 
    modifier restricted {
-      if(msg.sender == manager) _;
+      require(msg.sender == manager, "Only manager can do this");
+      _;
    }
 
    constructor (uint _minimum){
