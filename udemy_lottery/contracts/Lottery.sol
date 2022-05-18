@@ -8,6 +8,10 @@ contract Lottery {
    address payable[] public players;
    uint256 public minimum;
 
+   event WinnerIs (
+      address winner
+   );
+
    modifier restricted {
       require(msg.sender == manager, "Only manager can do this");
       _;
@@ -31,6 +35,7 @@ contract Lottery {
    function pickWinner() public restricted {
       uint index = random() % players.length;
       players[index].transfer(address(this).balance);
+      emit WinnerIs(players[index]);
       players = new address payable[](0);
    }
 
