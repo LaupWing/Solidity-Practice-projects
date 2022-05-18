@@ -22,8 +22,9 @@ describe("Lottery", function () {
       describe('enter', async()=>{
          it('Should succesfully enter user1', async ()=>{
             await lottery.connect(user1).enter({value: '300'});
-            const [_entee1] = await lottery.getPlayers() 
-            expect(_entee1).to.equal(user1.address)
+            // const [_entee1] = await lottery.getPlayers() 
+            console.log(await lottery.getPlayers())
+            // expect(_entee1).to.equal(user1.address)
          })
       })
    })
