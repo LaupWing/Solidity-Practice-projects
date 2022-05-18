@@ -25,6 +25,12 @@ describe("Lottery", function () {
             const [_entee1] = await lottery.getPlayers()
             expect(_entee1).to.equal(user1.address)
          })
+         it('Should unsuccesfully enter user1 and be reverted', async ()=>{
+            await expect(lottery.connect(user1).enter({value: '100'}))
+               .to
+               .be
+               .revertedWith('Doesnt met the enter fee')
+         })
       })
    })
 })
