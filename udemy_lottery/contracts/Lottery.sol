@@ -34,7 +34,7 @@ contract Lottery {
    }
 
    function getPlayers() view public returns(address[] memory){
-      address[] memory _players;
+      address[] memory _players = new address[](players.length);
 
       for(uint i=0; i<players.length; i++){
          address payable _p = players[i];
