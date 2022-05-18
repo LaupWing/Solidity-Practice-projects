@@ -43,9 +43,10 @@ describe("Lottery", function () {
 
       it('Non-manager cant start lottery', async ()=>{
          await lottery.connect(user1).enter({value: '300'});
-         const [_entee1] = await lottery.getPlayers()
-         
-         await lottery.connect(user1).pickWinner()
+         await expect(lottery.connect(user1).pickWinner())
+            .to
+            .be
+            .revertedWith('Only manager can do this')
       })
 
    })
