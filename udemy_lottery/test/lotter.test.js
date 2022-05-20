@@ -32,6 +32,14 @@ describe("Lottery", function () {
          .be
          .revertedWith('Doesnt met the enter fee')
       })
+      it('Should succesfully added two users and confirm it', async ()=>{
+         await lottery.connect(user1).enter({value: '300'});
+         await lottery.connect(user2).enter({value: '300'});
+         const [_entee1, _entee2] = await lottery.getPlayers()
+         
+         expect(_entee1).to.equal(user1.address)
+         expect(_entee2).to.equal(user2.address)
+      })
    })
    describe('Picking a winner', async ()=>{
       it('Manager can start lottery', async ()=>{
