@@ -67,9 +67,9 @@ describe("Lottery", function () {
          const initialBalance = (await user1.getBalance()).toString()
          await lottery.connect(deployer).pickWinner()
          const finalBalance = (await user1.getBalance()).toString()
-         console.log(initialBalance)
-         console.log(finalBalance)
-         console.log(utils.formatEther((finalBalance - initialBalance).toString()))
+         expect(Number(utils.formatEther((finalBalance - initialBalance).toString())))
+            .to
+            .above(1.8)
       })
    })
 })
