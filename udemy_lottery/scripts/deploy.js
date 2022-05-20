@@ -1,16 +1,17 @@
 const fs = require('fs')
+const path = require('path')
 const { ethers, artifacts } = require('hardhat')
 
 async function main(){
    const [deployer, user1] = await ethers.getSigners()
 
    const LotteryFactory = await ethers.getContractFactory('Lottery')
-   const lottery = await LotteryFactory.deploy('100')
+   const lottery = await LotteryFactory.deploy('200')
 
-   const contractsDir = __dirname + '../app/contractsData'
+   const contractsDir = path.join(__dirname,'../app/contractsData')
 
    if(!fs.existsSync(contractsDir)){
-      fs.mkdir(contractsDir)
+      fs.mkdirSync(contractsDir)
    }
 
    fs.writeFileSync(
