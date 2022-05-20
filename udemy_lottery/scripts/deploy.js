@@ -5,7 +5,7 @@ async function main(){
    const [deployer, user1] = await ethers.getSigners()
 
    const LotteryFactory = await ethers.getContractFactory('Lottery')
-   const lottery = await LotteryFactory.deploy(deployer)
+   const lottery = await LotteryFactory.deploy('100')
 
    const contractsDir = __dirname + '../app/contractsData'
 
