@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const { utils } = require("ethers");
 const { ethers } = require("hardhat");
 
 describe("Lottery", function () {
@@ -57,5 +58,15 @@ describe("Lottery", function () {
             .revertedWith('Only manager can do this')
       })
 
+   })
+
+   describe('End to end test', async()=>{
+      it('sends money to the winner and resets players array', async ()=>{
+         console.log((await user1.getBalance()).toString())
+         console.log(utils.parseEther('2').toString())
+         // await lottery.connect(user1).enter({value: utils.parseEther(2)})
+
+         // const initialBalance = 
+      })
    })
 })
