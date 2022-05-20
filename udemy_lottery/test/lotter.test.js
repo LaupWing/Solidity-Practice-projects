@@ -65,8 +65,11 @@ describe("Lottery", function () {
          await lottery.connect(user1).enter({value: utils.parseEther('2').toString()})
          
          const initialBalance = (await user1.getBalance()).toString()
-         await lottery.connect(user2).pickWinner()
+         await lottery.connect(deployer).pickWinner()
+         const finalBalance = (await user1.getBalance()).toString()
          console.log(initialBalance)
+         console.log(finalBalance)
+         console.log(utils.formatEther((finalBalance - initialBalance).toString()))
       })
    })
 })
