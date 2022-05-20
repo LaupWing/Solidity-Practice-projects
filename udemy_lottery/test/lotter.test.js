@@ -62,11 +62,11 @@ describe("Lottery", function () {
 
    describe('End to end test', async()=>{
       it('sends money to the winner and resets players array', async ()=>{
-         console.log((await user1.getBalance()).toString())
-         console.log(utils.parseEther('2').toString())
-         // await lottery.connect(user1).enter({value: utils.parseEther(2)})
-
-         // const initialBalance = 
+         await lottery.connect(user1).enter({value: utils.parseEther('2').toString()})
+         
+         const initialBalance = (await user1.getBalance()).toString()
+         await lottery.connect(user2).pickWinner()
+         console.log(initialBalance)
       })
    })
 })
