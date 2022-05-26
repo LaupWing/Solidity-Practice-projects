@@ -49,17 +49,17 @@ describe("Lottery", function () {
          
          await lottery.connect(deployer).pickWinner()
       })
-
+      
       it('Non-manager cant start lottery', async ()=>{
          await lottery.connect(user1).enter({value: '300'});
          await expect(lottery.connect(user1).pickWinner())
-            .to
-            .be
-            .revertedWith('Only manager can do this')
+         .to
+         .be
+         .revertedWith('Only manager can do this')
       })
-
+      
    })
-
+   
    describe('End to end test', async()=>{
       it('sends money to the winner and resets players array', async ()=>{
          await lottery.connect(user1).enter({value: utils.parseEther('2').toString()})
@@ -68,8 +68,19 @@ describe("Lottery", function () {
          await lottery.connect(deployer).pickWinner()
          const finalBalance = (await user1.getBalance()).toString()
          expect(Number(utils.formatEther((finalBalance - initialBalance).toString())))
-            .to
-            .above(1.8)
+         .to
+         .above(1.8)
       })
+   })
+   
+   describe('Events', async ()=>{
+      it("Should emit isWinner", async function () {
+         await lottery.connect(user1).enter({value: '300'});
+         
+         
+         await expect(lottery.connect(deployer).pickWinner())
+           .to.emit(lottery, "WinnerIs")
+           .withArgs(user1.address);
+       })
    })
 })
