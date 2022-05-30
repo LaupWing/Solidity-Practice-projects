@@ -29,13 +29,24 @@ function App() {
 
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
+      // await contract.deployed()
       setContract(contract)
       setLoading(false)
+      // setTimeout(()=>{
+      //    test()
+      // },1000)
    } 
+
+   const test = async ()=>{
+      console.log(contract)
+      const minimum = await contract.getPlayers()
+      console.log(minimum)
+   }
    return (
       <div>
          <h1>Lottery</h1>
          {account ? <p>{account}</p> :  <button onClick={web3Handler}>Conntect wallet</button> }
+         <button onClick={test}>Test</button>
       </div>
    );
 }
