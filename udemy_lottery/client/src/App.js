@@ -12,7 +12,6 @@ function App() {
    const web3Handler = async ()=>{
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
       setAccount(accounts[0])
-      console.log(accounts)
 
       window.ethereum.on('chainChanged', ()=>{
          window.location.reload()
@@ -35,10 +34,9 @@ function App() {
    } 
 
    return (
-      <div>
+      <div className='flex flex-col'>
          <h1>Lottery</h1>
-         {account ? <p>{account}</p> :  <button onClick={web3Handler}>Conntect wallet</button> }
-         <button onClick={test}>Test</button>
+         {account ? <p>{account}</p> :  <button onClick={web3Handler}>Connect wallet</button> }
          {contract ? <Enter contract={contract}/> : 'Waiting...'}
       </div>
    );
