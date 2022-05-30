@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import { useState } from 'react'
-import LotteryAbi from '../contractsData/lottery.json'
-import LotteryAddress from '../contractsData/lottery-address.json'
+import LotteryAbi from './contractsData/lottery.json'
+import LotteryAddress from './contractsData/lottery-address.json'
 
 function App() {
    const [loading, setLoading] = useState(false)
