@@ -35,7 +35,7 @@ function App() {
    return (
       <div>
          <h1>Lottery</h1>
-         <button onClick={web3Handler}>Conntect wallet</button>
+         {account ? <p>{account}</p> :  <button onClick={web3Handler}>Conntect wallet</button> }
       </div>
    );
 }
