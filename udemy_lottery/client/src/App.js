@@ -31,14 +31,13 @@ function App() {
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       // await contract.deployed()
       setContract(contract)
+      test()
       setLoading(false)
-      // setTimeout(()=>{
-      //    test()
-      // },1000)
    } 
-
+   
    const test = async ()=>{
       console.log(contract)
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
       const minimum = await contract.minimum()
       console.log(Number(minimum.toString()))
    }
