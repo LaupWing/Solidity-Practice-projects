@@ -1,7 +1,11 @@
 import { ethers } from 'ethers';
+import { useState } from 'react';
 
 function App() {
-   console.log(ethers)
+   const [loading, setLoading] = useState(false)
+   const [account, setAccount] = useState(null)
+   const [contract, setContract] = useState(null)
+
    return (
       <div>
          <h1>Lottery</h1>
