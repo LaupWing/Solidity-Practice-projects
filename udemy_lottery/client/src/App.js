@@ -24,8 +24,14 @@ function App() {
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      console.log(signer)
+      loadContract(signer)
    }
+
+   const loadContract = async (signer)=>{
+      const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
+      setContract(contract)
+      setLoading(false)
+   } 
    return (
       <div>
          <h1>Lottery</h1>
