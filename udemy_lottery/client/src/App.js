@@ -39,8 +39,8 @@ function App() {
 
    const test = async ()=>{
       console.log(contract)
-      const minimum = await contract.getPlayers()
-      console.log(minimum)
+      const minimum = await contract.minimum()
+      console.log(Number(minimum.toString()))
    }
    return (
       <div>
