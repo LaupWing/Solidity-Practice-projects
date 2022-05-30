@@ -10,6 +10,11 @@ const Enter = ({contract}) => {
       }
       fetching()
    },[])
+
+   const enterLottery = async ()=>{
+      
+   }
+
    return (
       <div className='flex flex-col rounded m-2 items-start bg-yellow-400 p-2'>
          <p className='text-yellow-100 text-sm my-1 uppercase font-bold'>Minimum: {minimum}</p>
