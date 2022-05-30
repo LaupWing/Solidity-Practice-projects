@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.btn {
+   @apply rounded bg-yellow-400 border-2 border-yellow-600 px-2 py-0.5 uppercase font-bold text-sm text-white;
+ }
