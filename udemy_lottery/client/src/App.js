@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 import { useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
+import Enter from './Enter'
 
 function App() {
    const [loading, setLoading] = useState(false)
@@ -29,23 +30,16 @@ function App() {
 
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
-      // await contract.deployed()
       setContract(contract)
-      test()
       setLoading(false)
    } 
-   
-   const test = async ()=>{
-      console.log(contract)
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const minimum = await contract.minimum()
-      console.log(Number(minimum.toString()))
-   }
+
    return (
       <div>
          <h1>Lottery</h1>
          {account ? <p>{account}</p> :  <button onClick={web3Handler}>Conntect wallet</button> }
          <button onClick={test}>Test</button>
+         {contract ? <Enter contract={contract}/> : 'Waiting...'}
       </div>
    );
 }
