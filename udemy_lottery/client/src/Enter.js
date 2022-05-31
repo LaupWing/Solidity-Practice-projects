@@ -33,7 +33,7 @@ const Enter = ({contract, account}) => {
          alert('Enter fee should be above ', enterFee)
          return
       }
-      await contract.enter({value: enterFee})
+      await (await contract.enter({value: enterFee}).wait())
    }
 
    return (
