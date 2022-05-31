@@ -13,7 +13,7 @@ const Enter = ({contract, account}) => {
          
          console.log(account)
          const test = await contract.entees(account)
-         console.log(test)
+         console.log(test.toString() === '0')
          setEntees(_entees)
          setMinimum(Number(_minimum.toString()))
       }
