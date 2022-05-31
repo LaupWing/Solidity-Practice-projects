@@ -12,6 +12,9 @@ contract Lottery {
    event WinnerIs (
       address winner
    );
+   event NewEntered (
+      address entee
+   );
 
    modifier restricted {
       require(msg.sender == manager, "Only manager can do this");
@@ -28,6 +31,7 @@ contract Lottery {
 
       players.push(payable(msg.sender));
       entees[msg.sender] = msg.value;
+      emit NewEntered(msg.sender);
    }
 
    function random() public view returns(uint){
