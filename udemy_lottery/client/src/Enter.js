@@ -22,6 +22,9 @@ const Enter = ({contract, account}) => {
          setMinimum(Number(_minimum.toString()))
       }
       fetching()
+      contract.on('NewEntered', (address)=>{
+         console.log(address)
+      })
    },[])
    
    const fetchEntees = async ()=>{
