@@ -10,10 +10,11 @@ const Enter = ({contract, account}) => {
       const fetching = async ()=>{
          const _minimum = await contract.minimum()
          const _entees = await contract.getPlayers()
-         
-         console.log(account)
-         const test = await contract.entees(account)
-         console.log(test.toString() === '0')
+
+         const entered = await contract.entees(account)
+         if(entered.toString() !== '0'){
+            setAlreadyEntered(true)
+         }
          setEntees(_entees)
          setMinimum(Number(_minimum.toString()))
       }
