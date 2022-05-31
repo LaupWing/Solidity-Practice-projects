@@ -9,23 +9,25 @@ const Enter = ({contract, account}) => {
 
    useEffect(()=>{
       const fetching = async ()=>{
+         await fetchEntees()
          const _minimum = await contract.minimum()
-         const _entees = await contract.getPlayers()
-         const manager = await contract.manager()
-         console.log(manager)
-
+         
          const entered = await contract.entees(account)
          if(entered.toString() === '0'){
             setAlreadyEntered(false)
          }else{
             setSubmission(entered.toString())
          }
-
-         setEntees(_entees)
+         
          setMinimum(Number(_minimum.toString()))
       }
       fetching()
    },[])
+   
+   const fetchEntees = async ()=>{
+      const _entees = await contract.getPlayers()
+      setEntees(_entees)
+   }
 
    const enterLottery = async (event)=>{
       event.preventDefault()
@@ -34,6 +36,7 @@ const Enter = ({contract, account}) => {
          return
       }
       await (await contract.enter({value: enterFee})).wait()
+      fetchEntees()
    }
 
    return (
