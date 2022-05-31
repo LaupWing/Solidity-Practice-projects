@@ -37,7 +37,7 @@ function App() {
       <div className='flex flex-col items-start p-10'>
          <h1>Lottery</h1>
          {account ? <p>{account}</p> :  <button className='btn' onClick={web3Handler}>Connect wallet</button> }
-         {contract ? <Enter contract={contract}/> : ''}
+         {contract ? <Enter account={account} contract={contract}/> : ''}
       </div>
    );
 }

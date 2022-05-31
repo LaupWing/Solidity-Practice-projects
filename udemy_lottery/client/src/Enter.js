@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Enter = ({contract}) => {
+const Enter = ({contract, account}) => {
    const [minimum, setMinimum] = useState(0)
    const [enterFee, setEnterFee] = useState(0)
    const [entees, setEntees] = useState([])
@@ -10,7 +10,10 @@ const Enter = ({contract}) => {
       const fetching = async ()=>{
          const _minimum = await contract.minimum()
          const _entees = await contract.getPlayers()
-
+         
+         console.log(account)
+         const test = await contract.entees(account)
+         console.log(test)
          setEntees(_entees)
          setMinimum(Number(_minimum.toString()))
       }
