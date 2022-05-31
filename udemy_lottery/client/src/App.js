@@ -34,7 +34,12 @@ function App() {
    } 
 
    return (
-      <div className='flex flex-col items-start p-10'>
+      <div 
+         style={{
+            backgroundImage: 'url(https://browsecat.net/sites/default/files/the-lottery-wallpapers-87160-475911-9479287.png)'
+         }}
+         className='flex flex-col items-start p-10 w-screen h-screen bg-cover'
+      >
          <h1>Lottery</h1>
          {account ? <p>{account}</p> :  <button className='btn' onClick={web3Handler}>Connect wallet</button> }
          {contract ? <Enter account={account} contract={contract}/> : ''}
