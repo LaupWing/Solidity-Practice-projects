@@ -4,7 +4,8 @@ const Enter = ({contract, account}) => {
    const [minimum, setMinimum] = useState(0)
    const [enterFee, setEnterFee] = useState(0)
    const [entees, setEntees] = useState([])
-   const [alreadyEntered, setAlreadyEntered] = useState(false)
+   const [submission, setSubmission] = useState(0)
+   const [alreadyEntered, setAlreadyEntered] = useState(true)
 
    useEffect(()=>{
       const fetching = async ()=>{
@@ -12,9 +13,12 @@ const Enter = ({contract, account}) => {
          const _entees = await contract.getPlayers()
 
          const entered = await contract.entees(account)
-         if(entered.toString() !== '0'){
-            setAlreadyEntered(true)
+         if(entered.toString() === '0'){
+            setAlreadyEntered(false)
+         }else{
+            setSubmission(entered.toString())
          }
+
          setEntees(_entees)
          setMinimum(Number(_minimum.toString()))
       }
@@ -44,7 +48,7 @@ const Enter = ({contract, account}) => {
          </ul>}
          <div className='flex flex-col'>
             <p className='text-yellow-100 text-sm my-1 uppercase font-bold'>Minimum: {minimum}</p>
-            {!alreadyEntered && <form 
+            {!alreadyEntered ? <form 
                className='flex'
                onSubmit={enterLottery}
             >
@@ -56,7 +60,7 @@ const Enter = ({contract, account}) => {
                   className="rounded border-2 border-yellow-500 focus:outline-none p-1 py-0.5"
                />
                <button className='btn'>enter</button>
-            </form>}
+            </form> : <p>Your submission: {submission}</p>}
          </div>
       </div>
    )
