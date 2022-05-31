@@ -11,6 +11,8 @@ const Enter = ({contract, account}) => {
       const fetching = async ()=>{
          const _minimum = await contract.minimum()
          const _entees = await contract.getPlayers()
+         const manager = await contract.manager()
+         console.log(manager)
 
          const entered = await contract.entees(account)
          if(entered.toString() === '0'){
