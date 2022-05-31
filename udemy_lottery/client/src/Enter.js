@@ -11,14 +11,21 @@ const Enter = ({contract}) => {
       fetching()
    },[])
 
-   const enterLottery = async ()=>{
-      
+   const enterLottery = async (event)=>{
+      event.preventDefault()
+      if(minimum > enterFee){
+         alert('Enter fee should be above ', enterFee)
+         return
+      }
    }
 
    return (
       <div className='flex flex-col rounded m-2 items-start bg-yellow-400 p-2'>
          <p className='text-yellow-100 text-sm my-1 uppercase font-bold'>Minimum: {minimum}</p>
-         <div className='flex'>
+         <form 
+            className='flex'
+            onSubmit={enterLottery}
+         >
             <input 
                type="number"  
                value={enterFee} 
@@ -27,7 +34,7 @@ const Enter = ({contract}) => {
                className="rounded border-2 border-yellow-500 focus:outline-none p-1 py-0.5"
             />
             <button className='btn'>enter</button>
-         </div>
+         </form>
       </div>
    )
 }
