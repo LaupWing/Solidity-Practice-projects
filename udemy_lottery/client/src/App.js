@@ -38,11 +38,15 @@ function App() {
          style={{
             backgroundImage: 'url(https://browsecat.net/sites/default/files/the-lottery-wallpapers-87160-475911-9479287.png)'
          }}
-         className='flex flex-col items-start p-10 w-screen h-screen bg-cover'
+         className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col justify-center'
       >
-         <h1>Lottery</h1>
-         {account ? <p>{account}</p> :  <button className='btn' onClick={web3Handler}>Connect wallet</button> }
-         {contract ? <Enter account={account} contract={contract}/> : ''}
+         <div
+            className='flex flex-col items-start p-10 bg-yellow-100 rounded'
+         >
+            <h1>Lottery</h1>
+            {account ? <p>{account}</p> :  <button className='btn' onClick={web3Handler}>Connect wallet</button> }
+            {contract ? <Enter account={account} contract={contract}/> : ''}
+         </div>
       </div>
    );
 }
