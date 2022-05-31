@@ -8,7 +8,7 @@ async function main(){
    const LotteryFactory = await ethers.getContractFactory('Lottery')
    const lottery = await LotteryFactory.deploy('200')
 
-   const contractsDir = path.join(__dirname,'../client/contractsData')
+   const contractsDir = path.join(__dirname,'../client/src/contractsData')
 
    if(!fs.existsSync(contractsDir)){
       fs.mkdirSync(contractsDir)
