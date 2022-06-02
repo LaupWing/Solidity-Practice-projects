@@ -4,6 +4,7 @@ import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
 import Enter from './Enter2'
 import Header from './Header'
+import Entees from './Entees'
 
 function App() {
    const [loading, setLoading] = useState(false)
@@ -35,7 +36,6 @@ function App() {
          
          if(entered.toString() !== '0'){
             setSubmission(entered.toString())
-            console.log(submission)
          }
       }
       if(contract){
@@ -58,7 +58,7 @@ function App() {
                className='flex flex-col items-start p-4 bg-yellow-300 rounded'
             >
                {account ?  
-                  <Enter account={account} contract={contract}/> :
+                  submission ? <Entees/> : <Enter account={account} contract={contract}/> :
                   <button className='btn' onClick={web3Handler}>Connect wallet</button> 
                }
             </div>
