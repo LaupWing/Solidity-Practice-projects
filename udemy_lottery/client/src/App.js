@@ -9,6 +9,7 @@ function App() {
    const [loading, setLoading] = useState(false)
    const [account, setAccount] = useState(null)
    const [contract, setContract] = useState(null)
+   const [submission, setSubmission] = useState(0)
 
    const web3Handler = async ()=>{
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
@@ -32,6 +33,12 @@ function App() {
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
       setLoading(false)
+      console.log(contract)
+      const entered = await contract.entees(account)
+      if(entered.toString() !== '0'){
+         setSubmission(entered.toString())
+         console.log(submission)
+      }
    } 
 
    return (
