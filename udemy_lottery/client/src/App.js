@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
 import Enter from './Enter2'
@@ -29,17 +29,25 @@ function App() {
       loadContract(signer)
    }
 
+   useEffect(()=>{
+      const fetching = async ()=>{
+         const entered = await contract.entees(account)
+         
+         if(entered.toString() !== '0'){
+            setSubmission(entered.toString())
+            console.log(submission)
+         }
+      }
+      if(contract){
+         fetching()
+      }
+   },[contract])
+
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
-      await contract.deployed()
       setContract(contract)
       setLoading(false)
-      console.log(contract)
-      const entered = await contract.entees(account)
-      if(entered.toString() !== '0'){
-         setSubmission(entered.toString())
-         console.log(submission)
-      }
+      
    } 
 
    return (
