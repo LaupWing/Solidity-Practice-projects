@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import { useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
-import Enter from './Enter'
+import Enter from './Enter2'
 import Header from './Header'
 
 function App() {
@@ -37,12 +37,15 @@ function App() {
    return (
       <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col'>
          <Header account={account}/>
-         <div
-            className='flex flex-col items-start p-10 bg-yellow-100 rounded'
-         >
-            <h1>Lottery</h1>
-            {account ? <p>{account}</p> :  <button className='btn' onClick={web3Handler}>Connect wallet</button> }
-            {contract ? <Enter account={account} contract={contract}/> : ''}
+         <div className='flex flex-1 flex-col items-center justify-center'>
+            <div
+               className='flex flex-col items-start p-4 bg-yellow-300 rounded'
+            >
+               {account ?  
+                  <Enter account={account} contract={contract}/> :
+                  <button className='btn' onClick={web3Handler}>Connect wallet</button> 
+               }
+            </div>
          </div>
       </div>
    );
