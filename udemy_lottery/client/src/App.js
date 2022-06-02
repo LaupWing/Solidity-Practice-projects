@@ -35,8 +35,8 @@ function App() {
    } 
 
    return (
-      <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col justify-center'>
-         <Header/>
+      <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col'>
+         <Header account={account}/>
          <div
             className='flex flex-col items-start p-10 bg-yellow-100 rounded'
          >
