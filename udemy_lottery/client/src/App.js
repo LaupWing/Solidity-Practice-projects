@@ -31,6 +31,7 @@ function App() {
 
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
+      await contract.deployed()
       setContract(contract)
       setLoading(false)
       console.log(contract)
