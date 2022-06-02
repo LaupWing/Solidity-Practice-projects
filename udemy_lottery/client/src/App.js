@@ -34,12 +34,7 @@ function App() {
    } 
 
    return (
-      <div 
-         style={{
-            backgroundImage: 'url(https://browsecat.net/sites/default/files/the-lottery-wallpapers-87160-475911-9479287.png)'
-         }}
-         className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col justify-center'
-      >
+      <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col justify-center'>
          <div
             className='flex flex-col items-start p-10 bg-yellow-100 rounded'
          >
