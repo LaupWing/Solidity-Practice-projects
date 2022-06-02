@@ -3,6 +3,7 @@ import { useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
 import Enter from './Enter'
+import Header from './Header'
 
 function App() {
    const [loading, setLoading] = useState(false)
@@ -35,6 +36,7 @@ function App() {
 
    return (
       <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col justify-center'>
+         <Header/>
          <div
             className='flex flex-col items-start p-10 bg-yellow-100 rounded'
          >
