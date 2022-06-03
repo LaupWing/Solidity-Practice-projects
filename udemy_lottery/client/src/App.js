@@ -2,12 +2,13 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
+import ReactLoading from 'react-loading'
 import Enter from './Enter2'
 import Header from './Header'
 import Entees from './Entees'
 
 function App() {
-   const [loading, setLoading] = useState(false)
+   const [loading, setLoading] = useState(true)
    const [account, setAccount] = useState(null)
    const [contract, setContract] = useState(null)
    const [submission, setSubmission] = useState(0)
@@ -46,7 +47,7 @@ function App() {
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
-      setLoading(false)
+      // setLoading(false)
       
    } 
 
@@ -57,9 +58,13 @@ function App() {
             <div
                className='flex flex-col items-start p-4 bg-yellow-300 rounded'
             >
-               {account ?  
-                  submission ? <Entees contract={contract}/> : <Enter account={account} contract={contract}/> :
-                  <button className='btn' onClick={web3Handler}>Connect wallet</button> 
+               {account ? 
+                  loading ? 
+                     <ReactLoading type='spokes'/> : 
+                        submission ? 
+                           <Entees contract={contract}/> : 
+                           <Enter account={account} contract={contract}/> 
+                  : <button className='btn' onClick={web3Handler}>Connect wallet</button> 
                }
             </div>
          </div>
