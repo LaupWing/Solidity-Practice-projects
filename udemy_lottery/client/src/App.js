@@ -8,7 +8,7 @@ import Header from './Header'
 import Entees from './Entees'
 
 function App() {
-   const [loading, setLoading] = useState(true)
+   const [loading, setLoading] = useState(false)
    const [account, setAccount] = useState(null)
    const [contract, setContract] = useState(null)
    const [submission, setSubmission] = useState(0)
@@ -38,8 +38,10 @@ function App() {
          if(entered.toString() !== '0'){
             setSubmission(entered.toString())
          }
+         setLoading(false)
       }
       if(contract){
+         setLoading(true)
          fetching()
       }
    },[contract])
@@ -47,7 +49,6 @@ function App() {
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
-      // setLoading(false)
       
    } 
 
