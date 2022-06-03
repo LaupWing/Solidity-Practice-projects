@@ -33,7 +33,7 @@ const Entees = ({contract}) => {
                </li>
             ))}
          </ul>}
-         <button className='border-white border-2 px-2 bg-yellow-200 text-white py-1 rounded font-bold text-xs'>LETS GO</button>
+         <button className='border-white border-2 px-2 bg-yellow-400 text-white py-1 rounded font-bold text-xs'>LETS GO</button>
       </div>
    )
 }
