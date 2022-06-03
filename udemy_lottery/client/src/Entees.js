@@ -10,6 +10,7 @@ const Entees = ({contract}) => {
       const _entees = await contract.getPlayers()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const balance = await provider.getBalance(LotteryAddress.address)
+      const manager = await contract.manager()
       setEntees(_entees)
       setBalance(balance.toString())
       
@@ -32,6 +33,7 @@ const Entees = ({contract}) => {
                </li>
             ))}
          </ul>}
+         <button className='border-white border-2 px-2 bg-yellow-200 text-white py-1 rounded font-bold text-xs'>LETS GO</button>
       </div>
    )
 }
