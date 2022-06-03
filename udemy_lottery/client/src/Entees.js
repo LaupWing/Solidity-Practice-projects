@@ -2,15 +2,17 @@ import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 import LotteryAddress from './contractsData/lottery-address.json'
 
-const Entees = ({contract}) => {
+const Entees = ({contract, account}) => {
    const [entees, setEntees] = useState([])
    const [balance, setBalance] = useState('')
+   const [isManager, setIsManager] = useState(false)
 
    const fetching = async ()=>{
       const _entees = await contract.getPlayers()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const balance = await provider.getBalance(LotteryAddress.address)
       const manager = await contract.manager()
+      setIsManager(account === manager)
       setEntees(_entees)
       setBalance(balance.toString())
       
@@ -33,7 +35,7 @@ const Entees = ({contract}) => {
                </li>
             ))}
          </ul>}
-         <button className='border-white border-2 px-2 bg-yellow-400 text-white py-1 rounded font-bold text-xs'>LETS GO</button>
+         {isManager && <button className='border-white border-2 px-2 bg-yellow-400 text-white py-1 rounded font-bold text-xs'>LETS GO</button>}
       </div>
    )
 }

@@ -63,7 +63,7 @@ function App() {
                   loading ? 
                      <ReactLoading type='spokes'/> : 
                         submission ? 
-                           <Entees contract={contract}/> : 
+                           <Entees contract={contract} account={account}/> : 
                            <Enter account={account} contract={contract}/> 
                   : <button className='btn' onClick={web3Handler}>Connect wallet</button> 
                }
