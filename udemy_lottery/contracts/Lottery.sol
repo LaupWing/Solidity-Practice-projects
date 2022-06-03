@@ -38,6 +38,10 @@ contract Lottery {
       return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
    }
 
+   function isManager() public view returns(bool){
+      return msg.sender == manager;
+   }
+
    function pickWinner() public restricted {
       uint index = random() % players.length;
       players[index].transfer(address(this).balance);
