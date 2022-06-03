@@ -58,7 +58,7 @@ function App() {
                className='flex flex-col items-start p-4 bg-yellow-300 rounded'
             >
                {account ?  
-                  submission ? <Entees/> : <Enter account={account} contract={contract}/> :
+                  submission ? <Entees contract={contract}/> : <Enter account={account} contract={contract}/> :
                   <button className='btn' onClick={web3Handler}>Connect wallet</button> 
                }
             </div>
