@@ -12,10 +12,8 @@ const Entees = ({contract, account}) => {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const balance = await provider.getBalance(LotteryAddress.address)
       const manager = await contract.manager()
-      console.log(account.toString())
-      console.log(manager.toString())
-      console.log(manager.trim().toString() == account.trim().toString())
-      setIsManager(account === manager)
+      const _isManager = await contract.isManager()
+      setIsManager(_isManager)
       setEntees(_entees)
       setBalance(balance.toString())
       
