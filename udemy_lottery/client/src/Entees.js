@@ -11,12 +11,10 @@ const Entees = ({contract, account}) => {
       const _entees = await contract.getPlayers()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const balance = await provider.getBalance(LotteryAddress.address)
-      const manager = await contract.manager()
       const _isManager = await contract.isManager()
       setIsManager(_isManager)
       setEntees(_entees)
-      setBalance(balance.toString())
-      
+      setBalance(balance.toString())  
    }
 
    useEffect(()=>{
@@ -30,7 +28,7 @@ const Entees = ({contract, account}) => {
             {entees.map(entee =>(
                <li 
                   key={entee}
-                  className='text-xs text-yellow-100 font-bold'
+                  className={'text-xs text-yellow-100 font-bold ' + `${account == entee ? 'text-gray-300' : '' }`}
                >
                   {entee}
                </li>
