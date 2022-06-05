@@ -32,7 +32,7 @@ function App() {
    }
 
    const fetchSubmission = async ()=>{
-      const entered = await contract.entees(account)
+      const entered = await contract.enteesFees(account)
       if(entered.toString() !== '0'){
          setSubmission(entered.toString())
       }else{
