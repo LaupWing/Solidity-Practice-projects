@@ -24,6 +24,7 @@ function App() {
       window.ethereum.on('accountsChanged', ()=>{
          setLoading(true)
          web3Handler()
+         fetchSubmission()
       })
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -31,18 +32,18 @@ function App() {
       loadContract(signer)
    }
 
-   useEffect(()=>{
-      const fetching = async ()=>{
-         const entered = await contract.entees(account)
-         
-         if(entered.toString() !== '0'){
-            setSubmission(entered.toString())
-         }
-         setLoading(false)
+   const fetchSubmission = async ()=>{
+      const entered = await contract.entees(account)
+      
+      if(entered.toString() !== '0'){
+         setSubmission(entered.toString())
       }
+      setLoading(false)
+   }
+   useEffect(()=>{
       if(contract){
          setLoading(true)
-         fetching()
+         fetchSubmission()
       }
    },[contract])
 
@@ -64,7 +65,11 @@ function App() {
                      <ReactLoading type='spokes'/> : 
                         submission ? 
                            <Entees contract={contract} account={account}/> : 
-                           <Enter account={account} contract={contract}/> 
+                           <Enter 
+                              account={account} 
+                              contract={contract}
+                              setSubmission={setSubmission}
+                           /> 
                   : <button className='btn' onClick={web3Handler}>Connect wallet</button> 
                }
             </div>

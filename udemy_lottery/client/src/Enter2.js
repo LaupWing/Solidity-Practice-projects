@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Enter = ({contract}) => {
+const Enter = ({contract, setSubmission}) => {
    const [minimum, setMinimum] = useState(0)
    const [enterFee, setEnterFee] = useState(0)
 
@@ -19,6 +19,7 @@ const Enter = ({contract}) => {
          return
       }
       await (await contract.enter({value: enterFee})).wait()
+      setSubmission(enterFee)
    }
 
    return (
