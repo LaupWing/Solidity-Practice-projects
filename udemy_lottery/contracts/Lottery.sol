@@ -5,13 +5,17 @@ import "hardhat/console.sol";
 
 contract Lottery {
    address public manager;
-   address payable[] public players;
+   Player[] public players;
    mapping(address => uint) public entees;
    uint256 public minimum;
 
    event WinnerIs (
       address winner
    );
+   struct Player {
+      address payable id;
+      uint tokens;
+   }
    event NewEntered (
       address entee
    );
@@ -29,13 +33,13 @@ contract Lottery {
    function enter() public payable {
       require(msg.value > minimum, 'Doesnt met the enter fee');
 
-      players.push(payable(msg.sender));
+      players.push(Player(payable(msg.sender), msg.value));
       entees[msg.sender] = msg.value;
       emit NewEntered(msg.sender);
    }
 
    function random() public view returns(uint){
-      return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
+      return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length)));
    }
 
    function isManager() public view returns(bool){
@@ -44,16 +48,16 @@ contract Lottery {
 
    function pickWinner() public restricted {
       uint index = random() % players.length;
-      players[index].transfer(address(this).balance);
-      emit WinnerIs(players[index]);
-      players = new address payable[](0);
+      players[index].id.transfer(address(this).balance);
+      emit WinnerIs(players[index].id);
+      players = new Player[](0);
    }
 
    function getPlayers() view public returns(address[] memory){
       address[] memory _players = new address[](players.length);
 
       for(uint i=0; i<players.length; i++){
-         address payable _p = players[i];
+         address payable _p = players[i].id;
          _players[i] = address(_p);
       }
       return _players;
