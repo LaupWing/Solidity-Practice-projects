@@ -24,7 +24,6 @@ function App() {
       window.ethereum.on('accountsChanged', ()=>{
          setLoading(true)
          web3Handler()
-         fetchSubmission()
       })
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -34,9 +33,10 @@ function App() {
 
    const fetchSubmission = async ()=>{
       const entered = await contract.entees(account)
-      
       if(entered.toString() !== '0'){
          setSubmission(entered.toString())
+      }else{
+         setSubmission(0)
       }
       setLoading(false)
    }
