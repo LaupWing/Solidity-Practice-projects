@@ -6,7 +6,7 @@ import "hardhat/console.sol";
 contract Lottery {
    address public manager;
    address payable[] public players;
-   mapping(address => uint) public entees;
+   mapping(address => uint) public enteesFees;
    uint256 public minimum;
 
    event WinnerIs (
@@ -30,7 +30,7 @@ contract Lottery {
       require(msg.value > minimum, 'Doesnt met the enter fee');
 
       players.push(payable(msg.sender));
-      entees[msg.sender] = msg.value;
+      enteesFees[msg.sender] = msg.value;
       emit NewEntered(msg.sender);
    }
 
