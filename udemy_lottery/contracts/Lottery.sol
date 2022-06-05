@@ -63,4 +63,6 @@ contract Lottery {
       }
       return _players;
    }
+
+   // function haveIWon() view public returns()
 }

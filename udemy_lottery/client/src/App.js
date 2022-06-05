@@ -52,6 +52,8 @@ function App() {
       setContract(contract)
       contract.on('WinnerIs', (address)=>{
          console.log(address)
+         console.log(account)
+         console.log(address === account)
       })
    } 
 
