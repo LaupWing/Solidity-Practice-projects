@@ -17,6 +17,10 @@ const Entees = ({contract, account}) => {
       setBalance(balance.toString())  
    }
 
+   const pickWinner = async () =>{
+      await contract.pickWinner()
+   }
+
    useEffect(()=>{
       fetching()  
    },[])
@@ -34,7 +38,10 @@ const Entees = ({contract, account}) => {
                </li>
             ))}
          </ul>}
-         {isManager && <button className='border-white border-2 px-2 bg-yellow-400 text-white py-1 rounded font-bold text-xs'>LETS GO</button>}
+         {isManager && <button 
+            className='border-white border-2 px-2 bg-yellow-400 text-white py-1 rounded font-bold text-xs'
+            onClick={pickWinner}
+         >LETS GO</button>}
       </div>
    )
 }

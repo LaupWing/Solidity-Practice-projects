@@ -50,7 +50,9 @@ function App() {
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
-      
+      contract.on('WinnerIs', (address)=>{
+         console.log(address)
+      })
    } 
 
    return (
