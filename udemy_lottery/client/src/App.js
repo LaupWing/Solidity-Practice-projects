@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import LotteryAbi from './contractsData/lottery.json'
 import LotteryAddress from './contractsData/lottery-address.json'
 import ReactLoading from 'react-loading'
-import Enter from './Enter2'
+import Enter from './Enter'
 import Header from './Header'
 import Entees from './Entees'
 
