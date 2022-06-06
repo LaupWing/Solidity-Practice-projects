@@ -60,6 +60,7 @@ function App() {
    return (
       <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col'>
          <Header account={account}/>
+         {winner ? 'You have won!' : ''}
          <div className='flex flex-1 flex-col items-center justify-center'>
             <div
                className='flex flex-col items-start p-4 bg-yellow-300 rounded'
