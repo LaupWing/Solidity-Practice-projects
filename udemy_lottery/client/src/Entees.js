@@ -12,9 +12,10 @@ const Entees = ({contract, account}) => {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const balance = await provider.getBalance(LotteryAddress.address)
       const _isManager = await contract.isManager()
+
       setIsManager(_isManager)
       setEntees(_entees)
-      setBalance(balance.toString())  
+      setBalance(ethers.utils.formatEther(balance.toString()))  
    }
 
    const pickWinner = async () =>{

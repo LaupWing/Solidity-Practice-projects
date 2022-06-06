@@ -19,7 +19,7 @@ const Enter = ({contract, setSubmission}) => {
          alert('Enter fee should be above ', enterFee)
          return
       }
-      await (await contract.enter({value: ethers.utils.formatEther(enterFee)})).wait()
+      await (await contract.enter({value: ethers.utils.parseEther(enterFee)})).wait()
       setSubmission(enterFee)
    }
 
