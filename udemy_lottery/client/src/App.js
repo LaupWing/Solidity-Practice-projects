@@ -39,6 +39,8 @@ function App() {
       }else{
          setSubmission(0)
       }
+      const winner = await contract.haveIWon()
+      console.log(winner)
       setLoading(false)
    }
    useEffect(()=>{
