@@ -11,6 +11,7 @@ function App() {
    const [loading, setLoading] = useState(false)
    const [account, setAccount] = useState(null)
    const [contract, setContract] = useState(null)
+   const [winner, setWinner] = useState(null)
    const [submission, setSubmission] = useState(0)
 
    const web3Handler = async ()=>{
@@ -50,10 +51,10 @@ function App() {
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
-      contract.on('WinnerIs', (address)=>{
+      contract.on('WinnerIs', async (address)=>{
+         const isWinner = await contract.haveIWon()
          console.log(address)
-         console.log(account)
-         console.log(address === account)
+         console.log(isWinner)
       })
    } 
 
