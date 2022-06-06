@@ -3,8 +3,6 @@ const path = require('path')
 const { ethers, artifacts } = require('hardhat')
 
 async function main(){
-   const [deployer, user1] = await ethers.getSigners()
-
    const LotteryFactory = await ethers.getContractFactory('Lottery')
    const lottery = await LotteryFactory.deploy('2')
 
