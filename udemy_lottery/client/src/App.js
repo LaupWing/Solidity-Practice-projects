@@ -54,6 +54,7 @@ function App() {
       contract.on('WinnerIs', async ()=>{
          const isWinner = await contract.haveIWon()
          setWinner(isWinner)
+         setSubmission(0)
       })
    } 
 
