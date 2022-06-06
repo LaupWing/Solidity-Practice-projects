@@ -39,8 +39,6 @@ function App() {
       }else{
          setSubmission(0)
       }
-      const winner = await contract.haveIWon()
-      console.log(winner)
       setLoading(false)
    }
    useEffect(()=>{
@@ -53,10 +51,9 @@ function App() {
    const loadContract = async (signer)=>{
       const contract = new ethers.Contract(LotteryAddress.address, LotteryAbi.abi, signer)
       setContract(contract)
-      contract.on('WinnerIs', async (address)=>{
+      contract.on('WinnerIs', async ()=>{
          const isWinner = await contract.haveIWon()
-         console.log(address)
-         console.log(isWinner)
+         setWinner(isWinner)
       })
    } 
 
