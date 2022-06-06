@@ -48,11 +48,11 @@ contract Lottery {
       players[index].transfer(address(this).balance);
       winner = players[index];
       emit WinnerIs(players[index]);
-      players = new address payable[](0);
       for(uint i=0; i< players.length; i++){
          address payable _p = players[i];
          enteesFees[_p] = 0;
       }
+      players = new address payable[](0);
    }
 
    function getPlayers() view public returns(address[] memory){
