@@ -8,6 +8,7 @@ contract Lottery {
    address payable[] public players;
    mapping(address => uint) public enteesFees;
    uint256 public minimum;
+   address private winner;
 
    event WinnerIs (
       address winner
@@ -45,9 +46,9 @@ contract Lottery {
    function pickWinner() public restricted {
       uint index = random() % players.length;
       players[index].transfer(address(this).balance);
+      winner = players[index];
       emit WinnerIs(players[index]);
       players = new address payable[](0);
-
       for(uint i=0; i< players.length; i++){
          address payable _p = players[i];
          enteesFees[_p] = 0;
@@ -64,5 +65,7 @@ contract Lottery {
       return _players;
    }
 
-   // function haveIWon() view public returns()
+   function haveIWon() view public returns(bool){
+      return msg.sender == winner;
+   }
 }
