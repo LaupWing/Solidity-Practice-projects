@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 
 const Enter = ({contract, setSubmission}) => {
@@ -18,7 +19,7 @@ const Enter = ({contract, setSubmission}) => {
          alert('Enter fee should be above ', enterFee)
          return
       }
-      await (await contract.enter({value: enterFee})).wait()
+      await (await contract.enter({value: ethers.utils.formatEther(enterFee)})).wait()
       setSubmission(enterFee)
    }
 
