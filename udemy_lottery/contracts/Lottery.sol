@@ -65,7 +65,11 @@ contract Lottery {
       return _players;
    }
 
-   function haveIWon() view public returns(bool){
-      return msg.sender == winner;
+   function haveIWon() public returns(bool){
+      address _winner = winner;
+      if(winner == msg.sender){
+         winner = address(0x0); 
+      }
+      return msg.sender == _winner;
    }
 }
