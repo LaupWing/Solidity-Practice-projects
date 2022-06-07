@@ -12,7 +12,7 @@ function App() {
    const [loading, setLoading] = useState(false)
    const [account, setAccount] = useState(null)
    const [contract, setContract] = useState(null)
-   const [winner, setWinner] = useState(null)
+   const [winner, setWinner] = useState(false)
    const [submission, setSubmission] = useState(0)
 
    const web3Handler = async ()=>{
@@ -55,7 +55,7 @@ function App() {
       contract.on('WinnerIs', async ()=>{
          const isWinner = await contract.haveIWon()
          if(isWinner){
-            setWinner(isWinner)
+            setWinner(true)
             setSubmission(0)
          }
       })
@@ -67,7 +67,7 @@ function App() {
          <Modal isOpen={winner}>
             <button 
                className='btn' 
-               onClick={()=>setWinner(null)}
+               onClick={()=>setWinner(false)}
             >
                Close
             </button>
