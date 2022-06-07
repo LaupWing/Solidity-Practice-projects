@@ -54,7 +54,6 @@ function App() {
       setContract(contract)
       contract.on('WinnerIs', async ()=>{
          const isWinner = await contract.haveIWon()
-         console.log(isWinner)
          if(isWinner){
             setWinner(isWinner)
             setSubmission(0)
@@ -72,8 +71,10 @@ function App() {
             >
                Close
             </button>
+            <div className='m-auto'>
+               You have won!
+            </div>
          </Modal>
-         {winner ? 'You have won!' : ''}
          <div className='flex flex-1 flex-col items-center justify-center'>
             <div
                className='flex flex-col items-start p-4 bg-yellow-300 rounded'
