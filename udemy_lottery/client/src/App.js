@@ -5,6 +5,7 @@ import LotteryAddress from './contractsData/lottery-address.json'
 import ReactLoading from 'react-loading'
 import Enter from './Enter'
 import Header from './Header'
+import Modal from 'react-modal'
 import Entees from './Entees'
 
 function App() {
@@ -34,8 +35,6 @@ function App() {
 
    const fetchSubmission = async ()=>{
       const entered = await contract.enteesFees(account)
-      console.log(entered.toString())
-      console.log(account)
       if(entered.toString() !== '0'){
          setSubmission(entered.toString())
       }else{
@@ -66,6 +65,14 @@ function App() {
    return (
       <div className='w-screen h-screen bg-blend-multiply bg-cover flex items-center flex-col'>
          <Header account={account}/>
+         <Modal isOpen={winner}>
+            <button 
+               className='btn' 
+               onClick={()=>setWinner(null)}
+            >
+               Close
+            </button>
+         </Modal>
          {winner ? 'You have won!' : ''}
          <div className='flex flex-1 flex-col items-center justify-center'>
             <div
