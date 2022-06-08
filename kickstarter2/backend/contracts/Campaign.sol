@@ -22,11 +22,14 @@ contract Campaign{
       uint value;
       address recipient;
       bool complete;
+      uint approvalCount;
+      mapping(address => bool) approvals;
    }
 
    address public manager;
    uint public minimum_contribution;
    string public name;
+   mapping (address => bool) approvers;
 
    modifier restricted() {
       require(msg.sender == manager);
@@ -45,6 +48,7 @@ contract Campaign{
 
    function contribute() public payable{
       require(msg.value > minimum_contribution);
+      approvers[msg.sender] = true;
 
    }
 
