@@ -29,6 +29,7 @@ contract Campaign{
    address public manager;
    uint public minimum_contribution;
    string public name;
+   Request[] public requests;
    mapping (address => bool) approvers;
 
    modifier restricted() {
@@ -57,11 +58,11 @@ contract Campaign{
       uint _value, 
       address _recipient
    ) public restricted{
-      Request memory newRequest = Request({
-         description: _description,
-         value: _value,
-         recipient: _recipient,
-         complete: false
-      });
+      Request storage newRequest = requests.push();
+      newRequest.description = _description;
+      newRequest.value = _value;
+      newRequest.recipient = _recipient;
+      newRequest.complete = false;
+      newRequest.approvalCount = 0;
    }
 }
