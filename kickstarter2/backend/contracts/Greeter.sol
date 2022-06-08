@@ -17,9 +17,21 @@ contract CampaignFactory {
 }
 
 contract Campaign{
+   struct Request{
+      string description;
+      uint value;
+      address recipient;
+      bool complete;
+   }
+
    address public manager;
    uint public minimum_contribution;
    string public name;
+
+   modifier restricted() {
+      require(msg.sender == manager);
+      _;
+   }
 
    constructor(
       string memory _name,
@@ -29,5 +41,23 @@ contract Campaign{
       manager = creator;
       name= _name;
       minimum_contribution = _minimum;
+   }
+
+   function contribute() public payable{
+      require(msg.value > minimum_contribution);
+
+   }
+
+   function createRequest(
+      string memory _description, 
+      uint _value, 
+      address _recipient
+   ) public restricted{
+      Request memory newRequest = Request({
+         description: _description,
+         value: _value,
+         recipient: _recipient,
+         complete: false
+      });
    }
 }
