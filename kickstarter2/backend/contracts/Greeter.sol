@@ -1,22 +1,33 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
-contract Greeter {
-    string private greeting;
+contract CampaignFactory {
+   address[] public deployedCampaigns;
 
-    constructor(string memory _greeting) {
-        console.log("Deploying a Greeter with greeting:", _greeting);
-        greeting = _greeting;
-    }
+   constructor(string memory name, uint minimum){
+      address newCampaign = address(new Campaign(name, minimum, msg.sender));
+      deployedCampaigns.push(newCampaign);
+   }
 
-    function greet() public view returns (string memory) {
-        return greeting;
-    }
+   function getDeployedCampaigns() public view returns (address[] memory){
+      return deployedCampaigns;
+   }
+}
 
-    function setGreeting(string memory _greeting) public {
-        console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
-        greeting = _greeting;
-    }
+contract Campaign{
+   address public manager;
+   uint public minimum_contribution;
+   string public name;
+
+   constructor(
+      string memory _name,
+      uint _minimum,
+      address creator
+   ){
+      manager = creator;
+      name= _name;
+      minimum_contribution = _minimum;
+   }
 }
