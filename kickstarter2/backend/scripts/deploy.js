@@ -24,7 +24,7 @@ async function main() {
       JSON.stringify(contractArtifact, null, 2)
    )
 
-   console.log("Greeter deployed to:", greeter.address)
+   console.log("Greeter deployed to:", campaign.address)
 }
 
 main()
