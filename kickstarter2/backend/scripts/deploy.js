@@ -1,10 +1,10 @@
 const hre = require("hardhat")
 
 async function main() {
-   const Greeter = await hre.ethers.getContractFactory("Greeter")
-   const greeter = await Greeter.deploy("Hello, Hardhat!")
+   const CampaignFactory = await hre.ethers.getContractFactory("Greeter")
+   const campaign = await Greeter.deploy()
 
-   await greeter.deployed()
+   await campaign.deployed()
 
    console.log("Greeter deployed to:", greeter.address)
 }
