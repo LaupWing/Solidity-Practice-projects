@@ -26,12 +26,12 @@ contract Campaign{
       mapping(address => bool) approvals;
    }
 
+   Request[] public requests;
    address public manager;
    uint public minimum_contribution;
-   string public name;
-   Request[] public requests;
    mapping (address => bool) approvers;
    uint public approversCount;
+   string public name;
 
    modifier restricted() {
       require(msg.sender == manager);
