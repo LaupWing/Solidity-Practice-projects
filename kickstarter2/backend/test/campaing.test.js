@@ -57,5 +57,9 @@ describe('Campaign', ()=>{
          expect((await campaign.requests(0)).value).to.be.equal(request_1.value)
          expect((await campaign.requests(0)).recipient).to.be.equal(request_1.recipient)
       })
+
+      it('Should unsuccessfully create a new request', async ()=>{
+         await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
+      })
    })
 })
