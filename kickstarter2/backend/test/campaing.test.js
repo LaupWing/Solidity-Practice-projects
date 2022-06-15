@@ -19,6 +19,7 @@ describe('Campaign', ()=>{
    describe('deployment', async ()=>{
       it('Should track name and minimum contribution', async ()=>{
          expect(await campaign.minimum_contribution()).to.equal(100)
+         expect(await campaign.name()).to.equal(name)
       })
    })
 })
