@@ -67,4 +67,10 @@ describe('Campaign', ()=>{
          )).to.be.revertedWith('Only manager allowed')
       })
    })
+
+   describe('Approve', async ()=>{
+      await campaign.connect(user1).contribute({value: 200})
+      await campaign.connect(users[0]).contribute({value: 200})
+      await campaign.connect(users[1]).contribute({value: 200})
+   })
 })

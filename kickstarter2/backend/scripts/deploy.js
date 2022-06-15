@@ -5,7 +5,6 @@ async function main() {
    const CampaignFactory = await ethers.getContractFactory("Campaign")
    const campaign = await CampaignFactory.deploy()
    const contractsDir = __dirname + '../../frontend/contractsData'
-   console.log(campaign)
    await campaign.deployed()
 
    if(!fs.existsSync(contractsDir)){
