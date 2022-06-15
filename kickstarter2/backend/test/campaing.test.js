@@ -38,13 +38,13 @@ describe('Campaign', ()=>{
    })
 
    describe('Request', async ()=>{
+      const request_1 = {
+         title: 'Request 1',
+         description: 'Describing Request1',
+         value: 100,
+         recipient: user1.address
+      }
       it('Should successfully create a new request', async ()=>{
-         const request_1 = {
-            title: 'Request 1',
-            description: 'Describing Request1',
-            value: 100,
-            recipient: user1.address
-         }
          await campaign.connect(deployer).createRequest(
             request_1.title, 
             request_1.description, 
