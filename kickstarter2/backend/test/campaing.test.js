@@ -38,6 +38,9 @@ describe('Campaign', ()=>{
    })
 
    describe('Request', async ()=>{
-      
+      it('Should successfully create a new request', async ()=>{
+         await campaign.connect(deployer).createRequest('Test', 'Testing description', 100, user1.address)
+         console.log((await campaign.requests(0)).title)
+      })
    })
 })
