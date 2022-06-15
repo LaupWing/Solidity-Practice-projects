@@ -18,6 +18,7 @@ contract CampaignFactory {
 
 contract Campaign{
    struct Request{
+      string title;
       string description;
       uint value;
       address payable recipient;
@@ -56,11 +57,13 @@ contract Campaign{
    }
 
    function createRequest(
+      string memory _title,
       string memory _description, 
       uint _value, 
       address _recipient
    ) public restricted{
       Request storage newRequest = requests.push();
+      newRequest.title = _title;
       newRequest.description = _description;
       newRequest.value = _value;
       newRequest.recipient = payable(_recipient);
