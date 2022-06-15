@@ -49,7 +49,7 @@ contract Campaign{
    }
 
    function contribute() public payable{
-      require(msg.value > minimum_contribution);
+      require(msg.value > minimum_contribution,  "Minimum contribution not met");
       approvers[msg.sender] = true;
       approversCount++;
 
