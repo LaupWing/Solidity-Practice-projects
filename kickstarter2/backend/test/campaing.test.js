@@ -39,8 +39,23 @@ describe('Campaign', ()=>{
 
    describe('Request', async ()=>{
       it('Should successfully create a new request', async ()=>{
-         await campaign.connect(deployer).createRequest('Test', 'Testing description', 100, user1.address)
-         console.log((await campaign.requests(0)).title)
+         const request_1 = {
+            title: 'Request 1',
+            description: 'Describing Request1',
+            value: 100,
+            recipient: user1.address
+         }
+         await campaign.connect(deployer).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )
+
+         expect((await campaign.requests(0)).title).to.be.equal(request_1.title)
+         expect((await campaign.requests(0)).description).to.be.equal(request_1.description)
+         expect((await campaign.requests(0)).value).to.be.equal(request_1.value)
+         expect((await campaign.requests(0)).recipient).to.be.equal(request_1.recipient)
       })
    })
 })
