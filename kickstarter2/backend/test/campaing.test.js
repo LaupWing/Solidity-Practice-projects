@@ -25,4 +25,11 @@ describe('Campaign', ()=>{
          expect(await campaign.manager()).to.equal(deployer.address)
       })
    })
+
+   describe('Contribution', async ()=>{
+      it('Should successfully register new account with the correct contribution', async ()=>{
+         await campaign.connect(user1).contribute({value: 200})
+         expect((await campaign.approversCount()).toString()).to.equal('1')
+      })
+   })
 })
