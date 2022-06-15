@@ -21,5 +21,8 @@ describe('Campaign', ()=>{
          expect(await campaign.minimum_contribution()).to.equal(100)
          expect(await campaign.name()).to.equal(name)
       })
+      it('Marks caller as the campaign manager', async ()=>{
+         expect(await campaign.manager()).to.equal(deployer.address)
+      })
    })
 })
