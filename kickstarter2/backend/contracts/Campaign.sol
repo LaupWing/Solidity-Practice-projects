@@ -35,7 +35,7 @@ contract Campaign{
    string public name;
 
    modifier restricted() {
-      require(msg.sender == manager);
+      require(msg.sender == manager, "Only manager allowed");
       _;
    }
 

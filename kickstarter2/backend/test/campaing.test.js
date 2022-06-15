@@ -59,7 +59,12 @@ describe('Campaign', ()=>{
       })
 
       it('Should unsuccessfully create a new request', async ()=>{
-         await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
+         await expect(campaign.connect(user1).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )).to.be.revertedWith('Only manager allowed')
       })
    })
 })
