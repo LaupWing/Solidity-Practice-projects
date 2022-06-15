@@ -17,7 +17,7 @@ describe('Campaign', ()=>{
       campaign = await ethers.getContractAt('Campaign', campaignAddress)
    })
 
-   describe('deployment', async ()=>{
+   describe('Deployment', async ()=>{
       it('Should track name and minimum contribution', async ()=>{
          expect(await campaign.minimum_contribution()).to.equal(minimum_contribution)
          expect(await campaign.name()).to.equal(name)
@@ -35,5 +35,9 @@ describe('Campaign', ()=>{
       it('Should revert with message when send incorrect contribution', async()=>{
          await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
       })
+   })
+
+   describe('Request', async ()=>{
+      
    })
 })
