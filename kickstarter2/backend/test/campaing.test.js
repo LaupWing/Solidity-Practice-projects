@@ -8,6 +8,12 @@ describe('Campaign', ()=>{
    const name = 'Fictive name lol'
    let deployer, user1, users
    const minimum_contribution = 100
+   const request_1 = {
+      title: 'Request 1',
+      description: 'Describing Request1',
+      value: 100,
+      recipient: user1.address
+   }
 
    beforeEach(async ()=>{
       [deployer, user1, ...users] = await ethers.getSigners()
@@ -39,12 +45,6 @@ describe('Campaign', ()=>{
    })
 
    describe('Request', async ()=>{
-      const request_1 = {
-         title: 'Request 1',
-         description: 'Describing Request1',
-         value: 100,
-         recipient: user1.address
-      }
       it('Should successfully create a new request', async ()=>{
          await campaign.connect(deployer).createRequest(
             request_1.title, 
@@ -52,26 +52,32 @@ describe('Campaign', ()=>{
             request_1.value, 
             request_1.recipient
          )
-
+         
          expect((await campaign.requests(0)).title).to.be.equal(request_1.title)
          expect((await campaign.requests(0)).description).to.be.equal(request_1.description)
          expect((await campaign.requests(0)).value).to.be.equal(request_1.value)
          expect((await campaign.requests(0)).recipient).to.be.equal(request_1.recipient)
       })
-
+      
       it('Should unsuccessfully create a new request', async ()=>{
          await expect(campaign.connect(user1).createRequest(
             request_1.title, 
             request_1.description, 
             request_1.value, 
             request_1.recipient
-         )).to.be.revertedWith('Only manager allowed')
-      })
+            )).to.be.revertedWith('Only manager allowed')
+         })
    })
-
+      
    describe('Approve', async ()=>{
       await campaign.connect(user1).contribute({value: 200})
       await campaign.connect(users[0]).contribute({value: 200})
       await campaign.connect(users[1]).contribute({value: 200})
+      await campaign.connect(deployer).createRequest(
+         request_1.title, 
+         request_1.description, 
+         request_1.value, 
+         request_1.recipient
+      )
    })
 })
