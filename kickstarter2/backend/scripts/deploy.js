@@ -4,7 +4,7 @@ const path = require('path')
 
 async function main() {
    const CampaignFactory = await ethers.getContractFactory("CampaignFactory")
-   const campaign = await CampaignFactory.deploy('Test campaign', 200)
+   const campaign = await CampaignFactory.deploy()
    const contractsDir = path.join(__dirname, '../../frontend/contractsData')
    await campaign.deployed()
 
