@@ -71,7 +71,7 @@ describe('Campaign', ()=>{
          })
    })
       
-   describe('Approve', async ()=>{
+   describe('End to end', async ()=>{
       
       it('test', async()=>{
          await campaign.connect(deployer).createRequest(
@@ -84,8 +84,10 @@ describe('Campaign', ()=>{
          await campaign.connect(users[0]).contribute({value: 200})
          await campaign.connect(users[1]).contribute({value: 200})
          await campaign.connect(user1).approveRequest(0)
+         // await campaign.connect(users[0]).approveRequest(0)
          console.log((await campaign.requests(0)).approvalCount.toString())
          console.log((await campaign.approversCount()).toString())
+         await campaign.connect(deployer).finalizeRequest(0)
          expect(true)
       })
    })

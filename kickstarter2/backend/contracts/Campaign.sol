@@ -84,7 +84,7 @@ contract Campaign{
    function finalizeRequest(uint index) public restricted{
       Request storage request = requests[index];
 
-      require(request.approvalCount > (approversCount / 2));
+      require(request.approvalCount > (approversCount / 2), "Not enough people have approved this request");
       require(!request.complete);
 
       request.recipient.transfer(request.value);
