@@ -8,19 +8,21 @@ describe('Campaign', ()=>{
    const name = 'Fictive name lol'
    let deployer, user1, users
    const minimum_contribution = 100
-   const request_1 = {
-      title: 'Request 1',
-      description: 'Describing Request1',
-      value: 100,
-      recipient: user1.address
+   let request_1 = {
    }
-
+   
    beforeEach(async ()=>{
       [deployer, user1, ...users] = await ethers.getSigners()
       const Factory = await ethers.getContractFactory('CampaignFactory');
       factory = await Factory.deploy(name, minimum_contribution);
       [campaignAddress] = await factory.getDeployedCampaigns()
       campaign = await ethers.getContractAt('Campaign', campaignAddress)
+      request_1 = {
+         title: 'Request 1',
+         description: 'Describing Request1',
+         value: 100,
+         recipient: user1.address
+      }
    })
 
    describe('Deployment', async ()=>{
@@ -70,14 +72,21 @@ describe('Campaign', ()=>{
    })
       
    describe('Approve', async ()=>{
-      await campaign.connect(user1).contribute({value: 200})
-      await campaign.connect(users[0]).contribute({value: 200})
-      await campaign.connect(users[1]).contribute({value: 200})
-      await campaign.connect(deployer).createRequest(
-         request_1.title, 
-         request_1.description, 
-         request_1.value, 
-         request_1.recipient
-      )
+      
+      it('test', async()=>{
+         await campaign.connect(deployer).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )
+         await campaign.connect(user1).contribute({value: 200})
+         await campaign.connect(users[0]).contribute({value: 200})
+         await campaign.connect(users[1]).contribute({value: 200})
+         await campaign.connect(user1).approveRequest(0)
+         console.log((await campaign.requests(0)).approvalCount.toString())
+         console.log((await campaign.approversCount()).toString())
+         expect(true)
+      })
    })
 })
