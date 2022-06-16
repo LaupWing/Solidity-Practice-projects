@@ -14,7 +14,9 @@ describe('Campaign', ()=>{
    beforeEach(async ()=>{
       [deployer, user1, ...users] = await ethers.getSigners()
       const Factory = await ethers.getContractFactory('CampaignFactory');
-      factory = await Factory.deploy(name, minimum_contribution);
+      factory = await Factory.deploy();
+      await factory.createCampaign(name, minimum_contribution);
+
       [campaignAddress] = await factory.getDeployedCampaigns()
       campaign = await ethers.getContractAt('Campaign', campaignAddress)
       request_1 = {
@@ -101,7 +103,7 @@ describe('Campaign', ()=>{
          await campaign.connect(users[1]).contribute({value: 200})
          await campaign.connect(user1).approveRequest(0)
          
-         expect(await campaign.connect(deployer).finalizeRequest(0)).to.be.revertedWith('Not enough people have approved this request')
+         await expect(campaign.connect(deployer).finalizeRequest(0)).to.be.revertedWith('Not enough people have approved this request')
       })
    })
 })
