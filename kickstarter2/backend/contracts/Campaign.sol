@@ -30,7 +30,7 @@ contract Campaign{
    Request[] public requests;
    address public manager;
    uint public minimum_contribution;
-   mapping (address => bool) approvers;
+   mapping (address => bool) public approvers;
    uint public approversCount;
    string public name;
 

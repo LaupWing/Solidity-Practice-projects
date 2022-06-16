@@ -31,8 +31,7 @@ describe('Campaign', ()=>{
       it('Should successfully register new account with the correct contribution', async ()=>{
          await campaign.connect(user1).contribute({value: 200})
          expect((await campaign.approversCount()).toString()).to.equal('1')
-         expect(await campaign.approvers(user1.address))
-         console.log(await campaign.approvers('Test'))
+         expect(await campaign.approvers(user1.address)).to.be.true
       })
       it('Should revert with message when send incorrect contribution', async()=>{
          await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
