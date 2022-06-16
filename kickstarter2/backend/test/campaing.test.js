@@ -67,8 +67,8 @@ describe('Campaign', ()=>{
             request_1.description, 
             request_1.value, 
             request_1.recipient
-            )).to.be.revertedWith('Only manager allowed')
-         })
+         )).to.be.revertedWith('Only manager allowed')
+      })
    })
       
    describe('End to end', async ()=>{
@@ -101,10 +101,7 @@ describe('Campaign', ()=>{
          await campaign.connect(users[1]).contribute({value: 200})
          await campaign.connect(user1).approveRequest(0)
          
-         expect(await campaign.connect(deployer).finalizeRequest(0))
-            .to
-            .be
-            .revertedWith('Not enough people have approved this request')
+         expect(await campaign.connect(deployer).finalizeRequest(0)).to.be.revertedWith('Not enough people have approved this request')
       })
    })
 })
