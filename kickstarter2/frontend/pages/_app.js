@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }) {
       })
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
+      console.log(window.ethereum)
       const signer = provider.getSigner()
       loadContract(signer)
    }
