@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { ethers, providers } from 'ethers'
 import { useEffect, useState } from 'react'
 import '../styles/globals.css'
 import CampaignFactoryAbi from '../contractsData/campaignFactory.json'
@@ -22,11 +22,13 @@ function MyApp({ Component, pageProps }) {
       })
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const test0 = new providers.JsonRpcProvider('http://localhost:8545/')
       console.log(window.ethereum)
       const signer = provider.getSigner()
+      console.log(test0.getSigner())
+      console.log(signer)
       loadContract(signer)
    }
-
    const loadContract = async (signer) =>{
       const _contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
       const test = await _contract.getDeployedCampaigns()
