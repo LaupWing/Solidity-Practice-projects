@@ -7,8 +7,15 @@ function MyApp({ Component, pageProps }) {
    const web3Handler = async () =>{
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
       setAccount(accounts[0])
-      console.log(account)
-      console.log(accounts)
+      
+      window.ethereum.on('chainChanged', ()=>{
+         window.location.reload()
+      })
+
+      window.ethereum.on('accountsChanged', ()=>{
+         // setLoading(true)
+         web3Handler()
+      })
    }
    useEffect(()=>{
       web3Handler()
