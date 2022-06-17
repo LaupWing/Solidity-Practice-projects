@@ -1,10 +1,12 @@
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import '../styles/globals.css'
-import CampaignFactoryAbi from '../contractsData/campaign-address.json'
+import CampaignFactoryAbi from '../contractsData/campaignFactory.json'
+import CampaignFactoryAddress from '../contractsData/campaignFactory-address.json'
 
 function MyApp({ Component, pageProps }) {
    const [account, setAccount] = useState(null)
+   const [contract, setContract] = useState(null)
 
    const web3Handler = async () =>{
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
@@ -25,7 +27,8 @@ function MyApp({ Component, pageProps }) {
    }
 
    const loadContract = async (signer) =>{
-      const contract = new ethers.Contract()
+      const _contract = new ethers.Contract(CampaignFactoryAbi.abi, CampaignFactoryAddress.address, signer)
+      setContract(_contract)
    }
 
    useEffect(()=>{
