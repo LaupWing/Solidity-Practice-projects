@@ -1,5 +1,7 @@
+import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import '../styles/globals.css'
+import CampaignFactoryAbi from '../contractsData/campaign-address.json'
 
 function MyApp({ Component, pageProps }) {
    const [account, setAccount] = useState(null)
@@ -16,7 +18,16 @@ function MyApp({ Component, pageProps }) {
          // setLoading(true)
          web3Handler()
       })
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner()
+      loadContract(signer)
    }
+
+   const loadContract = async (signer) =>{
+      const contract = new ethers.Contract()
+   }
+
    useEffect(()=>{
       web3Handler()
    },[])
