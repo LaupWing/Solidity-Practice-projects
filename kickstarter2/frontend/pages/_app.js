@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
    }
 
    const loadContract = async (signer) =>{
-      const _contract = new ethers.Contract(CampaignFactoryAbi.abi, CampaignFactoryAddress.address, signer)
+      const _contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
       setContract(_contract)
    }
 
