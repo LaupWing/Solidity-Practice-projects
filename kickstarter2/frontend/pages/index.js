@@ -24,12 +24,3 @@ export default function Home(props) {
       </div>
    )
 }
-
-Home.getInitialProps = async()=>{
-   const provider = new providers.StaticJsonRpcProvider('http://localhost:8545/')
-   // const provider2 = new providers.JsonRpcSigner('http://localhost:8545/')
-   const signer = provider.getSigner()
-   return {
-      signer
-   }
-}

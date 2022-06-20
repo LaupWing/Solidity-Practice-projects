@@ -28,8 +28,6 @@ function MyApp({ Component, pageProps }) {
    const loadContract = async (signer) =>{
       const _contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
       const test = await _contract.getDeployedCampaigns()
-      console.log(test)
-      console.log(_contract)
       setContract(_contract)
    }
 
