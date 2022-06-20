@@ -17,16 +17,11 @@ function MyApp({ Component, pageProps }) {
       })
 
       window.ethereum.on('accountsChanged', ()=>{
-         // setLoading(true)
          web3Handler()
       })
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const test0 = new providers.JsonRpcProvider('http://localhost:8545/')
-      console.log(window.ethereum)
       const signer = provider.getSigner()
-      console.log(test0.getSigner())
-      console.log(signer)
       loadContract(signer)
    }
    const loadContract = async (signer) =>{
