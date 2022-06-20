@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
    }
 
    useEffect(()=>{
-      web3Handler()
+      // web3Handler()
    },[])
    return <Component {...pageProps} />
 }
