@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }) {
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
+      console.log(signer)
       loadContract(signer)
    }
    const loadContract = async (signer) =>{
@@ -33,7 +34,7 @@ function MyApp({ Component, pageProps }) {
    }
 
    useEffect(()=>{
-      // web3Handler()
+      web3Handler()
    },[])
    return <Component {...pageProps} />
 }
