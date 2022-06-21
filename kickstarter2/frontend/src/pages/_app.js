@@ -1,8 +1,8 @@
 import { ethers, providers } from 'ethers'
 import { useEffect, useState } from 'react'
 import '../styles/globals.css'
-import CampaignFactoryAbi from '../contractsData/campaignFactory.json'
-import CampaignFactoryAddress from '../contractsData/campaignFactory-address.json'
+import CampaignFactoryAbi from '../../contractsData/campaignFactory.json'
+import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.json'
 
 function MyApp({ Component, pageProps }) {
    const [account, setAccount] = useState(null)

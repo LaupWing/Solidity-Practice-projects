@@ -1,8 +1,8 @@
 import { ethers, providers } from 'ethers'
 import Head from 'next/head'
 import Image from 'next/image'
-import CampaignFactoryAbi from '../contractsData/campaignFactory.json'
-import CampaignFactoryAddress from '../contractsData/campaignFactory-address.json'
+import CampaignFactoryAbi from '../../contractsData/campaignFactory.json'
+import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.json'
 import { useEffect } from 'react'
 
 
