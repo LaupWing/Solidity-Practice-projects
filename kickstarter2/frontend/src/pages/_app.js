@@ -1,6 +1,6 @@
 import { ethers, providers } from 'ethers'
 import { useEffect, useState } from 'react'
-import '../styles/globals.css'
+import '../../styles/globals.css'
 import CampaignFactoryAbi from '../../contractsData/campaignFactory.json'
 import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.json'
 import {Provider} from 'react-redux'
@@ -24,7 +24,6 @@ function MyApp({ Component, pageProps }) {
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      console.log(signer)
       loadContract(signer)
    }
    const loadContract = async (signer) =>{
