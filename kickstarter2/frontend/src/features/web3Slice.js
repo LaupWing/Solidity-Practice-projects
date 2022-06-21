@@ -6,7 +6,7 @@ const initialState = {
    error: false
 }
 
-export const counterSlice = createSlice({
+export const web3Slice= createSlice({
    name: 'web3',
    initialState,
    reducers: {
@@ -26,10 +26,10 @@ export const counterSlice = createSlice({
          state.account = accounts[0]
          state.contract = contract
       }
-   },
+   }
 })
 
-// Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
-export default counterSlice.reducer
+export const { setWeb3 } = web3Slice.actions
+
+export default web3Slice.reducer
