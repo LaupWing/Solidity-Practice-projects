@@ -11,7 +11,7 @@ export const web3Slice= createSlice({
    initialState,
    reducers: {
       setWeb3: (state)=>{
-         const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
+         const accounts = window.ethereum.request({method: 'eth_requestAccounts'})
          // window.ethereum.on('chainChanged', ()=>{
          //    window.location.reload()
          // })
