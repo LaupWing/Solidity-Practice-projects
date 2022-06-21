@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.json'
+import CampaignFactoryAbi from '../../contractsData/campaignFactory.json'
 
 const initialState = {
    contract: null,
@@ -6,9 +8,10 @@ const initialState = {
    error: false
 }
 
-const fetchWeb3 = createAsyncThunk(
+export const fetchWeb3 = createAsyncThunk(
    'web3/fetchWeb3Status',
    async ()=>{
+      console.log('lol')
       const accounts = window.ethereum.request({method: 'eth_requestAccounts'})
       // window.ethereum.on('chainChanged', ()=>{
       //    window.location.reload()
@@ -19,8 +22,9 @@ const fetchWeb3 = createAsyncThunk(
       
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
-      
+      const contract = new ethers.Contract(CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
+      const test = await contract.getDeployedCampaigns()
+      console.log(test)
       return {
          account: accounts[0],
          contract
