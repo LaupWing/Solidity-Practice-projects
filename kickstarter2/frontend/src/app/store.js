@@ -6,4 +6,7 @@ export const store = configureStore({
    reducer: {
       web3: web3Slice
    },
+   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      serializableCheck: false
+   }),
 })
