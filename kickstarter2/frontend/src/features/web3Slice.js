@@ -34,7 +34,6 @@ export const web3Slice = createSlice({
    extraReducers: builder =>{
       builder
          .addCase(fetchWeb3.fulfilled, (state, action)=>{
-            console.log(action)
             state.account = action.payload.account
             state.contract = action.payload.contract
          })
