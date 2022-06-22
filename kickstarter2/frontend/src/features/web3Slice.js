@@ -24,9 +24,8 @@ export const fetchWeb3 = createAsyncThunk(
 
       const provider = await new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contract = new ethers.Contract(CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
-      const test = await contract.getDeployedCampaigns()
-      console.log(contract)
+      
+      
       return {
          account: accounts[0],
          contract
@@ -40,7 +39,11 @@ export const web3Slice = createSlice({
    initialState,
    middleware: (getDefaultMiddleware) =>getDefaultMiddleware({serializableCheck: false,}),
    reducers: {
-
+      setContract: state =>{
+         const contract = new ethers.Contract(CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
+         console.log(contract)
+         state.contract = 'tet'
+      }
    },
    extraReducers: (builder) => {
       builder.addCase(fetchWeb3.fulfilled, (state, action) => {
