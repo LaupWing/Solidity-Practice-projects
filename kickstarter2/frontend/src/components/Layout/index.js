@@ -3,11 +3,14 @@ import { ethers } from 'ethers'
 import { useEffect } from 'react'
 import CampaignFactoryAbi from '../../../contractsData/campaignFactory.json'
 import CampaignFactoryAddress from '../../../contractsData/campaignFactory-address.json'
+import { useDispatch } from 'react-redux'
+import { setWeb3 } from '../../features/web3Slice'
 
 const Layout = ({children}) => {
+   const dispatch = useDispatch()
 
    const web3Handler = async () =>{
-      // const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
+      const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
       
       window.ethereum.on('chainChanged', ()=>{
          window.location.reload()
@@ -19,12 +22,11 @@ const Layout = ({children}) => {
 
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      loadContract(signer)
-   }
-   const loadContract = async (signer) =>{
-      const _contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
-      const test = await _contract.getDeployedCampaigns()
-      console.log(test)
+      const contract = new ethers.Contract( CampaignFactoryAddress.address, CampaignFactoryAbi.abi, signer)
+      
+      dispatch(setWeb3({
+         account: accounts[0]
+      }))
    }
 
    useEffect(()=>{
