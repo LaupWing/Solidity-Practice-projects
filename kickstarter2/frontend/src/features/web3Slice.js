@@ -28,7 +28,7 @@ export const fetchWeb3 = createAsyncThunk(
       
       return {
          account: accounts[0],
-         contract
+         signer
       }
    }
 )
