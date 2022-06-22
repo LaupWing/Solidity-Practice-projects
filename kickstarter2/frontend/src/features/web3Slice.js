@@ -30,15 +30,11 @@ export const web3Slice = createSlice({
    name: 'web3',
    initialState,
    reducers: {
-      setWeb3: (state, action) => {
-         console.log(contract)
-         state.contract = contract
-         state.account = action.payload.account
-      }
    },
    extraReducers: builder =>{
       builder
          .addCase(fetchWeb3.fulfilled, (state, action)=>{
+            console.log(action)
             state.account = action.payload.account
             state.contract = action.payload.contract
          })
@@ -46,6 +42,6 @@ export const web3Slice = createSlice({
 })
 
 
-export const { setWeb3 } = web3Slice.actions
+// export const { setWeb3 } = web3Slice.actions
 
 export default web3Slice.reducer
