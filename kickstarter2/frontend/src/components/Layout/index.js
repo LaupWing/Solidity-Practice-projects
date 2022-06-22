@@ -1,4 +1,8 @@
 import React from 'react'
+import { ethers } from 'ethers'
+import { useEffect } from 'react'
+import CampaignFactoryAbi from '../../../contractsData/campaignFactory.json'
+import CampaignFactoryAddress from '../../../contractsData/campaignFactory-address.json'
 
 const Layout = ({children}) => {
 
