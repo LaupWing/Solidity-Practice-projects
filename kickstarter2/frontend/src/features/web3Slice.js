@@ -6,7 +6,8 @@ import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.
 const initialState = {
    contract: null,
    account: null,
-   error: false
+   error: false,
+   signer: null
 }
 
 
@@ -21,7 +22,8 @@ export const fetchWeb3 = createAsyncThunk(
 
       return {
          account: accounts[0],
-         contract
+         contract,
+         signer
       }
    }
 )
@@ -37,6 +39,7 @@ export const web3Slice = createSlice({
          .addCase(fetchWeb3.fulfilled, (state, action)=>{
             state.account = action.payload.account
             state.contract = action.payload.contract
+            state.signer = action.payload.signer          
          })
    }
 })

@@ -1,21 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
+import CampaignCard from '../components/CampaignCard'
 
 export default function Home() {
    const {contract} = useSelector(state => state.web3)
+   const [campaigns, setCampaigns] = useState([])
 
    useEffect(()=>{
-      const test = async ()=>{
-         const _t = await contract.getDeployedCampaigns()
-         console.log(_t)
+      const getCampaigns = async ()=>{
+         const _campaigns = await contract.getDeployedCampaigns()
+         setCampaigns(_campaigns)
       }
-      test()
+      getCampaigns()
    },[])
 
 
    return (
       <main className="p-4">
-         <h2>Create Campaign</h2>
+         {campaigns.map(c=>(
+            <CampaignCard 
+               address={c}
+               key={c}
+            />
+         ))}
       </main>
    )
 }
