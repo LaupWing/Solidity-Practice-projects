@@ -16,7 +16,7 @@ export default function Home() {
 
 
    return (
-      <main className="p-4">
+      <main className="p-4 w-full max-w-lg mx-auto space-y-4">
          {campaigns.map(c=>(
             <CampaignCard 
                address={c}
