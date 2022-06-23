@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import {useSelector} from 'react-redux'
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
+   const {contract} = useSelector(state => state.web3)
+
+   console.log(contract)
 
    const handleSubmit = e =>{
       e.preventDefault()
-      console.log(name)
-      console.log(minimum)
+      contract.createCampaign(name, minimum)
    }
 
    return (
