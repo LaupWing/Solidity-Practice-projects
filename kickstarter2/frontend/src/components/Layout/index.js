@@ -19,8 +19,9 @@ const Layout = ({children}) => {
 
 
    return (
-      <div>
+      <div className='bg-slate-500 w-screen h-screen'>
          {children}
+      
       </div>
    )
 }
