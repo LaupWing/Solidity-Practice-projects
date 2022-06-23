@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { fetchWeb3 } from '../../features/web3Slice'
 import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
+import Header from './Header'
 
 const Layout = ({children}) => {
    const dispatch = useDispatch()
@@ -22,7 +23,8 @@ const Layout = ({children}) => {
 
 
    return (
-      <div className='bg-slate-500 w-screen h-screen flex'>
+      <div className='bg-slate-500 w-screen h-screen flex flex-col'>
+         <Header/>
          {contract ? children :(
             <ReactLoading className='m-auto'/>
          )}
