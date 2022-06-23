@@ -17,10 +17,15 @@ async function main() {
       JSON.stringify({address: campaign.address}, undefined, 2)
    )
    
-   const contractArtifact = artifacts.readArtifactSync('CampaignFactory')
+   const contractFactoryArtifact = artifacts.readArtifactSync('CampaignFactory')
+   const contractArtifact = artifacts.readArtifactSync('Campaign')
       
    fs.writeFileSync(
       `${contractsDir}/campaignFactory.json`,
+      JSON.stringify(contractFactoryArtifact, null, 2)
+   )
+   fs.writeFileSync(
+      `${contractsDir}/campaign.json`,
       JSON.stringify(contractArtifact, null, 2)
    )
 
