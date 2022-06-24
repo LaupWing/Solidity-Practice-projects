@@ -4,6 +4,7 @@ import CampaignAbi from '../../../contractsData/campaign.json'
 import {ethers} from 'ethers'
 import { useSelector } from 'react-redux'
 import ReactLoading from 'react-loading'
+import Contribute from '../../components/Contribute'
 
 const CampaignDetail = () => {
    const router = useRouter()
@@ -42,11 +43,7 @@ const CampaignDetail = () => {
                >
                   Create Request
                </button> :
-               <button 
-                  className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
-               >
-                  Contribute
-               </button>
+               <Contribute/>
             }
          </div>
    )
