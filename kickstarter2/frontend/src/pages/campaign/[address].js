@@ -36,7 +36,18 @@ const CampaignDetail = () => {
                {name}
                <span className='ml-auto text-slate-600'>{minimum}</span>
             </h2>
-
+            {owner ? 
+               <button 
+                  className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+               >
+                  Create Request
+               </button> :
+               <button 
+                  className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+               >
+                  Contribute
+               </button>
+            }
          </div>
    )
 }
