@@ -39,7 +39,7 @@ const CreateCampaign = () => {
             <div className='w-full flex my-2'>
                <input 
                   type="text"  
-                  className='focus:outline-none border border-slate-400 p-0.5 px-2 rounded flex-1'
+                  className='input'
                   placeholder='Campaign Name'
                   value={name}
                   onChange={e=>setName(e.target.value)}

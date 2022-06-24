@@ -10,7 +10,13 @@ const CreateRequest = () => {
          <h2 className='text-slate-700 font-bold uppercase mb-2'>Create request</h2>
          <input 
             type="text" 
-            className='border border-slate-300 rounded'
+            className='input'
+            placeholder='name'
+         />
+         <input 
+            type="text" 
+            className='input'
+            placeholder='name'
          />
       </Modal>
    )
