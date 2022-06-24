@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 const Contribute = ({contract, minimum}) => {
    const [contribution, setContribution] = useState(0)
 
-   const handleSubmit = e =>{
+   const handleSubmit = async e =>{
       e.preventDefault()
       if(contribution <= minimum){
          alert('Minimum not met')
          return
       }
+
+      const transation = await contract.contribute({value: contribution})
+      await transation.wait()
       console.log(contract)
       console.log(contribution)
    }
