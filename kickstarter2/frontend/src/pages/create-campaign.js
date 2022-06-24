@@ -15,6 +15,8 @@ const CreateCampaign = () => {
       try{
          const transaction = await contract.createCampaign(name, minimum)
          await transaction.wait()
+         setName('')
+         setMinimum(0)
       }catch(e){
          console.log(e.message)
       }
