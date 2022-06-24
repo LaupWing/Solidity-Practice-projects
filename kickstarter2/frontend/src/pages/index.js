@@ -11,6 +11,7 @@ export default function Home() {
       const getCampaigns = async ()=>{
          const _campaigns = await contract.getDeployedCampaigns()
          setCampaigns(_campaigns)
+         
       }
       getCampaigns()
    },[])
