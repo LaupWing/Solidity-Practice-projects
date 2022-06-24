@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
-import {ethers} from 'ethers'
+import { useRouter } from 'next/router'
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
    const [loading, setLoading] = useState(false)
    const {contract} = useSelector(state => state.web3)
+   const router = useRouter()
 
    const handleSubmit = async e =>{
       e.preventDefault()
@@ -17,6 +18,8 @@ const CreateCampaign = () => {
          await transaction.wait()
          setName('')
          setMinimum(0)
+         router.push('/')
+
       }catch(e){
          console.log(e.message)
       }
