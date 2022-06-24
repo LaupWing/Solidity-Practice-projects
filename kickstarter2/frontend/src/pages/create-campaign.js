@@ -1,22 +1,35 @@
 import React, { useState } from 'react'
+import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
+import {ethers} from 'ethers'
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
+   const [loading, setLoading] = useState(false)
    const {contract} = useSelector(state => state.web3)
 
-   const handleSubmit = e =>{
+   const handleSubmit = async e =>{
       e.preventDefault()
-      contract.createCampaign(name, minimum)
+      setLoading(true)
+      try{
+         const transaction = await contract.createCampaign(name, minimum)
+         await transaction.wait()
+      }catch(e){
+         console.log(e.message)
+      }
+      setLoading(false)
    }
 
    return (
       <main className='w-full p-4 max-w-2xl mx-auto'>
          <form 
-            className='w-full p-2 bg-white rounded shadow flex flex-col'
+            className='w-full p-2 bg-white overflow-hidden rounded shadow flex flex-col relative'
             onSubmit={handleSubmit}
          >
+            {loading && <div className='absolute bg-black bg-opacity-80 flex inset-0 justify-center items-center'>
+               <ReactLoading/>
+            </div>}
             <h2 className='text-slate-600 uppercase font-bold text-sm tracking-wider'>Create campaign</h2>
             <div className='w-full flex my-2'>
                <input 
