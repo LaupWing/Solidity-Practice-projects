@@ -5,6 +5,7 @@ import {ethers} from 'ethers'
 import { useSelector } from 'react-redux'
 import ReactLoading from 'react-loading'
 import Contribute from '../../components/Contribute'
+import CreateRequest from '../../components/CreateRequest'
 
 const CampaignDetail = () => {
    const router = useRouter()
@@ -36,6 +37,7 @@ const CampaignDetail = () => {
       loading ? 
          <ReactLoading className='m-auto'/> : 
          <div className='p-3 flex flex-col'>
+            <CreateRequest/>
             <h2 className='font-bold text-slate-400 flex'>
                {name}
                <span className='ml-auto text-slate-600'>{minimum}</span>
