@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Contribute = () => {
+const Contribute = ({contract, minimum}) => {
+   const [contribution, setContribution] = useState(0)
+
+   const handleSubmit = e =>{
+      e.preventDefault()
+      if(contribution <= minimum){
+         alert('Minimum not met')
+         return
+      }
+      console.log(contract)
+      console.log(contribution)
+   }
+
    return (
-      <div className='my-4 flex'>
+      <form 
+         className='my-4 flex'
+         onSubmit={handleSubmit}
+      >
          <input 
             type="number" 
-            value={0}
+            value={contribution}
+            onChange={e=>setContribution(e.target.value)}
             className='rounded mr-1 px-1 w-40'
          />
          <button 
@@ -13,7 +29,7 @@ const Contribute = () => {
          >
             Contribute
          </button>
-      </div>
+      </form>
    )
 }
 

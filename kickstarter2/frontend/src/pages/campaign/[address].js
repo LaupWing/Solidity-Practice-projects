@@ -11,16 +11,17 @@ const CampaignDetail = () => {
    const {address} = router.query
    const {signer, account} = useSelector(state=>state.web3)
    const [owner, setOwner] = useState(false)
+   const [contract, setContract] = useState(null)
    const [minimum, setMinimum] = useState(false)
    const [name, setName] = useState('')
    const [loading, setLoading] = useState(true)
 
    const fetchContract = async ()=>{
-      const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
-      const manager = await contract.manager()
-      console.log((await contract.approversCount()).toString())
-      setName(await contract.name())
-      setMinimum((await contract.minimum_contribution()).toString())
+      const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
+      const manager = await _contract.manager()
+      setContract(_contract)
+      setName(await _contract.name())
+      setMinimum((await _contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
       setLoading(false)
    }
@@ -43,7 +44,10 @@ const CampaignDetail = () => {
                >
                   Create Request
                </button> :
-               <Contribute/>
+               <Contribute
+                  contract={contract}
+                  minimum={minimum}
+               />
             }
          </div>
    )
