@@ -60,7 +60,7 @@ const CampaignDetail = () => {
    return (
       loading ? 
          <ReactLoading className='m-auto'/> : 
-         <div className='p-3 flex flex-col max-w-xl mx-auto w-full bg-white shadow rounded'>
+         <div className='p-3 flex flex-col max-w-3xl mx-auto w-full bg-white shadow rounded'>
             {showCreateRequest && <CreateRequest
                createRequest={createRequest}
             />}
@@ -80,6 +80,22 @@ const CampaignDetail = () => {
                   minimum={minimum}
                />)
             }
+            <table className='table-auto rounded overflow-hidden'>
+               <tr className='bg-slate-200 text-slate-400 text-sm'>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Value</th>
+                  <th>Recipient</th>
+               </tr>
+               {requests.map(r =>(
+                  <tr>
+                     <th>{r.title}</th>
+                     <th>{r.description}</th>
+                     <th>{r.value}</th>
+                     <th>{r.recipient}</th>
+                  </tr>
+               ))}
+            </table>
          </div>
    )
 }
