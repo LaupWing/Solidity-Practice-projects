@@ -21,8 +21,12 @@ const CampaignDetail = () => {
    const fetchContract = async ()=>{
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
-      const test = await _contract.requests()
-      console.log(test)
+      const request_count = await _contract.getRequestsCount()
+      const requests_proxy = await Promise.all([new Array(Number(request_count.toString()))]
+         .map((_, i)=>_contract.requests(i)))
+
+      console.log(request_count.toString())
+      console.log(requests_proxy)
       setAlreadyContributed(await _contract.approvers(account))
       setContract(_contract)
       setName(await _contract.name())
