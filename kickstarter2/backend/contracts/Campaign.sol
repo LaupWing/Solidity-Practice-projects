@@ -90,4 +90,8 @@ contract Campaign{
       request.recipient.transfer(request.value);
       request.complete = true;
    }
+
+   // function getRequests() public view returns(Request[] memory){
+   //    return requests;
+   // }
 }
