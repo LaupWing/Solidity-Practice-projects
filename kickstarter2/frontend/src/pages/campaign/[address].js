@@ -80,7 +80,7 @@ const CampaignDetail = () => {
                   minimum={minimum}
                />)
             }
-            <table className='table-auto rounded overflow-hidden'>
+            <table className='table-fixed rounded overflow-hidden border border-slate-600'>
                <tr className='bg-slate-200 text-slate-400 text-sm'>
                   <th>Title</th>
                   <th>Description</th>
@@ -88,7 +88,7 @@ const CampaignDetail = () => {
                   <th>Recipient</th>
                </tr>
                {requests.map(r =>(
-                  <tr>
+                  <tr className='bg-slate-100 font-normal'>
                      <th>{r.title}</th>
                      <th>{r.description}</th>
                      <th>{r.value}</th>
