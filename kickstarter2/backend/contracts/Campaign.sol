@@ -91,7 +91,7 @@ contract Campaign{
       request.complete = true;
    }
 
-   // function getRequests() public view returns(Request[] memory){
-   //    return requests;
-   // }
+   function getRequestsCount() public view returns(uint){
+      return requests.length;
+   }
 }
