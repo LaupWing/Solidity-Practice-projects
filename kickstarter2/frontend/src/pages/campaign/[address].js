@@ -21,6 +21,8 @@ const CampaignDetail = () => {
    const fetchContract = async ()=>{
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
+      const test = await _contract.requests()
+      console.log(test)
       setAlreadyContributed(await _contract.approvers(account))
       setContract(_contract)
       setName(await _contract.name())
@@ -37,7 +39,6 @@ const CampaignDetail = () => {
          request.address
       )
       await transation.wait()
-      console.log(transation)
    }
 
    useEffect(()=>{
@@ -48,9 +49,9 @@ const CampaignDetail = () => {
       loading ? 
          <ReactLoading className='m-auto'/> : 
          <div className='p-3 flex flex-col'>
-            <CreateRequest
+            {/* <CreateRequest
                createRequest={createRequest}
-            />
+            /> */}
             <h2 className='font-bold text-slate-400 flex'>
                {name}
                <span className='ml-auto text-slate-600'>{minimum}</span>
