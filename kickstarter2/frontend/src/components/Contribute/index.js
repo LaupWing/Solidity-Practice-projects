@@ -28,7 +28,7 @@ const Contribute = ({contract, minimum}) => {
             className='rounded mr-1 px-1 w-40'
          />
          <button 
-            className='rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+            className='btn'
          >
             Contribute
          </button>

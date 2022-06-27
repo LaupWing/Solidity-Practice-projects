@@ -54,7 +54,7 @@ const CreateCampaign = () => {
                   required
                />
             </div>
-            <button className='mx-auto my-2 bg-green-500 rounded uppercase text-xs tracking-wider font-bold text-white px-3 py-1'>Create</button>
+            <button className='btn'>Create</button>
          </form>
       </main>
    )
