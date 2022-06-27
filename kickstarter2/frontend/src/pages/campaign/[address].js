@@ -15,8 +15,11 @@ const CampaignDetail = () => {
    const [alreadyContributed, setAlreadyContributed] = useState(false)
    const [contract, setContract] = useState(null)
    const [minimum, setMinimum] = useState(false)
+   const [requests, setRequests] = useState([])
    const [name, setName] = useState('')
+
    const [loading, setLoading] = useState(true)
+   const [showCreateRequest, setShowCreateRequest] = useState(false)
 
    const fetchContract = async ()=>{
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
@@ -24,17 +27,14 @@ const CampaignDetail = () => {
       const request_count = await _contract.getRequestsCount()
       const requests_proxy = await Promise.all([new Array(Number(request_count.toString()))]
          .map((_, i)=>_contract.requests(i)))
-      const requests = requests_proxy.map(x=>({
+      setRequests(requests_proxy.map(x=>({
          approvalCount: x.approvalCount.toString(),
          complete: x.complete,
          description: x.description,
          recipient: x.recipient,
          title: x.title,
          value: x.value.toString()
-      }))
-      console.log(requests)
-      // console.log(request_count.toString())
-      // console.log(requests_proxy)
+      })))
       setAlreadyContributed(await _contract.approvers(account))
       setContract(_contract)
       setName(await _contract.name())
@@ -60,10 +60,10 @@ const CampaignDetail = () => {
    return (
       loading ? 
          <ReactLoading className='m-auto'/> : 
-         <div className='p-3 flex flex-col'>
-            {/* <CreateRequest
+         <div className='p-3 flex flex-col max-w-xl mx-auto w-full bg-white shadow rounded'>
+            {showCreateRequest && <CreateRequest
                createRequest={createRequest}
-            /> */}
+            />}
             <h2 className='font-bold text-slate-400 flex'>
                {name}
                <span className='ml-auto text-slate-600'>{minimum}</span>
@@ -71,6 +71,7 @@ const CampaignDetail = () => {
             { owner ? 
                <button 
                   className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+                  onClick={()=>setShowCreateRequest(true)}
                >
                   Create Request
                </button> :
