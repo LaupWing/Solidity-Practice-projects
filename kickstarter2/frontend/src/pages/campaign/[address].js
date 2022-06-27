@@ -25,8 +25,12 @@ const CampaignDetail = () => {
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
       const request_count = await _contract.getRequestsCount()
-      const requests_proxy = await Promise.all([new Array(Number(request_count.toString()))]
-         .map((_, i)=>_contract.requests(i)))
+      const requests_proxy = await Promise.all([...new Array(Number(request_count.toString()))]
+         .map((_, i)=>{
+            console.log(i)
+            return _contract.requests(i)
+         }))
+      console.log(request_count.toString())
       setRequests(requests_proxy.map(x=>({
          approvalCount: x.approvalCount.toString(),
          complete: x.complete,
@@ -81,20 +85,25 @@ const CampaignDetail = () => {
                />)
             }
             <table className='table-fixed rounded overflow-hidden border border-slate-600'>
-               <tr className='bg-slate-200 text-slate-400 text-sm'>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Value</th>
-                  <th>Recipient</th>
-               </tr>
-               {requests.map(r =>(
-                  <tr className='bg-slate-100 font-normal'>
-                     <th>{r.title}</th>
-                     <th>{r.description}</th>
-                     <th>{r.value}</th>
-                     <th>{r.recipient}</th>
+               <tbody>
+                  <tr className='bg-slate-200 text-slate-400 text-sm'>
+                     <th>Title</th>
+                     <th>Description</th>
+                     <th>Value</th>
+                     <th>Recipient</th>
                   </tr>
-               ))}
+                  {requests.map((r,i) =>(
+                     <tr 
+                        className='bg-slate-100 font-normal'
+                        key={i}
+                     >
+                        <th>{r.title}</th>
+                        <th>{r.description}</th>
+                        <th>{r.value}</th>
+                        <th>{r.recipient}</th>
+                     </tr>
+                  ))}
+               </tbody>
             </table>
          </div>
    )
