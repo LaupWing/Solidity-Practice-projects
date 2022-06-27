@@ -24,9 +24,17 @@ const CampaignDetail = () => {
       const request_count = await _contract.getRequestsCount()
       const requests_proxy = await Promise.all([new Array(Number(request_count.toString()))]
          .map((_, i)=>_contract.requests(i)))
-
-      console.log(request_count.toString())
-      console.log(requests_proxy)
+      const requests = requests_proxy.map(x=>({
+         approvalCount: x.approvalCount.toString(),
+         complete: x.complete,
+         description: x.description,
+         recipient: x.recipient,
+         title: x.title,
+         value: x.value.toString()
+      }))
+      console.log(requests)
+      // console.log(request_count.toString())
+      // console.log(requests_proxy)
       setAlreadyContributed(await _contract.approvers(account))
       setContract(_contract)
       setName(await _contract.name())
