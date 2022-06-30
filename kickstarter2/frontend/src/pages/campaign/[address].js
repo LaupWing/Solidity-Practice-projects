@@ -67,6 +67,7 @@ const CampaignDetail = () => {
          <div className='p-3 flex flex-col max-w-3xl mx-auto w-full bg-white shadow rounded'>
             {showCreateRequest && <CreateRequest
                createRequest={createRequest}
+               setShowCreateRequest={setShowCreateRequest}
             />}
             <h2 className='font-bold text-slate-400 flex'>
                {name}

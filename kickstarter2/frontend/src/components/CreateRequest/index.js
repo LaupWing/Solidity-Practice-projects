@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
-
+import {MdOutlineClose} from 'react-icons/md'
 
 // string memory _title,
 // string memory _description, 
 // uint _value, 
 // address _recipient
-const CreateRequest = ({createRequest}) => {
+const CreateRequest = ({createRequest,setShowCreateRequest}) => {
    const [name, setName] = useState('')
    const [address, setAddress] = useState('')
    const [value, setValue] = useState('')
@@ -28,7 +28,14 @@ const CreateRequest = ({createRequest}) => {
          ariaHideApp={false}
          isOpen={true}
       >
-         <h2 className='text-slate-700 font-bold uppercase mb-2'>Create request</h2>
+         <h2 className='text-slate-700 font-bold uppercase mb-2 flex'>
+            Create request
+            <MdOutlineClose 
+               className='ml-auto hover:text-white cursor-pointer' 
+               size={25}
+               onClick={()=>setShowCreateRequest(false)}
+            />
+         </h2>
          <form 
             className='flex flex-col space-y-2'
             onSubmit={handleSubmit}
