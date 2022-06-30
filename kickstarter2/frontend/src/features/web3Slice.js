@@ -41,6 +41,7 @@ export const web3Slice = createSlice({
          .addCase(fetchWeb3.fulfilled, (state, action)=>{
             state.account = action.payload.account
             state.contract = action.payload.contract
+            state.provider = action.payload.provider
             state.signer = action.payload.signer          
          })
    }

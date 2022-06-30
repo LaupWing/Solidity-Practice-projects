@@ -10,7 +10,7 @@ import CreateRequest from '../../components/CreateRequest'
 const CampaignDetail = () => {
    const router = useRouter()
    const {address} = router.query
-   const {signer, account} = useSelector(state=>state.web3)
+   const {signer, account, provider} = useSelector(state=>state.web3)
    const [owner, setOwner] = useState(false)
    const [alreadyContributed, setAlreadyContributed] = useState(false)
    const [contract, setContract] = useState(null)
@@ -26,6 +26,8 @@ const CampaignDetail = () => {
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
       const request_count = await _contract.getRequestsCount()
+      const _balance = await provider.getBalance(address)
+      console.log(_balance)
       const requests_proxy = await Promise.all(
          [...new Array(Number(request_count.toString()))]
          .map((_, i)=>{
