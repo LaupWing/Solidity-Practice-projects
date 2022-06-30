@@ -27,14 +27,13 @@ const CampaignDetail = () => {
       const manager = await _contract.manager()
       const request_count = await _contract.getRequestsCount()
       const _balance = await provider.getBalance(address)
-      console.log(_balance)
       const requests_proxy = await Promise.all(
          [...new Array(Number(request_count.toString()))]
          .map((_, i)=>{
             console.log(i)
             return _contract.requests(i)
          })
-      )
+         )
       setRequests(requests_proxy.map(x=>({
          approvalCount: x.approvalCount.toString(),
          complete: x.complete,
@@ -43,6 +42,7 @@ const CampaignDetail = () => {
          title: x.title,
          value: x.value.toString()
       })))
+      setBalance(_balance.toString())
       setAlreadyContributed(await _contract.approvers(account))
       setContract(_contract)
       setName(await _contract.name())
