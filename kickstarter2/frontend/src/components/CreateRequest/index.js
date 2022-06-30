@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import {MdOutlineClose} from 'react-icons/md'
 
-// string memory _title,
-// string memory _description, 
-// uint _value, 
-// address _recipient
 const CreateRequest = ({createRequest,setShowCreateRequest}) => {
    const [name, setName] = useState('')
    const [address, setAddress] = useState('')
