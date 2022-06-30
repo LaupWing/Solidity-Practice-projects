@@ -6,6 +6,7 @@ import CampaignFactoryAddress from '../../contractsData/campaignFactory-address.
 const initialState = {
    contract: null,
    account: null,
+   provider: null,
    error: false,
    signer: null
 }
@@ -23,7 +24,8 @@ export const fetchWeb3 = createAsyncThunk(
       return {
          account: accounts[0],
          contract,
-         signer
+         signer,
+         provider
       }
    }
 )
