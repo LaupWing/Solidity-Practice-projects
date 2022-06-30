@@ -15,6 +15,7 @@ const CampaignDetail = () => {
    const [alreadyContributed, setAlreadyContributed] = useState(false)
    const [contract, setContract] = useState(null)
    const [minimum, setMinimum] = useState(false)
+   const [balance, setBalance] = useState(false)
    const [requests, setRequests] = useState([])
    const [name, setName] = useState('')
 
@@ -25,12 +26,13 @@ const CampaignDetail = () => {
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
       const request_count = await _contract.getRequestsCount()
-      const requests_proxy = await Promise.all([...new Array(Number(request_count.toString()))]
+      const requests_proxy = await Promise.all(
+         [...new Array(Number(request_count.toString()))]
          .map((_, i)=>{
             console.log(i)
             return _contract.requests(i)
-         }))
-      console.log(request_count.toString())
+         })
+      )
       setRequests(requests_proxy.map(x=>({
          approvalCount: x.approvalCount.toString(),
          complete: x.complete,
