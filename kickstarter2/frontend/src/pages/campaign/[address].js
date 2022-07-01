@@ -34,7 +34,8 @@ const CampaignDetail = () => {
             console.log(i)
             return _contract.requests(i)
          })
-         )
+      )
+
       setRequests(requests_proxy.map(x=>({
          approvalCount: x.approvalCount.toString(),
          complete: x.complete,
@@ -75,7 +76,9 @@ const CampaignDetail = () => {
                setShowCreateRequest={setShowCreateRequest}
             />}
             <CampaignHeader
-               contract={contract}
+               name={name}
+               minimum={minimum}
+               balance={balance}
             />
             { owner ? 
                <button 

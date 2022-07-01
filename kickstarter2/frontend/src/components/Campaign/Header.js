@@ -1,19 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-const CampaignHeader = ({contract}) => {
-   const [minimum, setMinimum] = useState(false)
-   const [name, setName] = useState('')
-
-   const fetchInfo = async ()=>{
-      setName(await contract.name())
-      setMinimum((await contract.minimum_contribution()).toString())
-   }
-
-   useEffect(()=>{
-      fetchInfo()
-   },[])
-
+const CampaignHeader = ({name, minimum}) => {
    return (
       <header>
          <h2 className='font-bold text-slate-400 flex'>
