@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading'
 import Contribute from '../../components/Contribute'
 import CreateRequest from '../../components/CreateRequest'
 import CampaignHeader from '../../components/Campaign/Header.js'
+import CampaingRequests from '../../components/Campaign/Requests'
 
 const CampaignDetail = () => {
    const router = useRouter()
@@ -92,27 +93,9 @@ const CampaignDetail = () => {
                   minimum={minimum}
                />)
             }
-            <table className='table-fixed rounded overflow-hidden border border-slate-600'>
-               <tbody>
-                  <tr className='bg-slate-200 text-slate-400 text-sm'>
-                     <th>Title</th>
-                     <th>Description</th>
-                     <th>Value</th>
-                     <th>Recipient</th>
-                  </tr>
-                  {requests.map((r,i) =>(
-                     <tr 
-                        className='bg-slate-100 font-normal'
-                        key={i}
-                     >
-                        <th>{r.title}</th>
-                        <th>{r.description}</th>
-                        <th>{r.value}</th>
-                        <th>{r.recipient}</th>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
+            <CampaingRequests 
+               requests={requests}
+            />
          </div>
    )
 }
