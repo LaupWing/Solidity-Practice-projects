@@ -71,31 +71,39 @@ const CampaignDetail = () => {
    return (
       loading ? 
          <ReactLoading className='m-auto'/> : 
-         <div className='p-3 flex flex-col max-w-3xl mx-auto w-full bg-white shadow rounded'>
-            {showCreateRequest && <CreateRequest
-               createRequest={createRequest}
-               setShowCreateRequest={setShowCreateRequest}
-            />}
-            <CampaignHeader
-               name={name}
-               minimum={minimum}
-               balance={balance}
-            />
-            { owner ? 
-               <button 
-                  className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
-                  onClick={()=>setShowCreateRequest(true)}
-               >
-                  Create Request
-               </button> :
-               (alreadyContributed ? null : <Contribute
-                  contract={contract}
+         <div className=' max-w-3xl mx-auto w-full flex flex-col'>
+            <button 
+               className='btn mb-4'
+               onClick={()=>router.push('/')}
+            >
+               back
+            </button>
+            <div className='p-3 flex flex-col w-full bg-white shadow rounded'>
+               {showCreateRequest && <CreateRequest
+                  createRequest={createRequest}
+                  setShowCreateRequest={setShowCreateRequest}
+               />}
+               <CampaignHeader
+                  name={name}
                   minimum={minimum}
-               />)
-            }
-            <CampaingRequests 
-               requests={requests}
-            />
+                  balance={balance}
+               />
+               { owner ? 
+                  <button 
+                     className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+                     onClick={()=>setShowCreateRequest(true)}
+                  >
+                     Create Request
+                  </button> :
+                  (alreadyContributed ? null : <Contribute
+                     contract={contract}
+                     minimum={minimum}
+                  />)
+               }
+               <CampaingRequests 
+                  requests={requests}
+               />
+            </div>
          </div>
    )
 }
