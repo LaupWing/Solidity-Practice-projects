@@ -77,10 +77,6 @@ const CampaignDetail = () => {
             <CampaignHeader
                contract={contract}
             />
-            <h2 className='font-bold text-slate-400 flex'>
-               {name}
-               <span className='ml-auto text-slate-600'>{minimum}</span>
-            </h2>
             { owner ? 
                <button 
                   className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
