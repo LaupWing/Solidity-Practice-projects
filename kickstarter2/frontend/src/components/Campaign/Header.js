@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 
-const CampaignHeader = ({name, minimum}) => {
+const CampaignHeader = ({name, minimum, balance}) => {
    return (
-      <header>
-         <h2 className='font-bold text-slate-400 flex'>
-            {name}
-            <span className='ml-auto text-slate-600'>{minimum}</span>
+      <header className='flex flex-col text-slate-400'>
+         <h2>
+            <span className='font-bold'>Name: </span>{name}
+         </h2>
+         <h2>
+            <span className='font-bold'>Minimum: </span>{minimum}
+         </h2>
+         <h2>
+            <span className='font-bold'>Balance: </span>{balance}
          </h2>
       </header>
    )
