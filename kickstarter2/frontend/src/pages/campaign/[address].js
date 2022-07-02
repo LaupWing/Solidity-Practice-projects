@@ -27,13 +27,24 @@ const CampaignDetail = () => {
    const fetchContract = async ()=>{
       const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
       const manager = await _contract.manager()
-      const request_count = await _contract.getRequestsCount()
       const _balance = await provider.getBalance(address)
+      setContract(_contract)
+      
+      await getRequests()
+      setBalance(_balance.toString())
+      setAlreadyContributed(await _contract.approvers(account))
+      setName(await _contract.name())
+      setMinimum((await _contract.minimum_contribution()).toString())
+      setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
+      setLoading(false)
+   }
+   
+   const getRequests = async ()=>{
+      const request_count = await contract.getRequestsCount()
       const requests_proxy = await Promise.all(
          [...new Array(Number(request_count.toString()))]
          .map((_, i)=>{
-            console.log(i)
-            return _contract.requests(i)
+            return contract.requests(i)
          })
       )
 
@@ -45,13 +56,6 @@ const CampaignDetail = () => {
          title: x.title,
          value: x.value.toString()
       })))
-      setBalance(_balance.toString())
-      setAlreadyContributed(await _contract.approvers(account))
-      setContract(_contract)
-      setName(await _contract.name())
-      setMinimum((await _contract.minimum_contribution()).toString())
-      setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
-      setLoading(false)
    }
 
    const createRequest = async (request) =>{
