@@ -95,10 +95,12 @@ contract Campaign{
       return requests.length;
    }
 
-   function getInfo() public view returns (uint, uint){
+   function getInfo() public view returns (uint, uint, uint, uint){
       return (
          minimum_contribution,
-         address(this).balance
+         address(this).balance,
+         requests.length,
+         approversCount
       );
    }
 }
