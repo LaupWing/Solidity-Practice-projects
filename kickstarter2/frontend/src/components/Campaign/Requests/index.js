@@ -2,7 +2,7 @@ import React from 'react'
 
 const CampaingRequests = ({requests}) => {
    return (
-      <table className='table-fixed rounded overflow-hidden border border-slate-600'>
+      <table className='rounded overflow-hidden border border-slate-600 font-normal'>
          <tbody>
             <tr className='bg-slate-200 text-slate-400 text-sm'>
                <th>Title</th>
@@ -12,7 +12,7 @@ const CampaingRequests = ({requests}) => {
             </tr>
             {requests.map((r,i) =>(
                <tr 
-                  className='bg-slate-100 font-normal'
+                  className='bg-slate-100'
                   key={i}
                >
                   <th>{r.title}</th>
