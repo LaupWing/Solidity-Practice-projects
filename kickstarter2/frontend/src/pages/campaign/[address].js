@@ -89,6 +89,7 @@ const CampaignDetail = () => {
                {showCreateRequest && <CreateRequest
                   createRequest={createRequest}
                   setShowCreateRequest={setShowCreateRequest}
+                  getRequests={getRequests}
                />}
                <CampaignHeader
                   name={name}

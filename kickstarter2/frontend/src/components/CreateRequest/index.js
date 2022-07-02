@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import {MdOutlineClose} from 'react-icons/md'
 import ReactLoading from 'react-loading'
 
-const CreateRequest = ({createRequest,setShowCreateRequest}) => {
+const CreateRequest = ({createRequest, setShowCreateRequest, getRequests}) => {
    const [name, setName] = useState('')
    const [address, setAddress] = useState('')
    const [value, setValue] = useState('')
@@ -12,12 +12,16 @@ const CreateRequest = ({createRequest,setShowCreateRequest}) => {
 
    const handleSubmit = async e =>{
       e.preventDefault()
+      setLoading(true)
       await createRequest({
          name,
          address,
          value,
          description,
       })
+      await getRequests()
+      setShowCreateRequest(false)
+      setLoading(false)
    }
 
    return (
@@ -26,9 +30,9 @@ const CreateRequest = ({createRequest,setShowCreateRequest}) => {
          ariaHideApp={false}
          isOpen={true}
       >
-         <div className='inset-0 absolute bg-slate-500 bg-opacity-80 flex justify-center items-center'>
+         {loading && <div className='inset-0 absolute bg-slate-500 bg-opacity-80 flex justify-center items-center'>
             <ReactLoading className='m-auto'/>
-         </div>
+         </div>}
          <h2 className='text-slate-700 font-bold uppercase mb-2 flex'>
             Create request
             <MdOutlineClose 
