@@ -24,17 +24,16 @@ const CampaignDetail = () => {
    const [loading, setLoading] = useState(true)
    const [showCreateRequest, setShowCreateRequest] = useState(false)
 
-   const fetchContract = async ()=>{
-      const _contract = new ethers.Contract(address, CampaignAbi.abi, signer)
-      const manager = await _contract.manager()
+   const fetchInfo = async ()=>{
+      const manager = await contract.manager()
       const _balance = await provider.getBalance(address)
-      setContract(_contract)
+      
       
       await getRequests()
       setBalance(_balance.toString())
-      setAlreadyContributed(await _contract.approvers(account))
-      setName(await _contract.name())
-      setMinimum((await _contract.minimum_contribution()).toString())
+      setAlreadyContributed(await contract.approvers(account))
+      setName(await contract.name())
+      setMinimum((await contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
       setLoading(false)
    }
@@ -69,8 +68,12 @@ const CampaignDetail = () => {
    }
 
    useEffect(()=>{
-      fetchContract()
-   },[])
+      if(!contract){
+         setContract(new ethers.Contract(address, CampaignAbi.abi, signer))
+      }else{
+         fetchInfo()
+      }
+   },[contract])
 
    return (
       loading ? 
