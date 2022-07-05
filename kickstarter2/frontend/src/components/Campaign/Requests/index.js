@@ -2,7 +2,7 @@ import React from 'react'
 
 const CampaingRequests = ({requests, owner}) => {
    return (
-      <table className='rounded overflow-hidden border border-slate-600 font-normal'>
+      <table className='rounded overflow-hidden border border-slate-600 font-normal mt-4'>
          <tbody>
             <tr className='bg-slate-200 text-slate-400 text-sm'>
                <th>Title</th>

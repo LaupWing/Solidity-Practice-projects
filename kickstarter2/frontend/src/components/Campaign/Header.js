@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const CampaignHeader = ({name, minimum, balance}) => {
+const CampaignHeader = ({name, minimum, balance, contributors}) => {
    return (
       <header className='flex flex-col text-slate-400 leading-5'>
          <h2>
@@ -12,6 +12,9 @@ const CampaignHeader = ({name, minimum, balance}) => {
          </h2>
          <h2>
             <span className='font-bold'>Balance: </span>{balance}
+         </h2>
+         <h2>
+            <span className='font-bold'>Contributors: </span>{contributors}
          </h2>
       </header>
    )

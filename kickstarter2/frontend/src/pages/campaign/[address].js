@@ -13,7 +13,9 @@ const CampaignDetail = () => {
    const router = useRouter()
    const {address} = router.query
    const {signer, account, provider} = useSelector(state=>state.web3)
+
    const [owner, setOwner] = useState(false)
+   const [contributors, setContributors] = useState(null)
    const [alreadyContributed, setAlreadyContributed] = useState(false)
    const [contract, setContract] = useState(null)
    const [minimum, setMinimum] = useState(false)
@@ -31,6 +33,7 @@ const CampaignDetail = () => {
       await getRequests()
       setBalance(_balance.toString())
       setAlreadyContributed(await contract.approvers(account))
+      setContributors((await contract.approversCount()).toString())
       setName(await contract.name())
       setMinimum((await contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
@@ -94,6 +97,7 @@ const CampaignDetail = () => {
                   name={name}
                   minimum={minimum}
                   balance={balance}
+                  contributors={contributors}
                />
                { owner ? 
                   <button 
