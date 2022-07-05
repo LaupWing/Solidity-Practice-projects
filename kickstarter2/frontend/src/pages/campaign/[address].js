@@ -28,12 +28,11 @@ const CampaignDetail = () => {
       const manager = await contract.manager()
       const _balance = await provider.getBalance(address)
       
-      
       await getRequests()
       setBalance(_balance.toString())
       setAlreadyContributed(await contract.approvers(account))
       setName(await contract.name())
-      setMinimum((await contract.minimum_contribution()).toString())
+      setMinimum((contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
       setLoading(false)
    }
