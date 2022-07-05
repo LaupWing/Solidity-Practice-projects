@@ -32,7 +32,7 @@ const CampaignDetail = () => {
       setBalance(_balance.toString())
       setAlreadyContributed(await contract.approvers(account))
       setName(await contract.name())
-      setMinimum((contract.minimum_contribution()).toString())
+      setMinimum((await contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
       setLoading(false)
    }
@@ -109,6 +109,7 @@ const CampaignDetail = () => {
                }
                <CampaingRequests 
                   requests={requests}
+                  owner={owner}
                />
             </div>
          </div>
