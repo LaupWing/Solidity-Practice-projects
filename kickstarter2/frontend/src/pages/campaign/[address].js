@@ -114,6 +114,7 @@ const CampaignDetail = () => {
                <CampaingRequests 
                   requests={requests}
                   owner={owner}
+                  contributors={contributors}
                />
             </div>
          </div>
