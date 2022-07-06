@@ -10,7 +10,7 @@ const CampaingRequests = ({requests, owner, contributors}) => {
                <th>Value</th>
                <th>Recipient</th>
                <th>Approvals</th>
-               {owner && <th>Send</th>}
+               {owner ? <th>Send</th> : <th>Approve</th>}
             </tr>
             {requests.map((r,i) =>(
                <tr 
@@ -22,9 +22,13 @@ const CampaingRequests = ({requests, owner, contributors}) => {
                   <th>{r.value}</th>
                   <th>{r.recipient}</th>
                   <th>{r.approvalCount}/{contributors}</th>
-                  {owner && <th>
+                  {owner ? <th>
                      <button className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'>
                         Send
+                     </button>
+                  </th> : <th>
+                     <button className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'>
+                        Approve
                      </button>
                   </th>}
                </tr>
