@@ -80,14 +80,14 @@ const CampaignDetail = () => {
    return (
       loading ? 
          <ReactLoading className='m-auto'/> : 
-         <div className=' max-w-3xl mx-auto w-full flex flex-col'>
+         <div className='max-w-3xl mx-auto w-full flex flex-col'>
             <button 
                className='btn mb-4'
                onClick={()=>router.push('/')}
             >
                back
             </button>
-            <div className='p-3 flex flex-col w-full bg-white shadow rounded'>
+            <div className='relative p-3 flex flex-col w-full bg-white shadow rounded'>
                {showCreateRequest && <CreateRequest
                   createRequest={createRequest}
                   setShowCreateRequest={setShowCreateRequest}
@@ -109,6 +109,7 @@ const CampaignDetail = () => {
                   (alreadyContributed ? null : <Contribute
                      contract={contract}
                      minimum={minimum}
+                     fetchInfo={fetchInfo}
                   />)
                }
                <CampaingRequests 
