@@ -7,8 +7,6 @@ const Contribute = ({contract, minimum, fetchInfo}) => {
 
    const handleSubmit = async e =>{
       e.preventDefault()
-      console.log(contribution)
-      console.log(minimum)
       if(Number(contribution) <= minimum){
          alert('Minimum not met')
          return
