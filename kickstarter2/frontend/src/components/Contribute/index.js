@@ -7,12 +7,14 @@ const Contribute = ({contract, minimum, fetchInfo}) => {
 
    const handleSubmit = async e =>{
       e.preventDefault()
-      setLoading(true)
-      if(contribution <= minimum){
+      console.log(contribution)
+      console.log(minimum)
+      if(Number(contribution) <= minimum){
          alert('Minimum not met')
          return
       }
-
+      
+      setLoading(true)
       const transation = await contract.contribute({value: contribution})
       await transation.wait()
       setLoading(false)
