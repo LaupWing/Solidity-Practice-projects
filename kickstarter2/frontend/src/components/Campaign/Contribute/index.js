@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import React, { useState } from 'react'
 
 const Contribute = ({contribute, minimum}) => {
@@ -9,7 +10,7 @@ const Contribute = ({contribute, minimum}) => {
          alert('Minimum not met')
          return
       }
-      contribute(contribution)
+      contribute(ethers.utils.parseEther(contribution))
    }
 
    return (
@@ -26,7 +27,7 @@ const Contribute = ({contribute, minimum}) => {
          <button 
             className='btn'
          >
-            Contribute
+            Contribute (ETH)
          </button>
       </form>
    )
