@@ -69,6 +69,11 @@ const CampaignDetail = () => {
       await transation.wait()
    }
 
+   const approveRequest = async (index) =>{
+      const transation = await contract.approveRequest(index)
+      await transation.wait()
+   }
+
    useEffect(()=>{
       if(!contract){
          setContract(new ethers.Contract(address, CampaignAbi.abi, signer))
@@ -115,6 +120,7 @@ const CampaignDetail = () => {
                <CampaingRequests 
                   requests={requests}
                   owner={owner}
+                  approveRequest={approveRequest}
                   contributors={contributors}
                />
             </div>
