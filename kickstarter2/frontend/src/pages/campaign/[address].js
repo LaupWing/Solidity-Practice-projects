@@ -23,6 +23,7 @@ const CampaignDetail = () => {
    const [requests, setRequests] = useState([])
    const [name, setName] = useState('')
 
+   const [initialLoading, setInitialLoading] = useState(true)
    const [loading, setLoading] = useState(true)
    const [showCreateRequest, setShowCreateRequest] = useState(false)
 
@@ -37,7 +38,7 @@ const CampaignDetail = () => {
       setName(await contract.name())
       setMinimum((await contract.minimum_contribution()).toString())
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
-      setLoading(false)
+      setInitialLoading(false)
    }
    
    const getRequests = async ()=>{
@@ -69,6 +70,15 @@ const CampaignDetail = () => {
       await transation.wait()
    }
 
+
+   const contribute = async (contribution) =>{
+      setLoading(true)
+      const transation = await contract.contribute({value: contribution})
+      await transation.wait()
+      setLoading(false)
+      fetchInfo()
+   }
+
    const approveRequest = async (index) =>{
       const transation = await contract.approveRequest(index)
       await transation.wait()
@@ -83,7 +93,7 @@ const CampaignDetail = () => {
    },[contract])
 
    return (
-      loading ? 
+      initialLoading ? 
          <ReactLoading className='m-auto'/> : 
          <div className='max-w-3xl mx-auto w-full flex flex-col'>
             <button 
@@ -93,6 +103,9 @@ const CampaignDetail = () => {
                back
             </button>
             <div className='relative p-3 flex flex-col w-full bg-white shadow rounded'>
+               {loading && <div className='absolute inset-0 bg-slate-500 bg-opacity-50 flex justify-center items-center'>
+                  <ReactLoading/>
+               </div>}
                {showCreateRequest && <CreateRequest
                   createRequest={createRequest}
                   setShowCreateRequest={setShowCreateRequest}
@@ -112,9 +125,7 @@ const CampaignDetail = () => {
                      Create Request
                   </button> :
                   (alreadyContributed ? null : <Contribute
-                     contract={contract}
-                     minimum={minimum}
-                     fetchInfo={fetchInfo}
+                     contribute={contribute}
                   />)
                }
                <CampaingRequests 

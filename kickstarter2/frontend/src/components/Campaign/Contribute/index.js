@@ -1,29 +1,20 @@
 import React, { useState } from 'react'
-import ReactLoading from 'react-loading'
 
-const Contribute = ({contract, minimum, fetchInfo}) => {
+const Contribute = ({contribute}) => {
    const [contribution, setContribution] = useState(0)
-   const [loading, setLoading] = useState(false)
 
-   const handleSubmit = async e =>{
+   const handleSubmit = e =>{
       e.preventDefault()
       if(Number(contribution) <= minimum){
          alert('Minimum not met')
          return
       }
-      
-      setLoading(true)
-      const transation = await contract.contribute({value: contribution})
-      await transation.wait()
-      setLoading(false)
-      fetchInfo()
+      contribute(contribution)
    }
 
    return (
       <>
-         {loading && <div className='absolute inset-0 bg-slate-500 bg-opacity-50 flex justify-center items-center'>
-            <ReactLoading/>
-         </div>}
+         
          <form 
             className='my-4 flex border border-slate-300 mr-auto p-1 rounded'
             onSubmit={handleSubmit}
