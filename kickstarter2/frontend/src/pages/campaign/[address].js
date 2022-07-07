@@ -24,7 +24,7 @@ const CampaignDetail = () => {
    const [name, setName] = useState('')
 
    const [initialLoading, setInitialLoading] = useState(true)
-   const [loading, setLoading] = useState(true)
+   const [loading, setLoading] = useState(false)
    const [showCreateRequest, setShowCreateRequest] = useState(false)
 
    const fetchInfo = async ()=>{
@@ -75,13 +75,16 @@ const CampaignDetail = () => {
       setLoading(true)
       const transation = await contract.contribute({value: contribution})
       await transation.wait()
+      await fetchInfo()
       setLoading(false)
-      fetchInfo()
    }
-
+   
    const approveRequest = async (index) =>{
+      setLoading(true)
       const transation = await contract.approveRequest(index)
       await transation.wait()
+      await fetchInfo()
+      setLoading(false)
    }
 
    useEffect(()=>{
@@ -126,6 +129,7 @@ const CampaignDetail = () => {
                   </button> :
                   (alreadyContributed ? null : <Contribute
                      contribute={contribute}
+                     minimum={minimum}
                   />)
                }
                <CampaingRequests 

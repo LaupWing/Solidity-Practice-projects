@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CampaingRequests = ({requests, owner, contributors}) => {
+const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
    return (
       <table className='rounded overflow-hidden border border-slate-600 font-normal mt-4'>
          <tbody>
@@ -27,7 +27,10 @@ const CampaingRequests = ({requests, owner, contributors}) => {
                         Send
                      </button>
                   </th> : <th>
-                     <button className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'>
+                     <button 
+                        className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'
+                        onClick={()=>approveRequest(i)}
+                     >
                         Approve
                      </button>
                   </th>}
