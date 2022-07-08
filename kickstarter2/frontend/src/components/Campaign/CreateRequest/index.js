@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import {MdOutlineClose} from 'react-icons/md'
 import ReactLoading from 'react-loading'
+import {ethers} from 'ethers'
 
 const CreateRequest = ({createRequest, setShowCreateRequest, getRequests}) => {
    const [name, setName] = useState('')
@@ -16,7 +17,7 @@ const CreateRequest = ({createRequest, setShowCreateRequest, getRequests}) => {
       await createRequest({
          name,
          address,
-         value,
+         value: ethers.utils.parseEther(value).toString(),
          description,
       })
       await getRequests()
