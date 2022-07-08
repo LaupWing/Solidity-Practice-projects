@@ -56,7 +56,7 @@ const CampaignDetail = () => {
          description: x.description,
          recipient: x.recipient,
          title: x.title,
-         value: x.value.toString()
+         value: ethers.utils.formatEther(x.value.toString())
       })))
    }
 
