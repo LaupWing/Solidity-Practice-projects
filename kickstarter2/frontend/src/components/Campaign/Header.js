@@ -1,5 +1,4 @@
 import React from 'react'
-import {ethers} from 'ethers'
 
 const CampaignHeader = ({name, minimum, balance, contributors}) => {
    return (

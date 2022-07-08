@@ -32,7 +32,7 @@ const CampaignDetail = () => {
       const _balance = await provider.getBalance(address)
       
       await getRequests()
-      setBalance(_balance.toString())
+      setBalance(ethers.utils.formatEther(_balance.toString()))
       setAlreadyContributed(await contract.approvers(account))
       setContributors((await contract.approversCount()).toString())
       setName(await contract.name())
