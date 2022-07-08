@@ -8,10 +8,10 @@ const CampaignHeader = ({name, minimum, balance, contributors}) => {
             <span className='font-bold'>Name: </span>{name}
          </h2>
          <h2>
-            <span className='font-bold'>Minimum (Ether): </span>{ethers.utils.formatEther(minimum)}
+            <span className='font-bold'>Minimum (Ether): </span>{minimum}
          </h2>
          <h2>
-            <span className='font-bold'>Balance (Ether): </span>{ethers.utils.formatEther(balance)}
+            <span className='font-bold'>Balance (Ether): </span>{balance}
          </h2>
          <h2>
             <span className='font-bold'>Contributors: </span>{contributors}

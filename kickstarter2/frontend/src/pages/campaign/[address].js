@@ -36,7 +36,7 @@ const CampaignDetail = () => {
       setAlreadyContributed(await contract.approvers(account))
       setContributors((await contract.approversCount()).toString())
       setName(await contract.name())
-      setMinimum((await contract.minimum_contribution()).toString())
+      setMinimum(ethers.utils.formatEther((await contract.minimum_contribution()).toString()))
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
       setInitialLoading(false)
    }
