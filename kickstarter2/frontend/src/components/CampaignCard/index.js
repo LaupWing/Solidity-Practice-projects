@@ -17,7 +17,7 @@ const CampaignCard = ({address}) => {
          const name = await contract.name()
          const minimum = await contract.minimum_contribution()
          setName(name)
-         setMinimum(minimum.toString())
+         setMinimum(ethers.utils.formatEther(minimum.toString()))
          setLoading(false)
       }
       getCampaign()
