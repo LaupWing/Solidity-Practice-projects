@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
-   const [minimum, setMinimum] = useState(0)
+   const [minimum, setMinimum] = useState(null)
    const [loading, setLoading] = useState(false)
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
@@ -47,8 +47,8 @@ const CreateCampaign = () => {
                />
                <input 
                   type="number" 
-                  className='focus:outline-none border ml-1 w-24 px-2 border-slate-400 rounded' 
-                  placeholder='1'
+                  className='focus:outline-none border ml-1 w-90 px-2 border-slate-400 rounded' 
+                  placeholder='ETH minimum'
                   value={minimum}
                   onChange={e=>setMinimum(e.target.value)}
                   required
