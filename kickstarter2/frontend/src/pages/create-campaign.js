@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
 import { useRouter } from 'next/router'
+import {ethers} from 'ethers'
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
-   const [minimum, setMinimum] = useState(null)
+   const [minimum, setMinimum] = useState('')
    const [loading, setLoading] = useState(false)
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
@@ -14,7 +15,7 @@ const CreateCampaign = () => {
       e.preventDefault()
       setLoading(true)
       try{
-         const transaction = await contract.createCampaign(name, minimum)
+         const transaction = await contract.createCampaign(name, ethers.utils.parseEther(minimum).toString())
          await transaction.wait()
          setName('')
          setMinimum(0)
