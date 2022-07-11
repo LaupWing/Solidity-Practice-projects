@@ -29,6 +29,7 @@ const CreateCampaign = () => {
 
    return (
       <main className='w-full p-4 max-w-2xl mx-auto'>
+         <button className='btn mb-4'>Back</button>
          <form 
             className='w-full p-2 bg-white overflow-hidden rounded shadow flex flex-col relative'
             onSubmit={handleSubmit}
