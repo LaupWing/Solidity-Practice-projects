@@ -3,6 +3,8 @@ import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
 import { useRouter } from 'next/router'
 import {ethers} from 'ethers'
+import {create as ipfsHttpClient} from 'ipfs-http-client'
+const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 const CreateCampaign = () => {
    const [name, setName] = useState('')
