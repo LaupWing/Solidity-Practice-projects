@@ -30,7 +30,7 @@ const CampaignCard = ({address}) => {
                <ReactLoading className='mx-auto'/> :
                <div className='flex text-xl font-bold p-2 justify-between w-full'>
                   <h2 className='text-slate-500'>{name}</h2>
-                  <p className='text-white'>{minimum}</p>
+                  <p className='text-white'>{minimum} (ETH)</p>
                </div>
             }
          </div>
