@@ -7,6 +7,6 @@
       @apply focus:outline-none border border-slate-400 p-0.5 px-2 rounded flex-1;
    }
    .btn{
-      @apply rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1
+      @apply rounded px-4 text-xs uppercase text-white font-bold py-1
    }
 }

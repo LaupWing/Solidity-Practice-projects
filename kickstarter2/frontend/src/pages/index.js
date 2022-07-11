@@ -20,7 +20,7 @@ export default function Home() {
    return (
       <main className="p-4 w-full max-w-lg mx-auto space-y-4">
          <Link href={`/create-campaign`}>
-            <button className='text-xs uppercase text-white bg-indigo-600 py-1 px-4 font-bold rounded'>Create</button>
+            <button className='bg-indigo-600 btn'>Create</button>
          </Link>
          {campaigns.map(c=>(
             <CampaignCard 

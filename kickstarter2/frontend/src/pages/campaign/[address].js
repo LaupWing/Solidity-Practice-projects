@@ -100,7 +100,7 @@ const CampaignDetail = () => {
          <ReactLoading className='m-auto'/> : 
          <div className='max-w-3xl mx-auto w-full flex flex-col'>
             <button 
-               className='btn mb-4'
+               className='btn mb-4 mr-auto bg-indigo-600'
                onClick={()=>router.push('/')}
             >
                back
@@ -122,7 +122,7 @@ const CampaignDetail = () => {
                />
                { owner ? 
                   <button 
-                     className='my-4 rounded bg-green-500 mr-auto px-4 text-xs uppercase text-white font-bold py-1'
+                     className='my-4 btn bg-green-500 mr-auto'
                      onClick={()=>setShowCreateRequest(true)}
                   >
                      Create Request
