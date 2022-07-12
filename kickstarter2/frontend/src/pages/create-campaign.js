@@ -32,7 +32,11 @@ const CreateCampaign = () => {
 
    const handleFile = e =>{
       const {files} = e.target
-      console.log(files)
+      const file = files[0]
+      const validImageTypes = ['image/jpeg', 'image/png']
+      if(validImageTypes.includes(file.type)){
+         console.log(files)
+      }
    }
 
    return (
