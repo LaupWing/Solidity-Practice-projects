@@ -58,7 +58,7 @@ const CreateCampaign = () => {
             <div className='w-full flex my-2'>
                <input 
                   type="text"  
-                  className='input'
+                  className='input flex-1'
                   placeholder='Campaign Name'
                   value={name}
                   onChange={e=>setName(e.target.value)}
@@ -66,14 +66,14 @@ const CreateCampaign = () => {
                />
                <input 
                   type="number" 
-                  className='focus:outline-none border ml-1 w-90 px-2 border-slate-400 rounded' 
+                  className='input ml-1 w-90' 
                   placeholder='ETH minimum'
                   value={minimum}
                   onChange={e=>setMinimum(e.target.value)}
                   required
                />
             </div>
-            <div className='my-2 h-40 flex items-center'>
+            <div className='h-40 flex items-center'>
                {!preview ? <input 
                   type="file" 
                   onChange={handleFile}

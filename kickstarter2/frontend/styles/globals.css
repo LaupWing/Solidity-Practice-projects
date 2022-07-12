@@ -4,7 +4,7 @@
 
 @layer components {
    .input {
-      @apply focus:outline-none border border-slate-400 p-0.5 px-2 rounded flex-1;
+      @apply focus:outline-none bg-slate-200 p-1 px-2 rounded;
    }
    .btn{
       @apply rounded px-4 text-xs uppercase text-white font-bold py-1
