@@ -10,6 +10,7 @@ const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
    const [loading, setLoading] = useState(false)
+   const [files, setFiles] = useState([])
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
 
@@ -27,6 +28,11 @@ const CreateCampaign = () => {
          console.log(e.message)
       }
       setLoading(false)
+   }
+
+   const handleFile = e =>{
+      const {files} = e.target
+      console.log(files)
    }
 
    return (
@@ -63,7 +69,13 @@ const CreateCampaign = () => {
                   required
                />
             </div>
-            <button className='btn bg-indigo-600 mr-auto'>Create</button>
+            <div className='my-2'>
+               <input 
+                  type="file" 
+                  onChange={handleFile}
+               />
+            </div>
+            <button className='btn bg-indigo-500 mr-auto'>Create</button>
          </form>
       </main>
    )
