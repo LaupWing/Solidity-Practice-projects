@@ -19,11 +19,13 @@ const CreateCampaign = () => {
       e.preventDefault()
       setLoading(true)
       try{
-         const transaction = await contract.createCampaign(name, ethers.utils.parseEther(minimum).toString())
-         await transaction.wait()
-         setName('')
-         setMinimum(0)
-         router.push('/')
+         const file = await client.add(buffer) 
+         console.log(file)
+         // const transaction = await contract.createCampaign(name, ethers.utils.parseEther(minimum).toString())
+         // await transaction.wait()
+         // setName('')
+         // setMinimum(0)
+         // router.push('/')
 
       }catch(e){
          console.log(e.message)
