@@ -9,6 +9,7 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
+   const [description, setDescription] = useState('')
    const [loading, setLoading] = useState(false)
    const [buffer, setBuffer] = useState(false)
    const [preview, setPreview] = useState(false)
@@ -19,13 +20,20 @@ const CreateCampaign = () => {
       e.preventDefault()
       setLoading(true)
       try{
-         const file = await client.add(buffer) 
-         console.log(file)
-         // const transaction = await contract.createCampaign(name, ethers.utils.parseEther(minimum).toString())
-         // await transaction.wait()
-         // setName('')
-         // setMinimum(0)
-         // router.push('/')
+         const image = await client.add(buffer) 
+         
+         const transaction = await contract.createCampaign(
+            name, 
+            ethers.utils.parseEther(minimum).toString(),
+            description,
+            image
+         )
+         await transaction.wait()
+         setName('')
+         setBuffer(false)
+         setPreview(false)
+         setMinimum(0)
+         router.push('/')
 
       }catch(e){
          console.log(e.message)
@@ -94,6 +102,7 @@ const CreateCampaign = () => {
                <textarea 
                   className='h-full rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
                   placeholder='Description'
+                  onChange={e=>setDescription(e.target.value)}
                ></textarea>
             </div>
             <button className='btn bg-indigo-500 mr-auto'>Create</button>
