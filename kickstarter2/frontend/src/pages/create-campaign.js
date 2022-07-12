@@ -10,7 +10,7 @@ const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
    const [loading, setLoading] = useState(false)
-   const [files, setFiles] = useState([])
+   const [preview, setPreview] = useState([])
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
 
@@ -35,7 +35,7 @@ const CreateCampaign = () => {
       const file = files[0]
       const validImageTypes = ['image/jpeg', 'image/png']
       if(validImageTypes.includes(file.type)){
-         console.log(files)
+         setPreview(URL.createObjectURL(file))
       }
    }
 
