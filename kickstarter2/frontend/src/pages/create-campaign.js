@@ -10,6 +10,7 @@ const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
    const [loading, setLoading] = useState(false)
+   const [buffer, setBuffer] = useState(false)
    const [preview, setPreview] = useState(false)
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
@@ -36,6 +37,12 @@ const CreateCampaign = () => {
       const validImageTypes = ['image/jpeg', 'image/png']
       if(validImageTypes.includes(file.type)){
          setPreview(URL.createObjectURL(file))
+         const reader = new window.FileReader()
+         reader.readAsArrayBuffer(file)
+   
+         reader.onloadend = () =>{
+            setBuffer(Buffer(reader.result))
+         }
       }
    }
 
