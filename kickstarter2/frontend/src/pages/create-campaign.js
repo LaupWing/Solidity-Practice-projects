@@ -63,7 +63,7 @@ const CreateCampaign = () => {
                   required
                />
             </div>
-            <button className='btn'>Create</button>
+            <button className='btn bg-indigo-600 mr-auto'>Create</button>
          </form>
       </main>
    )
