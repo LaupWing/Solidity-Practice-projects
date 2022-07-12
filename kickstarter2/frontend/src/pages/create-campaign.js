@@ -73,15 +73,19 @@ const CreateCampaign = () => {
                   required
                />
             </div>
-            <div className='my-2 h-60 flex items-center'>
+            <div className='my-2 h-40 flex items-center'>
                {!preview ? <input 
                   type="file" 
                   onChange={handleFile}
                /> : <img 
                   src={preview}
-                  className='h-full object-cover w-60'
+                  className='h-full object-cover w-40'
                />
                }
+               <textarea 
+                  className='h-full rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
+                  placeholder='Description'
+               ></textarea>
             </div>
             <button className='btn bg-indigo-500 mr-auto'>Create</button>
          </form>
