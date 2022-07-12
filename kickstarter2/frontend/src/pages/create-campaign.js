@@ -10,7 +10,7 @@ const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
    const [loading, setLoading] = useState(false)
-   const [preview, setPreview] = useState([])
+   const [preview, setPreview] = useState(false)
    const {contract} = useSelector(state => state.web3)
    const router = useRouter()
 
@@ -74,10 +74,10 @@ const CreateCampaign = () => {
                />
             </div>
             <div className='my-2'>
-               <input 
+               {!preview ? <input 
                   type="file" 
                   onChange={handleFile}
-               />
+               /> : <img src={preview}/>}
             </div>
             <button className='btn bg-indigo-500 mr-auto'>Create</button>
          </form>
