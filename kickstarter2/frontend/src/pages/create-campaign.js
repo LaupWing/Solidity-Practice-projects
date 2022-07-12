@@ -73,11 +73,15 @@ const CreateCampaign = () => {
                   required
                />
             </div>
-            <div className='my-2'>
+            <div className='my-2 h-60 flex items-center'>
                {!preview ? <input 
                   type="file" 
                   onChange={handleFile}
-               /> : <img src={preview}/>}
+               /> : <img 
+                  src={preview}
+                  className='h-full object-cover w-60'
+               />
+               }
             </div>
             <button className='btn bg-indigo-500 mr-auto'>Create</button>
          </form>
