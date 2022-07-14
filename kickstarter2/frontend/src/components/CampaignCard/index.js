@@ -10,18 +10,16 @@ const CampaignCard = ({address}) => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
    const [loading, setLoading] = useState(true)
+   const [description, setDescription] = useState(true)
    const [thumbnail, setThumbnail] = useState(true)
 
    useEffect(()=>{
       const getCampaign = async ()=>{
          const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
-         const name = await contract.name()
-         const minimum = await contract.minimum_contribution()
-         const thumbnail = await contract.thumbnail()
          
-         setThumbnail(thumbnail)
-         setName(name)
-         setMinimum(ethers.utils.formatEther(minimum.toString()))
+         setThumbnail(await contract.thumbnail())
+         setName(await contract.name())
+         setMinimum(ethers.utils.formatEther((await contract.minimum_contribution()).toString()))
          setLoading(false)
       }
       getCampaign()
@@ -42,6 +40,7 @@ const CampaignCard = ({address}) => {
                   </div>
                   <div className='p-2'>
                      <h2 className='text-slate-500'>{name}</h2>
+
                   </div>
                </div>
             }
