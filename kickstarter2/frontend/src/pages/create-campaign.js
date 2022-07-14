@@ -105,7 +105,7 @@ const CreateCampaign = () => {
                   onChange={e=>setDescription(e.target.value)}
                ></textarea>
             </div>
-            <button className='btn bg-indigo-500 mr-auto'>Create</button>
+            <button className='btn bg-indigo-500 mr-auto mt-2'>Create</button>
          </form>
       </main>
    )
