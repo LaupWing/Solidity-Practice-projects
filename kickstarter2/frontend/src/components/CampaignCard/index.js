@@ -29,13 +29,20 @@ const CampaignCard = ({address}) => {
 
    return (
       <Link href={`/campaign/${address}`}>
-         <div className='w-full p-2 bg-slate-300 flex rounded shadow cursor-pointer hover:border-indigo-500 border-2 border-transparent'>
+         <div className='w-full max-w-xs bg-slate-300 flex rounded shadow cursor-pointer border-transparent overflow-hidden'>
             {loading ? 
-               <ReactLoading className='mx-auto'/> :
-               <div className='flex text-xl font-bold p-2 justify-between w-full'>
-                  <h2 className='text-slate-500'>{name}</h2>
-                  <p className='text-white'>{minimum} (ETH)</p>
-                  <img src={`https://ipfs.infura.io/ipfs/${thumbnail}`} style={{ maxWidth: '420px' }} />
+               <ReactLoading className='mx-auto my-20'/> :
+               <div className='flex flex-col font-bold justify-between w-full'>
+                  <div className='relative'>
+                     <p className='text-white text-xs bg-slate-500 w-20 rounded-full text-center right-2 top-2 py-1 absolute'>{minimum} (ETH)</p>
+                     <img 
+                        src={`https://ipfs.infura.io/ipfs/${thumbnail}`} 
+                        className='w-full h-52 object-cover'
+                     />
+                  </div>
+                  <div className='p-2'>
+                     <h2 className='text-slate-500'>{name}</h2>
+                  </div>
                </div>
             }
          </div>
