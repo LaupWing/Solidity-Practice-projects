@@ -16,7 +16,7 @@ const CampaignCard = ({address}) => {
    useEffect(()=>{
       const getCampaign = async ()=>{
          const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
-         console.log(await contract.description())
+         
          setDescription(await contract.description())
          setThumbnail(await contract.thumbnail())
          setName(await contract.name())
