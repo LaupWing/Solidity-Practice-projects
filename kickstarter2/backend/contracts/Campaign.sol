@@ -103,4 +103,22 @@ contract Campaign{
    function getRequestsCount() public view returns(uint){
       return requests.length;
    }
+
+   function summary() public view returns(
+      uint, 
+      uint, 
+      address, 
+      string memory, 
+      string memory, 
+      string memory
+   ){
+      return (
+         minimum_contribution, 
+         address(this).balance,
+         manager,
+         thumbnail,
+         description,
+         name
+      );
+   }
 }
