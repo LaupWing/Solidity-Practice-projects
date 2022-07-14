@@ -10,6 +10,7 @@ const CampaignCard = ({address}) => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
    const [loading, setLoading] = useState(true)
+   const [thumbnail, setThumbnail] = useState(true)
 
    useEffect(()=>{
       const getCampaign = async ()=>{
@@ -17,7 +18,8 @@ const CampaignCard = ({address}) => {
          const name = await contract.name()
          const minimum = await contract.minimum_contribution()
          const thumbnail = await contract.thumbnail()
-         console.log(thumbnail)
+         
+         setThumbnail(thumbnail)
          setName(name)
          setMinimum(ethers.utils.formatEther(minimum.toString()))
          setLoading(false)
@@ -33,6 +35,7 @@ const CampaignCard = ({address}) => {
                <div className='flex text-xl font-bold p-2 justify-between w-full'>
                   <h2 className='text-slate-500'>{name}</h2>
                   <p className='text-white'>{minimum} (ETH)</p>
+                  <img src={`https://ipfs.infura.io/ipfs/${thumbnail}`} style={{ maxWidth: '420px' }} />
                </div>
             }
          </div>
