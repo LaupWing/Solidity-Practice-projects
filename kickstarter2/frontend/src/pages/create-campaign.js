@@ -26,7 +26,7 @@ const CreateCampaign = () => {
             name, 
             ethers.utils.parseEther(minimum).toString(),
             description,
-            image
+            image.path
          )
          await transaction.wait()
          setName('')
