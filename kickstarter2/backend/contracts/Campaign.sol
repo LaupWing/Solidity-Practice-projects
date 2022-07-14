@@ -8,7 +8,7 @@ contract CampaignFactory {
       string memory name, 
       uint minimum,
       string memory description,
-      string memory thumbnail
+      address thumbnail
    ) public {
       address newCampaign = address(new Campaign(name, minimum, msg.sender, description, thumbnail));
       deployedCampaigns.push(newCampaign);
@@ -37,7 +37,7 @@ contract Campaign{
    uint public approversCount;
    string public name;
    string public description;
-   string public thumbnail;
+   address public thumbnail;
 
    modifier restricted() {
       require(msg.sender == manager, "Only manager allowed");
@@ -49,13 +49,13 @@ contract Campaign{
       uint _minimum,
       address creator,
       string memory _description,
-      string memory _thumbnail
+      address _thumbnail
    ){
       manager = creator;
       name = _name;
       description = _description;
-      thumbnail = _thumbnail;
       minimum_contribution = _minimum;
+      thumbnail = _thumbnail;
    }
 
    function contribute() public payable{

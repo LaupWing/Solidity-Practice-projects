@@ -16,6 +16,8 @@ const CampaignCard = ({address}) => {
          const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
          const name = await contract.name()
          const minimum = await contract.minimum_contribution()
+         const thumbnail = await contract.thumbnail()
+         console.log(thumbnail)
          setName(name)
          setMinimum(ethers.utils.formatEther(minimum.toString()))
          setLoading(false)
