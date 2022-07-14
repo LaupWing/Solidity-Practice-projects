@@ -18,16 +18,18 @@ export default function Home() {
 
 
    return (
-      <main className="p-4 w-full max-w-lg mx-auto space-y-4">
+      <main className="p-4 w-full max-w-5xl gap-2 mx-auto space-y-4">
          <Link href={`/create-campaign`}>
             <button className='bg-indigo-600 btn'>Create</button>
          </Link>
-         {campaigns.map(c=>(
-            <CampaignCard 
-               address={c}
-               key={c}
-            />
-         ))}
+         <div className='grid grid-cols-3 w-full'>
+            {campaigns.map(c=>(
+               <CampaignCard 
+                  address={c}
+                  key={c}
+               />
+            ))}
+         </div>
       </main>
    )
 }
