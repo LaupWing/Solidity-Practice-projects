@@ -7,10 +7,11 @@ contract CampaignFactory {
    function createCampaign(
       string memory name, 
       uint minimum,
+      uint goal,
       string memory description,
       string memory thumbnail
    ) public {
-      address newCampaign = address(new Campaign(name, minimum, msg.sender, description, thumbnail));
+      address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail));
       deployedCampaigns.push(newCampaign);
    }
 
@@ -34,6 +35,7 @@ contract Campaign{
    address public immutable manager;
    uint public minimum_contribution;
    mapping (address => bool) public approvers;
+   uint public goal;
    uint public approversCount;
    string public name;
    string public description;
@@ -47,6 +49,7 @@ contract Campaign{
    constructor(
       string memory _name,
       uint _minimum,
+      uint _goal,
       address creator,
       string memory _description,
       string memory _thumbnail
@@ -54,6 +57,7 @@ contract Campaign{
       manager = creator;
       name = _name;
       description = _description;
+      goal = _goal;
       thumbnail = _thumbnail;
       minimum_contribution = _minimum;
    }
