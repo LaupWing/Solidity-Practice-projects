@@ -9,6 +9,7 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 const CreateCampaign = () => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState('')
+   const [goal, setGoal] = useState('')
    const [description, setDescription] = useState('')
    const [loading, setLoading] = useState(false)
    const [buffer, setBuffer] = useState(false)
@@ -25,6 +26,7 @@ const CreateCampaign = () => {
          const transaction = await contract.createCampaign(
             name, 
             ethers.utils.parseEther(minimum).toString(),
+            ethers.utils.parseEther(goal).toString(),
             description,
             image.path
          )
@@ -88,8 +90,8 @@ const CreateCampaign = () => {
                      type="number" 
                      className='input flex-1' 
                      placeholder='ETH goal'
-                     value={minimum}
-                     onChange={e=>setMinimum(e.target.value)}
+                     value={goal}
+                     onChange={e=>setGoal(e.target.value)}
                      required
                   />
                   <input 
