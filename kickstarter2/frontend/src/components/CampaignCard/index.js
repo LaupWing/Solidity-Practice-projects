@@ -10,6 +10,7 @@ const CampaignCard = ({address}) => {
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
    const [loading, setLoading] = useState(true)
+   const [manager, setManager] = useState(true)
    const [description, setDescription] = useState(true)
    const [thumbnail, setThumbnail] = useState(true)
 
@@ -27,6 +28,7 @@ const CampaignCard = ({address}) => {
          
          setDescription(_description)
          setThumbnail(_thumbnail)
+         setManager(_manager)
          setName(_name)
          setMinimum(ethers.utils.formatEther(_minimum.toString()))
          setLoading(false)
@@ -50,6 +52,9 @@ const CampaignCard = ({address}) => {
                   <div className='p-2'>
                      <h2 className='text-slate-500 text-xl'>{name}</h2>
                      <p className='text-slate-400'>{description}</p>
+                     <p className='max-w-full my-4 text-slate-300 truncate text-xs'>
+                        by  <b>{manager}</b>
+                     </p>
                   </div>
                </div>
             }
