@@ -59,13 +59,13 @@ const CreateCampaign = () => {
    return (
       <main className='w-full p-4 max-w-2xl mx-auto'>
          <button 
-            className='btn mb-4 bg-indigo-600'
+            className='btn-hollow mb-4'
             onClick={()=> router.push('/')}
          >
             Back
          </button>
          <form 
-            className='w-full p-2 bg-white overflow-hidden rounded shadow flex flex-col relative'
+            className='w-full p-2 bg-slate-50 border border-slate-300 overflow-hidden rounded  flex flex-col relative'
             onSubmit={handleSubmit}
          >
             {loading && <div className='absolute bg-black bg-opacity-80 flex inset-0 justify-center items-center'>
@@ -105,7 +105,7 @@ const CreateCampaign = () => {
                   onChange={e=>setDescription(e.target.value)}
                ></textarea>
             </div>
-            <button className='btn bg-indigo-500 mr-auto mt-2'>Create</button>
+            <button className='btn bg-indigo-500 ml-auto mt-2'>Create</button>
          </form>
       </main>
    )

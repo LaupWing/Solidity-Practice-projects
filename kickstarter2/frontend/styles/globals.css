@@ -7,6 +7,11 @@
       @apply focus:outline-none bg-slate-200 p-1 px-2 rounded;
    }
    .btn{
-      @apply rounded px-4 text-xs uppercase text-white font-bold py-1
+      @apply rounded px-4 text-xs uppercase text-white font-bold py-0.5;
    }
-}
+   
+   .btn-hollow{
+      @apply rounded px-4 text-xs uppercase text-indigo-500 border-2 border-indigo-500 font-bold py-0.5;
+   }
+   
+} 
