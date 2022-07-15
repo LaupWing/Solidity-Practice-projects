@@ -31,17 +31,17 @@ const CampaignCard = ({address}) => {
          <div className='w-full max-w-xs border border-slate-300 flex hover:shadow cursor-pointer overflow-hidden hover:scale-[.99] duration-200 transform'>
             {loading ? 
                <ReactLoading className='mx-auto my-20'/> :
-               <div className='flex flex-col font-bold justify-between w-full'>
+               <div className='flex flex-col justify-between w-full'>
                   <div className='relative'>
-                     <p className='text-white text-xs bg-slate-500 w-20 rounded-full text-center right-2 top-2 py-1 absolute'>{minimum} (ETH)</p>
+                     <p className='bg-white text-xs text-slate-500 w-20 rounded-full text-center right-2 top-2 py-0.5 absolute'>{minimum} (ETH)</p>
                      <img 
                         src={`https://ipfs.infura.io/ipfs/${thumbnail}`} 
                         className='w-full h-52 object-cover'
                      />
                   </div>
                   <div className='p-2'>
-                     <h2 className='text-slate-500'>{name}</h2>
-                     <p>{description}</p>
+                     <h2 className='text-slate-500 text-xl'>{name}</h2>
+                     <p className='text-slate-400'>{description}</p>
                   </div>
                </div>
             }
