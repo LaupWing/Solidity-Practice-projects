@@ -19,9 +19,6 @@ export default function Home() {
 
    return (
       <main className="p-4 w-full max-w-5xl mx-auto space-y-4">
-         <Link href={`/create-campaign`}>
-            <button className='bg-indigo-600 btn'>Create</button>
-         </Link>
          <div className='grid grid-cols-3 w-full gap-4'>
             {campaigns.map(c=>(
                <CampaignCard 
