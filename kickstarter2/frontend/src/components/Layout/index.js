@@ -23,7 +23,7 @@ const Layout = ({children}) => {
 
 
    return (
-      <div className='bg-slate-500 w-screen h-screen flex flex-col'>
+      <div className='bg-white w-screen h-screen flex flex-col'>
          <Header/>
          {contract ? children :(
             <ReactLoading className='m-auto'/>
