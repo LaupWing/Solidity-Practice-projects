@@ -31,7 +31,7 @@ contract Campaign{
    }
 
    Request[] public requests;
-   address public manager;
+   address public immutable manager;
    uint public minimum_contribution;
    mapping (address => bool) public approvers;
    uint public approversCount;
