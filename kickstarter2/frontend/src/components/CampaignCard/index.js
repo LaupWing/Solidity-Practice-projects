@@ -51,7 +51,7 @@ const CampaignCard = ({address}) => {
                   </div>
                   <div className='p-2'>
                      <h2 className='text-slate-500 text-xl'>{name}</h2>
-                     <p className='text-slate-400'>{description}</p>
+                     <p className='text-slate-400 text-sm h-32 text-ellipsis overflow-hidden leading-6'>{description}</p>
                      <p className='max-w-full my-4 text-slate-300 truncate text-xs'>
                         by  <b>{manager}</b>
                      </p>
