@@ -28,7 +28,7 @@ const CampaignCard = ({address}) => {
 
    return (
       <Link href={`/campaign/${address}`}>
-         <div className='w-full max-w-xs bg-slate-300 flex rounded shadow cursor-pointer border-transparent overflow-hidden'>
+         <div className='w-full max-w-xs border border-slate-300 flex hover:shadow cursor-pointer overflow-hidden hover:scale-[.99] duration-200 transform'>
             {loading ? 
                <ReactLoading className='mx-auto my-20'/> :
                <div className='flex flex-col font-bold justify-between w-full'>
