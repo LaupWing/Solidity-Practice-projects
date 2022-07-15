@@ -16,11 +16,19 @@ const CampaignCard = ({address}) => {
    useEffect(()=>{
       const getCampaign = async ()=>{
          const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
+         const [
+            _minimum,
+            _balance,
+            _manager,
+            _thumbnail,
+            _description,
+            _name
+         ] = await contract.summary()
          
-         setDescription(await contract.description())
-         setThumbnail(await contract.thumbnail())
-         setName(await contract.name())
-         setMinimum(ethers.utils.formatEther((await contract.minimum_contribution()).toString()))
+         setDescription(_description)
+         setThumbnail(_thumbnail)
+         setName(_name)
+         setMinimum(ethers.utils.formatEther(_minimum.toString()))
          setLoading(false)
       }
       getCampaign()
