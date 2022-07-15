@@ -72,38 +72,50 @@ const CreateCampaign = () => {
                <ReactLoading/>
             </div>}
             <h2 className='text-slate-600 uppercase font-bold text-sm tracking-wider'>Create campaign</h2>
-            <div className='w-full flex my-2'>
-               <input 
-                  type="text"  
-                  className='input flex-1'
-                  placeholder='Campaign Name'
-                  value={name}
-                  onChange={e=>setName(e.target.value)}
-                  required
-               />
-               <input 
-                  type="number" 
-                  className='input ml-1 w-90' 
-                  placeholder='ETH minimum'
-                  value={minimum}
-                  onChange={e=>setMinimum(e.target.value)}
-                  required
-               />
-            </div>
-            <div className='h-40 flex items-center'>
-               {!preview ? <input 
-                  type="file" 
-                  onChange={handleFile}
-               /> : <img 
-                  src={preview}
-                  className='h-full object-cover w-40'
-               />
-               }
-               <textarea 
-                  className='h-full rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
-                  placeholder='Description'
-                  onChange={e=>setDescription(e.target.value)}
-               ></textarea>
+            <div className='my-2'>
+               <div className='w-full flex'>
+                  <input 
+                     type="text"  
+                     className='input flex-1'
+                     placeholder='Campaign Name'
+                     value={name}
+                     onChange={e=>setName(e.target.value)}
+                     required
+                  />
+               </div>
+               <div className='w-full flex my-2'>
+                  <input 
+                     type="number" 
+                     className='input flex-1' 
+                     placeholder='ETH goal'
+                     value={minimum}
+                     onChange={e=>setMinimum(e.target.value)}
+                     required
+                  />
+                  <input 
+                     type="number" 
+                     className='input ml-1 flex-1' 
+                     placeholder='ETH minimum'
+                     value={minimum}
+                     onChange={e=>setMinimum(e.target.value)}
+                     required
+                  />
+               </div>
+               <div className='h-40 flex items-center'>
+                  {!preview ? <input 
+                     type="file" 
+                     onChange={handleFile}
+                  /> : <img 
+                     src={preview}
+                     className='h-full object-cover w-40'
+                  />
+                  }
+                  <textarea 
+                     className='h-full rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
+                     placeholder='Description'
+                     onChange={e=>setDescription(e.target.value)}
+                  ></textarea>
+               </div>
             </div>
             <button className='btn bg-indigo-500 ml-auto mt-2'>Create</button>
          </form>
