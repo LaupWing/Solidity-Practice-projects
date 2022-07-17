@@ -19,7 +19,7 @@ export default function Home() {
 
    return (
       <main className="p-4 w-full max-w-5xl mx-auto space-y-4">
-         <h2 className='uppercase text-sm font-bold text-slate-300'>Total projects: {campaigns.length}</h2>
+         <h2 className='uppercase text-sm font-bold text-slate-300 tracking-wider'>Total projects: {campaigns.length}</h2>
          <div className='grid grid-cols-3 w-full gap-4'>
             {campaigns.map(c=>(
                <CampaignCard 

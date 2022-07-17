@@ -25,7 +25,7 @@ const Contribute = ({contribute, minimum}) => {
             className='rounded mr-1 px-1 w-40 bg-slate-200 focus:outline-none'
          />
          <button 
-            className='btn'
+            className='btn bg-green-500'
          >
             Contribute (ETH)
          </button>

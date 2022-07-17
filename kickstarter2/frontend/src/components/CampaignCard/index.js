@@ -55,6 +55,7 @@ const CampaignCard = ({address}) => {
                      <p className='max-w-full my-4 text-slate-300 truncate text-xs'>
                         by  <b>{manager}</b>
                      </p>
+                     <div></div>
                   </div>
                </div>
             }

@@ -100,7 +100,7 @@ const CampaignDetail = () => {
          <ReactLoading className='m-auto'/> : 
          <div className='max-w-3xl mx-auto w-full flex flex-col'>
             <button 
-               className='btn mb-4 mr-auto bg-indigo-600'
+               className='btn-hollow my-3 mr-auto'
                onClick={()=>router.push('/')}
             >
                back
