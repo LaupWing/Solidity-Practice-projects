@@ -12,7 +12,7 @@ const Header = () => {
             </Link>
          </nav>
          <h1 className='uppercase font-bold basis-1/3 text-center'>kickstarter</h1>
-         <p className='basis-1/3 text-xs text-right ml-auto text-slate-400 font-bold truncate'>{account}</p>
+         <p className='basis-1/3 text-xs text-right ml-auto text-slate-400 font-bold truncate'>{account || '0x0'}</p>
       </header>
    )
 }
