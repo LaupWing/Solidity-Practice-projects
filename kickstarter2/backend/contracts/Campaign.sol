@@ -111,6 +111,7 @@ contract Campaign{
    function summary() public view returns(
       uint, 
       uint, 
+      uint, 
       address, 
       string memory, 
       string memory, 
@@ -118,6 +119,7 @@ contract Campaign{
    ){
       return (
          minimum_contribution, 
+         goal,
          address(this).balance,
          manager,
          thumbnail,
