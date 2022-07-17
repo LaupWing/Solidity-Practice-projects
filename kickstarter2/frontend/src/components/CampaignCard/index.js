@@ -9,7 +9,9 @@ const CampaignCard = ({address}) => {
    const {signer} = useSelector(state => state.web3)
    const [name, setName] = useState('')
    const [minimum, setMinimum] = useState(0)
+   const [balance, setBalance] = useState(0)
    const [loading, setLoading] = useState(true)
+   const [goal, setGoal] = useState(true)
    const [manager, setManager] = useState(true)
    const [description, setDescription] = useState(true)
    const [thumbnail, setThumbnail] = useState(true)
@@ -19,6 +21,7 @@ const CampaignCard = ({address}) => {
          const contract = new ethers.Contract(address, CampaignAbi.abi, signer)
          const [
             _minimum,
+            _goal,
             _balance,
             _manager,
             _thumbnail,
@@ -27,15 +30,16 @@ const CampaignCard = ({address}) => {
          ] = await contract.summary()
          
          setDescription(_description)
+         setGoal(Number(ethers.utils.formatEther(_goal)))
+         setBalance(Number(ethers.utils.formatEther(_balance)))
          setThumbnail(_thumbnail)
          setManager(_manager)
          setName(_name)
-         setMinimum(ethers.utils.formatEther(_minimum.toString()))
+         setMinimum(Number(ethers.utils.formatEther(_minimum.toString())))
          setLoading(false)
       }
       getCampaign()
    },[])
-
    return (
       <Link href={`/campaign/${address}`}>
          <div className='w-full max-w-xs border border-slate-300 flex hover:shadow cursor-pointer overflow-hidden hover:scale-[.99] duration-200 transform'>
@@ -55,7 +59,14 @@ const CampaignCard = ({address}) => {
                      <p className='max-w-full my-4 text-slate-300 truncate text-xs'>
                         by  <b>{manager}</b>
                      </p>
-                     <div></div>
+                     <div className='w-full p-0.5 rounded-full border-2 border-green-500'>
+                        <div 
+                           className='bg-green-500 h-2 rounded-full'
+                           style={{
+                              width: `${balance/goal*100}%`
+                           }}
+                        ></div>
+                     </div>
                   </div>
                </div>
             }
