@@ -12,7 +12,7 @@ import CampaingRequests from '../../components/Campaign/Requests'
 const CampaignDetail = () => {
    const router = useRouter()
    const {address} = router.query
-   const {signer, account, provider} = useSelector(state=>state.web3)
+   const {signer, account} = useSelector(state=>state.web3)
 
    const [owner, setOwner] = useState(false)
    const [contributors, setContributors] = useState(null)
@@ -22,6 +22,10 @@ const CampaignDetail = () => {
    const [balance, setBalance] = useState(false)
    const [requests, setRequests] = useState([])
    const [name, setName] = useState('')
+   const [goal, setGoal] = useState('')
+   const [thumbnail, setThumbnail] = useState('')
+   const [manager, setManager] = useState('')
+   const [dsecription, setDescription] = useState('')
 
    const [initialLoading, setInitialLoading] = useState(true)
    const [loading, setLoading] = useState(false)
@@ -29,15 +33,29 @@ const CampaignDetail = () => {
 
    const fetchInfo = async ()=>{
       const manager = await contract.manager()
-      const _balance = await provider.getBalance(address)
       
       await getRequests()
-      setBalance(ethers.utils.formatEther(_balance.toString()))
+      
+      const [
+         _minimum,
+         _goal,
+         _balance,
+         _manager,
+         _thumbnail,
+         _description,
+         _name
+      ] = await contract.summary()
+      
       setAlreadyContributed(await contract.approvers(account))
-      setContributors((await contract.approversCount()).toString())
-      setName(await contract.name())
-      setMinimum(ethers.utils.formatEther((await contract.minimum_contribution()).toString()))
       setOwner(ethers.utils.getAddress(account) === ethers.utils.getAddress(manager))
+      setContributors((await contract.approversCount()).toString())
+      setDescription(_description)
+      setGoal(Number(ethers.utils.formatEther(_goal)))
+      setBalance(Number(ethers.utils.formatEther(_balance)))
+      setThumbnail(_thumbnail)
+      setManager(_manager)
+      setName(_name)
+      setMinimum(Number(ethers.utils.formatEther(_minimum.toString())))
       setInitialLoading(false)
    }
    
