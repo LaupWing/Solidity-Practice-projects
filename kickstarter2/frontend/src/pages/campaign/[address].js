@@ -25,7 +25,7 @@ const CampaignDetail = () => {
    const [goal, setGoal] = useState('')
    const [thumbnail, setThumbnail] = useState('')
    const [manager, setManager] = useState('')
-   const [dsecription, setDescription] = useState('')
+   const [description, setDescription] = useState('')
 
    const [initialLoading, setInitialLoading] = useState(true)
    const [loading, setLoading] = useState(false)
@@ -135,6 +135,8 @@ const CampaignDetail = () => {
                <CampaignHeader
                   name={name}
                   minimum={minimum}
+                  description={description}
+                  thumbnail={thumbnail}
                   balance={balance}
                   contributors={contributors}
                />
