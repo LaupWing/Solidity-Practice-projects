@@ -15,10 +15,17 @@ const CampaignHeader = ({name, description, minimum, balance, contributors, thum
             <span className='font-bold'>Contributors: </span>{contributors}
          </h2> */}
          <div className='flex'>
-         <img 
-            src={`https://ipfs.infura.io/ipfs/${thumbnail}`} 
-            className='w-96 h-72 object-cover'
-         />
+            <div 
+               className='w-2/3 relative'
+               style={{
+                  paddingBottom: '40%'
+               }}
+            >
+               <img 
+                  src={`https://ipfs.infura.io/ipfs/${thumbnail}`} 
+                  className='w-full h-full object-cover absolute'
+               />
+            </div>
          </div>
       </header>
    )
