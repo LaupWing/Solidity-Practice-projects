@@ -116,7 +116,7 @@ const CampaignDetail = () => {
    return (
       initialLoading ? 
          <ReactLoading className='m-auto'/> : 
-         <div className='max-w-3xl mx-auto w-full flex flex-col'>
+         <div className='max-w-5xl mx-auto w-full flex flex-col'>
             <button 
                className='btn-hollow my-3 mr-auto'
                onClick={()=>router.push('/')}
@@ -137,6 +137,7 @@ const CampaignDetail = () => {
                   minimum={minimum}
                   description={description}
                   thumbnail={thumbnail}
+                  goal={goal}
                   balance={balance}
                   contributors={contributors}
                />
