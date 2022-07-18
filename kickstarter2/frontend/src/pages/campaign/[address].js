@@ -123,7 +123,7 @@ const CampaignDetail = () => {
             >
                back
             </button>
-            <div className='relative p-3 flex flex-col w-full bg-white shadow rounded'>
+            <div className='relative p-3 flex flex-col w-full'>
                {loading && <div className='absolute inset-0 bg-slate-500 bg-opacity-50 flex justify-center items-center'>
                   <ReactLoading/>
                </div>}
