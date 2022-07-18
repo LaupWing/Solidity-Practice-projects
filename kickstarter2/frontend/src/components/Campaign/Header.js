@@ -9,6 +9,7 @@ const CampaignHeader = ({
       goal, 
       balance, 
       contributors, 
+      alreadyContributed, 
       contribute, 
       thumbnail
    }) => {
@@ -49,10 +50,10 @@ const CampaignHeader = ({
                   <span className='flex items-center text-2xl text-slate-500'>{contributors} <FaHandHoldingHeart/></span>
                   Backers
                </h3>
-               <Contribute
+               {!alreadyContributed && <Contribute
                   contribute={contribute}
                   minimum={minimum}
-               />
+               />}
             </div>
          </div>
       </header>

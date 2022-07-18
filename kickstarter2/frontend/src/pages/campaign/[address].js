@@ -140,19 +140,16 @@ const CampaignDetail = () => {
                   goal={goal}
                   balance={balance}
                   contributors={contributors}
+                  alreadyContributed={alreadyContributed}
                   contribute={contribute}
                />
-               { owner ? 
+               { owner &&
                   <button 
                      className='my-4 btn bg-green-500 mr-auto'
                      onClick={()=>setShowCreateRequest(true)}
                   >
                      Create Request
-                  </button> :
-                  (alreadyContributed ? null : <Contribute
-                     contribute={contribute}
-                     minimum={minimum}
-                  />)
+                  </button>
                }
                <CampaingRequests 
                   requests={requests}
