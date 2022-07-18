@@ -4,7 +4,6 @@ import CampaignAbi from '../../../contractsData/campaign.json'
 import {ethers} from 'ethers'
 import { useSelector } from 'react-redux'
 import ReactLoading from 'react-loading'
-import Contribute from '../../components/Campaign/Contribute'
 import CreateRequest from '../../components/Campaign/CreateRequest'
 import CampaignHeader from '../../components/Campaign/Header.js'
 import CampaingRequests from '../../components/Campaign/Requests'
@@ -140,7 +139,7 @@ const CampaignDetail = () => {
                   goal={goal}
                   balance={balance}
                   contributors={contributors}
-                  alreadyContributed={alreadyContributed}
+                  show_contribute={!alreadyContributed && !owner}
                   contribute={contribute}
                />
                { owner &&
