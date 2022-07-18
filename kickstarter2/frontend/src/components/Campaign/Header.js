@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaEthereum, FaHandHoldingHeart } from 'react-icons/fa'
+import Contribute from './Contribute'
 
 const CampaignHeader = ({
       name, 
@@ -8,6 +9,7 @@ const CampaignHeader = ({
       goal, 
       balance, 
       contributors, 
+      contribute, 
       thumbnail
    }) => {
    return (
@@ -25,7 +27,7 @@ const CampaignHeader = ({
          </h2> */}
          <div className='flex items-start'>
             <div 
-               className='w-2/3 relative'
+               className='w-3/5 relative'
                style={{
                   paddingBottom: '40%'
                }}
@@ -35,7 +37,7 @@ const CampaignHeader = ({
                   className='w-full h-full object-cover absolute'
                />
             </div>
-            <div className='mx-4 flex-1 flex flex-col'>
+            <div className='mx-4 flex-1 flex flex-col h-full'>
                <div className='w-full p-0.5 rounded-full border-2 border-green-500'>
                   <div 
                      className='bg-green-500 h-2 rounded-full'
@@ -56,6 +58,10 @@ const CampaignHeader = ({
                   <span className='flex items-center text-2xl text-slate-500'>{contributors} <FaHandHoldingHeart/></span>
                   Backers
                </h3>
+               <Contribute
+                  contribute={contribute}
+                  minimum={minimum}
+               />
             </div>
          </div>
       </header>

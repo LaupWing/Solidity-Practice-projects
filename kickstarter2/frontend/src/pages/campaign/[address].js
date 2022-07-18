@@ -140,6 +140,7 @@ const CampaignDetail = () => {
                   goal={goal}
                   balance={balance}
                   contributors={contributors}
+                  contribute={contribute}
                />
                { owner ? 
                   <button 
