@@ -47,7 +47,7 @@ const CampaignHeader = ({
                   Goal
                </h3>
                <h3 className='flex flex-col items-start my-4 text-sm'>
-                  <span className='flex items-center text-2xl text-slate-500'>{contributors} <FaHandHoldingHeart/></span>
+                  <span className='flex items-center text-2xl text-slate-500'>{contributors} <FaHandHoldingHeart className='ml-1'/></span>
                   Backers
                </h3>
                {show_contribute && <Contribute
