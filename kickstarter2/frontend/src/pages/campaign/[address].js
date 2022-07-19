@@ -142,14 +142,17 @@ const CampaignDetail = () => {
                   show_contribute={!owner && !alreadyContributed}
                   contribute={contribute}
                />
-               { owner &&
-                  <button 
-                     className='my-4 btn bg-green-500 mr-auto'
-                     onClick={()=>setShowCreateRequest(true)}
-                  >
-                     Create Request
-                  </button>
-               }
+               <h2 className='text-2xl my-5 w-full flex items-end'>
+                  Requests
+                  { owner &&
+                     <button 
+                        className='ml-3 btn bg-green-500'
+                        onClick={()=>setShowCreateRequest(true)}
+                     >
+                        Create Request
+                     </button>
+                  }
+               </h2>
                <CampaingRequests 
                   requests={requests}
                   owner={owner}
