@@ -39,7 +39,7 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
       //       ))}
       //    </tbody>
       // </table>
-      <div className='grid grid-cols-3'>
+      <div className='grid grid-cols-3 gap-2'>
          {requests.map(request=>(
             <RequestCard
                request={request}

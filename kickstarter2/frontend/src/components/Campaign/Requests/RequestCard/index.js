@@ -4,7 +4,7 @@ import { FaEthereum } from 'react-icons/fa'
 const RequestCard = ({request,contributors}) => {
    return (
       <div className='border border-slate-300 p-2 flex flex-col'>
-         <h3 className='flex ml-auto items-center rounded-full px-4 py-0.5 bg-slate-200 text-xs text-slate-500'>
+         <h3 className='flex ml-auto items-center rounded-full px-4 py-0.5 bg-slate-200 text-md text-slate-500'>
             {request.value} ETH<FaEthereum/>
          </h3>
          <h1 className='font-bold text-slate-500'>{request.title}</h1>
