@@ -1,4 +1,5 @@
 import React from 'react'
+import RequestCard from './RequestCard'
 
 const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
    return (
@@ -38,8 +39,12 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
       //       ))}
       //    </tbody>
       // </table>
-      <div className='flex'>
-         
+      <div className='grid grid-cols-3'>
+         {requests.map(request=>(
+            <RequestCard
+               request={request}
+            />
+         ))}
       </div>
    )
 }
