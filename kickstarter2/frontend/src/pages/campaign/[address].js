@@ -139,7 +139,7 @@ const CampaignDetail = () => {
                   goal={goal}
                   balance={balance}
                   contributors={contributors}
-                  show_contribute={!alreadyContributed && !owner}
+                  show_contribute={!owner && !alreadyContributed}
                   contribute={contribute}
                />
                { owner &&
