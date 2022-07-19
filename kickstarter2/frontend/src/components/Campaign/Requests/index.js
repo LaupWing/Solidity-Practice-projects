@@ -43,6 +43,7 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
          {requests.map(request=>(
             <RequestCard
                request={request}
+               contributors={contributors}
             />
          ))}
       </div>
