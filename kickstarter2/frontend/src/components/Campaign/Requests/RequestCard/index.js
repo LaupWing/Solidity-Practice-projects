@@ -22,6 +22,11 @@ const RequestCard = ({request,contributors}) => {
             </div>
             <p className='text-green-500 font-bold'>{request.approvalCount}/{contributors}</p>
          </div>
+         <button 
+            className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1 ml-auto'
+         >
+            Approve
+         </button>
       </div>
    )
 }
