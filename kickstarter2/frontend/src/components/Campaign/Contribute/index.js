@@ -15,20 +15,23 @@ const Contribute = ({contribute, minimum}) => {
 
    return (
       <form 
-         className='my-4 flex border border-slate-300 w-full p-1 rounded mt-auto'
+         className='my-4 flex flex-col border border-slate-300 w-full p-1 rounded mt-auto'
          onSubmit={handleSubmit}
       >
-         <input 
-            type="number" 
-            value={contribution}
-            onChange={e=>setContribution(e.target.value)}
-            className='rounded flex-1 mr-1 px-1 w-40 bg-slate-200 focus:outline-none'
-         />
-         <button 
-            className='btn bg-green-500'
-         >
-            Contribute (ETH)
-         </button>
+         <p className='mb-1 text-xs uppercase font-bold text-slate-400'>Minimum: {minimum} ETH</p>
+         <div className='flex'>
+            <input 
+               type="number" 
+               value={contribution}
+               onChange={e=>setContribution(e.target.value)}
+               className='rounded flex-1 mr-1 px-1 w-40 bg-slate-200 focus:outline-none'
+            />
+            <button 
+               className='btn bg-green-500'
+            >
+               Contribute (ETH)
+            </button>
+         </div>
       </form>
    )
 }
