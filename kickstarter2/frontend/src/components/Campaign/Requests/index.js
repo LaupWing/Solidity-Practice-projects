@@ -40,10 +40,11 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
       //    </tbody>
       // </table>
       <div className='grid grid-cols-3 gap-2'>
-         {requests.map(request=>(
+         {requests.map((request, i)=>(
             <RequestCard
                request={request}
                contributors={contributors}
+               key={i}
             />
          ))}
       </div>
