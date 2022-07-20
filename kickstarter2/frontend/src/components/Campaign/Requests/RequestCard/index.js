@@ -34,7 +34,7 @@ const RequestCard = ({
          </div>
          {owner ? ( 
             <button 
-               className={'text-xs py-1 text-white uppercase px-2 rounded m-1 ' + `${Number(request.approvalCount) > (Number(contributors)/2) ? 'bg-blue-500' : 'bg-slate-300 pointer-events-none cursor-not-allowed'}`}
+               className={'text-xs py-1 text-white uppercase px-2 rounded m-1 ' + `${Number(request.approvalCount) > (Number(contributors)/2) ? 'bg-blue-500' : 'bg-slate-300 cursor-not-allowed'}`}
                >
                Send
             </button>

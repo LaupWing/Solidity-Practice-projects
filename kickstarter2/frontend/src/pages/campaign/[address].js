@@ -154,7 +154,7 @@ const CampaignDetail = () => {
                      </button>
                   }
                </h2>
-               {alreadyContributed ? <CampaingRequests 
+               {(owner || alreadyContributed) ? <CampaingRequests 
                   requests={requests}
                   owner={owner}
                   approveRequest={approveRequest}
