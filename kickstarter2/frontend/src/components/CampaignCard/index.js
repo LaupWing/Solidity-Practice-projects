@@ -81,7 +81,7 @@ const CampaignCard = ({address}) => {
                               <span className='flex items-center'>{balance} ETH<FaEthereum/></span>
                            </h3>
                            <h3 className='flex items-center justify-between text-slate-300'>
-                              Funded: <span>{balance/goal*100} %</span>
+                              Funded: <span>{Math.round(balance/goal*100)} %</span>
                            </h3>
                         </div>
                      </div>
