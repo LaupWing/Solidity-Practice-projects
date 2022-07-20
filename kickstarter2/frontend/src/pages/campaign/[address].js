@@ -153,12 +153,12 @@ const CampaignDetail = () => {
                      </button>
                   }
                </h2>
-               <CampaingRequests 
+               {alreadyContributed ? <CampaingRequests 
                   requests={requests}
                   owner={owner}
                   approveRequest={approveRequest}
                   contributors={contributors}
-               />
+               /> : <h3>You have to contribute to view the requests</h3>}
             </div>
          </div>
    )
