@@ -138,6 +138,7 @@ const CampaignDetail = () => {
                   thumbnail={thumbnail}
                   goal={goal}
                   balance={balance}
+                  manager={manager}
                   contributors={contributors}
                   show_contribute={!owner && !alreadyContributed}
                   contribute={contribute}

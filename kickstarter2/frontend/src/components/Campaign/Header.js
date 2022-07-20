@@ -8,6 +8,7 @@ const CampaignHeader = ({
       minimum, 
       goal, 
       balance, 
+      manager, 
       contributors, 
       show_contribute, 
       contribute, 
@@ -15,6 +16,7 @@ const CampaignHeader = ({
    }) => {
    return (
       <header className='flex flex-col text-slate-400 leading-5'>
+         <h2 className='text-center text-sm text-slate-300'>{manager}</h2>
          <h2 className='text-center font-bold text-xl'>{name}</h2>
          <p className='text-center my-4'>{description}</p>
          <div className='flex items-start'>
