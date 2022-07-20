@@ -2,6 +2,7 @@ import React from 'react'
 import { FaEthereum } from 'react-icons/fa'
 
 const RequestCard = ({request,contributors}) => {
+   console.log(request, contributors)
    return (
       <div className='border border-slate-300 p-2 flex flex-col'>
          <h3 className='flex ml-auto items-center rounded-full px-4 py-0.5 bg-slate-200 text-md text-slate-500'>
@@ -14,7 +15,7 @@ const RequestCard = ({request,contributors}) => {
                <div
                   className='bg-green-500 h-1.5 rounded-full'
                   style={{
-                     width: '50%'
+                     width: `${(Number(request.approvalCount)/Number(contributors)) * 100}%`
                   }}
                >
 
