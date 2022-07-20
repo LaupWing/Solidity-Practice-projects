@@ -29,6 +29,7 @@ contract Campaign{
       bool complete;
       uint approvalCount;
       mapping(address => bool) approvals;
+      mapping(address => bool) denials;
    }
 
    Request[] public requests;
@@ -92,6 +93,15 @@ contract Campaign{
 
       request.approvals[msg.sender] = true;
       request.approvalCount ++;
+   }
+
+   function denyRequest(uint index) public{
+      Request storage request = requests[index];
+
+      require(approvers[msg.sender]);
+      require(!request.denials[msg.sender]);
+
+      request.denials[msg.sender] = true;
    }
 
    function finalizeRequest(uint index) public restricted{
