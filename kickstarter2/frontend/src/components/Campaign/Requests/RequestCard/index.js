@@ -20,7 +20,10 @@ const RequestCard = ({request,contributors}) => {
 
                </div>
             </div>
-            <p className='text-green-500 font-bold'>{request.approvalCount}/{contributors}</p>
+            <div className='flex justify-between'>
+               <p className='text-green-500 font-bold'>{request.approvalCount}/{contributors}</p>
+               <p className='text-slate-400'>{(Number(contributors)/2) - Number(request.approvalCount)} left</p>
+            </div>
          </div>
          <button 
             className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1 ml-auto'
