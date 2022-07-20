@@ -1,7 +1,14 @@
 import React from 'react'
 import { FaEthereum } from 'react-icons/fa'
 
-const RequestCard = ({request,contributors}) => {
+const RequestCard = ({
+   request,
+   contributors,
+   index,
+   owner,
+   approveRequest
+}) => {
+
    return (
       <div className='border border-slate-300 p-2 flex flex-col'>
          <h3 className='flex ml-auto items-center rounded-full px-4 py-0.5 bg-slate-200 text-md text-slate-500'>
@@ -25,11 +32,19 @@ const RequestCard = ({request,contributors}) => {
                <p className='text-slate-400'>{(Number(contributors)/2) - Number(request.approvalCount)} left</p>
             </div>
          </div>
+         {owner ? ( 
+            <button 
+               className={'text-xs py-1 text-white uppercase px-2 rounded m-1 ' + `${Number(request.approvalCount) > (Number(contributors)/2) ? 'bg-blue-500' : 'bg-slate-300 pointer-events-none cursor-not-allowed'}`}
+               >
+               Send
+            </button>
+         ) : 
          <button 
-            className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1 ml-auto'
+            className='text-xs bg-green-500 py-1 text-white uppercase px-2 rounded m-1 ml-auto'
+            onClick={()=>approveRequest(index)}
          >
             Approve
-         </button>
+         </button>}
       </div>
    )
 }

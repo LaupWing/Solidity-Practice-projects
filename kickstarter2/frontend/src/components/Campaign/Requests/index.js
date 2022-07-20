@@ -24,16 +24,9 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
       //             <th>{r.recipient}</th>
       //             <th>{r.approvalCount}/{contributors}</th>
       //             {owner ? <th>
-      //                <button className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'>
-      //                   Send
-      //                </button>
+                     
       //             </th> : <th>
-      //                <button 
-      //                   className='text-xs bg-blue-500 py-1 text-white uppercase px-2 rounded m-1'
-      //                   onClick={()=>approveRequest(i)}
-      //                >
-      //                   Approve
-      //                </button>
+
       //             </th>}
       //          </tr>
       //       ))}
@@ -44,6 +37,9 @@ const CampaingRequests = ({requests, owner, contributors, approveRequest}) => {
             <RequestCard
                request={request}
                contributors={contributors}
+               approveRequest={approveRequest}
+               owner={owner}
+               index={i}
                key={i}
             />
          ))}
