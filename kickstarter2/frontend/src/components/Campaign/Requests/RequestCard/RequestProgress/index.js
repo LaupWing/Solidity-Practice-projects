@@ -16,7 +16,7 @@ const RequestProgress = ({request, contributors}) => {
 
          <div className='flex justify-between'>
             <p className='text-green-500 font-bold'>{request.approvalCount}/{contributors}</p>
-            <p className='text-slate-400'>{(Number(contributors)/2) - Number(request.approvalCount)} left</p>
+            <p className='text-slate-400'>{Math.round((Number(contributors)/2) - Number(request.approvalCount))} left</p>
          </div>
       </div>
    )
