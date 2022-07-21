@@ -47,7 +47,4 @@ export const web3Slice = createSlice({
    }
 })
 
-
-// export const { setWeb3 } = web3Slice.actions
-
 export default web3Slice.reducer

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import CampaignCard from '../components/CampaignCard'
-import Link from 'next/link'
 
 export default function Home() {
    const {contract} = useSelector(state => state.web3)
