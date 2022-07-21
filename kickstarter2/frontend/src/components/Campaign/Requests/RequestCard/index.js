@@ -1,5 +1,6 @@
 import React from 'react'
-import { FaEthereum } from 'react-icons/fa'
+import RequestHeader from './Header'
+import RequestContent from './RequestContent'
 
 const RequestCard = ({
    request,
@@ -11,14 +12,8 @@ const RequestCard = ({
    console.log(request)
    return (
       <div className='border border-slate-300 p-2 flex flex-col'>
-         <div className='flex justify-between items-center'>
-            <p className='truncate text-sm text-slate-400'>{request.recipient}</p>
-            <h3 className='flex ml-auto shrink-0 items-center rounded-full px-4 py-0.5 bg-slate-200 text-md text-slate-500'>
-               {request.value} ETH<FaEthereum/>
-            </h3>
-         </div>
-         <h1 className='font-bold text-slate-500'>{request.title}</h1>
-         <p className='text-slate-400'>{request.description}</p>
+         <RequestHeader request={request}/>
+         <RequestContent request={request}/>
          <div className='flex flex-col my-2 mt-auto'>
             <div className='w-full border-2 border-green-500 rounded-full p-0.5'>
                <div
