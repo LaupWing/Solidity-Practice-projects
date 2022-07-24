@@ -15,17 +15,23 @@ const RequestCard = ({
    contract
 }) => {
    const {account} = useSelector(state=>state.web3)
-   const [canAnswer, setCanAnswer] = useState(false)
-   const [loading, setLoading] = useState(false)
+   const [answered, setAnswered] = useState(false)
+   const [loading, setLoading] = useState(true)
 
    const fetchInfo = async ()=>{
-      setAlreadyContributed(await contract.answeredRequest(index))
+      const answersed = await contract.answeredRequest(index) 
+      const approved = answersed[0]
+      const denied = answersed[1]
+      setAnswered({
+         approved,
+         denied
+      })
+      setLoading(false)
    }
-   console.log(canAnswer)
 
    useEffect(()=>{
-      fetchInfo
-   })
+      fetchInfo()
+   },[])
 
    return (
       <div className='border border-slate-300 p-2 flex flex-col rounded bg-slate-50'>
@@ -39,7 +45,7 @@ const RequestCard = ({
                Send
             </button>
          ) : 
-         <div className='flex w-full justify-between'>
+         ((!answered.approved && !answered.denied && !loading) && <div className='flex w-full justify-between'>
             <button 
                className='text-xs bg-red-500 py-1 text-white uppercase px-2 rounded w-20'
                onClick={()=>approveRequest(index)}
@@ -52,7 +58,7 @@ const RequestCard = ({
             >
                Approve
             </button>
-         </div>
+         </div>)
          }
       </div>
    )
