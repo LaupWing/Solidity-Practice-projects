@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import RequestHeader from './Header'
 import RequestContent from './RequestContent'
 import RequestProgress from './RequestProgress'
@@ -14,7 +13,6 @@ const RequestCard = ({
    approveRequest, 
    contract
 }) => {
-   const {account} = useSelector(state=>state.web3)
    const [answered, setAnswered] = useState(false)
    const [loading, setLoading] = useState(true)
 

@@ -103,6 +103,13 @@ const CampaignDetail = () => {
       await fetchInfo()
       setLoading(false)
    }
+   const denyRequest = async (index) =>{
+      setLoading(true)
+      const transation = await contract.denyRequest(index)
+      await transation.wait()
+      await fetchInfo()
+      setLoading(false)
+   }
 
    useEffect(()=>{
       if(!contract){
