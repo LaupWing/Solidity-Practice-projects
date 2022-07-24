@@ -10,9 +10,8 @@ const RequestCard = ({
    owner,
    approveRequest
 }) => {
-   console.log(request)
    return (
-      <div className='border border-slate-300 p-2 flex flex-col'>
+      <div className='border border-slate-300 p-2 flex flex-col rounded bg-slate-50'>
          <RequestHeader request={request}/>
          <RequestContent request={request}/>
          <RequestProgress request={request} contributors={contributors}/>
