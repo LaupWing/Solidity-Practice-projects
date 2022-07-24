@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import RequestHeader from './Header'
@@ -10,14 +11,22 @@ const RequestCard = ({
    contributors,
    index,
    owner,
-   approveRequest
+   approveRequest, 
+   contract
 }) => {
    const {account} = useSelector(state=>state.web3)
+   const [canAnswer, setCanAnswer] = useState(false)
+   const [loading, setLoading] = useState(false)
+
+   const fetchInfo = async ()=>{
+      setAlreadyContributed(await contract.answeredRequest(index))
+   }
+   console.log(canAnswer)
 
    useEffect(()=>{
-      
+      fetchInfo
    })
-   console.log(account)
+
    return (
       <div className='border border-slate-300 p-2 flex flex-col rounded bg-slate-50'>
          <RequestHeader request={request}/>
