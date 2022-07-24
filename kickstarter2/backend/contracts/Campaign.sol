@@ -47,6 +47,15 @@ contract Campaign{
       _;
    }
 
+   modifier canAnswer(uint index) {
+      Request storage request = requests[index];
+
+      require(approvers[msg.sender]);
+      require(!request.approvals[msg.sender]);
+      require(!request.denials[msg.sender]);
+      _;
+   }
+
    constructor(
       string memory _name,
       uint _minimum,
@@ -85,23 +94,24 @@ contract Campaign{
       newRequest.approvalCount = 0;
    }
 
-   function approveRequest(uint index) public{
+   function answeredRequest(uint index) public view canAnswer(index) returns(bool, bool){
       Request storage request = requests[index];
 
-      require(approvers[msg.sender]);
-      require(!request.approvals[msg.sender]);
-      require(!request.denials[msg.sender]);
+      return (
+         request.approvals[msg.sender],
+         request.denials[msg.sender]
+      );
+   }
+
+   function approveRequest(uint index) public canAnswer(index){
+      Request storage request = requests[index];
 
       request.approvals[msg.sender] = true;
       request.approvalCount ++;
    }
 
-   function denyRequest(uint index) public{
+   function denyRequest(uint index) public canAnswer(index){
       Request storage request = requests[index];
-
-      require(approvers[msg.sender]);
-      require(!request.approvals[msg.sender]);
-      require(!request.denials[msg.sender]);
 
       request.denials[msg.sender] = true;
    }

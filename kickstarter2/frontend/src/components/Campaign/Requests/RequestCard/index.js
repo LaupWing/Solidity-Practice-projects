@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import RequestHeader from './Header'
 import RequestContent from './RequestContent'
 import RequestProgress from './RequestProgress'
@@ -10,6 +12,12 @@ const RequestCard = ({
    owner,
    approveRequest
 }) => {
+   const {account} = useSelector(state=>state.web3)
+
+   useEffect(()=>{
+      
+   })
+   console.log(account)
    return (
       <div className='border border-slate-300 p-2 flex flex-col rounded bg-slate-50'>
          <RequestHeader request={request}/>
