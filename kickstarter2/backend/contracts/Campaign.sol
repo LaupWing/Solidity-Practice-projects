@@ -90,6 +90,7 @@ contract Campaign{
 
       require(approvers[msg.sender]);
       require(!request.approvals[msg.sender]);
+      require(!request.denials[msg.sender]);
 
       request.approvals[msg.sender] = true;
       request.approvalCount ++;
@@ -99,6 +100,7 @@ contract Campaign{
       Request storage request = requests[index];
 
       require(approvers[msg.sender]);
+      require(!request.approvals[msg.sender]);
       require(!request.denials[msg.sender]);
 
       request.denials[msg.sender] = true;
