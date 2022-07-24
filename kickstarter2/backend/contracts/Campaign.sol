@@ -94,7 +94,7 @@ contract Campaign{
       newRequest.approvalCount = 0;
    }
 
-   function answeredRequest(uint index) public view canAnswer(index) returns(bool, bool){
+   function answeredRequest(uint index) public view returns(bool, bool){
       Request storage request = requests[index];
 
       return (
