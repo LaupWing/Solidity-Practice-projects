@@ -60,6 +60,7 @@ const CampaignDetail = () => {
    
    const getRequests = async ()=>{
       const request_count = await contract.getRequestsCount()
+      setRequests([])
       const requests_proxy = await Promise.all(
          [...new Array(Number(request_count.toString()))]
          .map((_, i)=>{
