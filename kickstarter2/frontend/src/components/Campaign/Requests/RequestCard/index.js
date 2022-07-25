@@ -43,7 +43,7 @@ const RequestCard = ({
                Send
             </button>
          ) : 
-         ((!answered.approved && !answered.denied && !loading) && <div className='flex w-full justify-between'>
+         ((!answered.approved && !answered.denied && !loading) ? <div className='flex w-full justify-between'>
             <button 
                className='text-xs bg-red-500 py-1 text-white uppercase px-2 rounded w-20'
                onClick={()=>approveRequest(index)}
@@ -56,7 +56,7 @@ const RequestCard = ({
             >
                Approve
             </button>
-         </div>)
+         </div> : <p className='text-xs py-1 font-bold text-slate-300 uppercase'>You have already responded here</p>)
          }
       </div>
    )
