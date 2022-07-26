@@ -10,6 +10,7 @@ const RequestCard = ({
    contributors,
    index,
    owner,
+   sendRequest,
    approveRequest, 
    denyRequest, 
    contract
@@ -40,7 +41,8 @@ const RequestCard = ({
          {owner ? ( 
             <button 
                className={'text-xs py-1 text-white uppercase px-2 rounded m-1 ' + `${Number(request.approvalCount) > (Number(contributors)/2) ? 'bg-blue-500' : 'bg-slate-300 cursor-not-allowed'}`}
-               >
+               onClick={()=>sendRequest(index)}
+            >
                Send
             </button>
          ) : 

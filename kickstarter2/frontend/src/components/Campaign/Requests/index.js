@@ -6,6 +6,7 @@ const CampaingRequests = ({
    owner, 
    contributors, 
    approveRequest, 
+   sendRequest, 
    contract, 
    denyRequest
 }) => {
@@ -17,6 +18,7 @@ const CampaingRequests = ({
                contract={contract}
                contributors={contributors}
                approveRequest={approveRequest}
+               sendRequest={sendRequest}
                denyRequest={denyRequest}
                owner={owner}
                index={i}
