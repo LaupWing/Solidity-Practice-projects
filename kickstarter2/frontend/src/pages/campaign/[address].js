@@ -112,6 +112,14 @@ const CampaignDetail = () => {
       setLoading(false)
    }
 
+   const sendRequest = async (index) =>{
+      setLoading(true)
+      const transation = await contract.finalizeRequest(index)
+      await transation.wait()
+      await fetchInfo()
+      setLoading(false)
+   }
+
    useEffect(()=>{
       if(!contract){
          setContract(new ethers.Contract(address, CampaignAbi.abi, signer))
@@ -166,6 +174,7 @@ const CampaignDetail = () => {
                   requests={requests}
                   owner={owner}
                   approveRequest={approveRequest}
+                  sendRequest={sendRequest}
                   denyRequest={denyRequest}
                   contributors={contributors}
                   contract={contract}
