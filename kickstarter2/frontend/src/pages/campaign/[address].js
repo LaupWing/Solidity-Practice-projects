@@ -166,6 +166,7 @@ const CampaignDetail = () => {
                   requests={requests}
                   owner={owner}
                   approveRequest={approveRequest}
+                  denyRequest={denyRequest}
                   contributors={contributors}
                   contract={contract}
                /> : <h3>You have to contribute to view the requests</h3>}

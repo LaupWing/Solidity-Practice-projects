@@ -11,6 +11,7 @@ const RequestCard = ({
    index,
    owner,
    approveRequest, 
+   denyRequest, 
    contract
 }) => {
    const [answered, setAnswered] = useState(false)
@@ -46,7 +47,7 @@ const RequestCard = ({
          ((!answered.approved && !answered.denied && !loading) ? <div className='flex w-full justify-between'>
             <button 
                className='text-xs bg-red-500 py-1 text-white uppercase px-2 rounded w-20'
-               onClick={()=>approveRequest(index)}
+               onClick={()=>denyRequest(index)}
             >
                deny
             </button>
