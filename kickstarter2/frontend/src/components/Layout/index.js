@@ -18,6 +18,7 @@ const Layout = ({children}) => {
       const accounts = await provider.listAccounts()
       if(accounts.length > 0){
          dispatch(fetchWeb3())
+         setLoggedIn(true)
       }
    }
    useEffect(()=>{
