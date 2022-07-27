@@ -85,7 +85,7 @@ const CreateCampaign = () => {
                      required
                   />
                </div>
-               <div className='w-full flex my-2'>
+               <div className='w-full flex my-2 flex-col md:flex-row'>
                   <input 
                      type="number" 
                      className='input flex-1' 
@@ -96,16 +96,16 @@ const CreateCampaign = () => {
                   />
                   <input 
                      type="number" 
-                     className='input ml-1 flex-1' 
+                     className='input md:ml-1 mt-2 md:mt-0 flex-1' 
                      placeholder='ETH minimum'
                      value={minimum}
                      onChange={e=>setMinimum(e.target.value)}
                      required
                   />
                </div>
-               <div className='h-40 flex items-center'>
+               <div className='h-40 flex items-center flex-col md:flex-row'>
                   {!preview ? <input 
-                     type="file" 
+                     type="file"
                      onChange={handleFile}
                   /> : <img 
                      src={preview}
@@ -113,7 +113,7 @@ const CreateCampaign = () => {
                   />
                   }
                   <textarea 
-                     className='h-full rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
+                     className='md:h-full flex-1 rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
                      placeholder='Description'
                      onChange={e=>setDescription(e.target.value)}
                   ></textarea>
