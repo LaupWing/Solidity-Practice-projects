@@ -75,6 +75,16 @@ const CreateCampaign = () => {
             </div>}
             <h2 className='text-slate-600 uppercase font-bold text-sm tracking-wider'>Create campaign</h2>
             <div className='my-2'>
+               <div className='md:hidden mb-2 mx-auto flex justify-center items-center'>
+                  {!preview ? <input 
+                     type="file"
+                     onChange={handleFile}
+                  /> : <img 
+                     src={preview}
+                     className='h-full object-cover w-40'
+                  />
+                  }
+               </div>
                <div className='w-full flex'>
                   <input 
                      type="text"  
@@ -104,16 +114,18 @@ const CreateCampaign = () => {
                   />
                </div>
                <div className='h-40 flex items-center flex-col md:flex-row'>
-                  {!preview ? <input 
-                     type="file"
-                     onChange={handleFile}
-                  /> : <img 
-                     src={preview}
-                     className='h-full object-cover w-40'
-                  />
-                  }
+                  <div className='hidden md:block md:h-full'>
+                     {!preview ? <input 
+                        type="file"
+                        onChange={handleFile}
+                     /> : <img 
+                        src={preview}
+                        className='h-full object-cover w-40'
+                     />
+                     }
+                  </div>
                   <textarea 
-                     className='md:h-full flex-1 rounded p-2 focus:outline-none bg-slate-200 w-full resize-none ml-2'
+                     className='h-full flex-1 rounded p-2 focus:outline-none bg-slate-200 w-full resize-none md:ml-2'
                      placeholder='Description'
                      onChange={e=>setDescription(e.target.value)}
                   ></textarea>
