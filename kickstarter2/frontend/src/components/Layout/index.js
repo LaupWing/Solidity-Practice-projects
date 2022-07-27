@@ -6,10 +6,12 @@ import ReactLoading from 'react-loading'
 import {useSelector} from 'react-redux'
 import Header from './Header'
 import { ethers } from 'ethers'
+import { useState } from 'react'
 
 const Layout = ({children}) => {
    const dispatch = useDispatch()
    const {contract} = useSelector(state => state.web3)
+   const [loggedIn, setLoggedIn] = useState(false)
 
    const initialize = async ()=>{
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -32,9 +34,16 @@ const Layout = ({children}) => {
 
    return (
       <div className='bg-white w-full h-screen flex flex-col'>
-         <Header/>
-         {contract ? children :(
-            <ReactLoading className='m-auto'/>
+         {loggedIn ? (<>
+            <Header/>
+            {contract ? children :(
+               <ReactLoading className='m-auto'/>
+            )}
+         </>) : (
+            <div className='flex flex-col flex-1 items-center justify-center'>
+               <p className='text-slate-300 uppercase text-sm font-bold'>You need metamask to use this website</p>
+               <button className="btn bg-indigo-500 mt-4">Login Metamask</button>
+            </div>
          )}
       </div>
    )
