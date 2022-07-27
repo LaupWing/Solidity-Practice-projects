@@ -7,12 +7,12 @@ export default function Home() {
    const [campaigns, setCampaigns] = useState([])
 
    useEffect(()=>{
-      const getCampaigns = async ()=>{
-         const _campaigns = await contract.getDeployedCampaigns()
-         setCampaigns(_campaigns)
+      // const getCampaigns = async ()=>{
+      //    const _campaigns = await contract.getDeployedCampaigns()
+      //    setCampaigns(_campaigns)
          
-      }
-      getCampaigns()
+      // }
+      // getCampaigns()
    },[])
 
 
