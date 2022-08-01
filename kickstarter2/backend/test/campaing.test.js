@@ -7,7 +7,7 @@ describe('Campaign', ()=>{
    let factory
    const name = 'Fictive name lol'
    let deployer, user1, users
-   const minimum_contribution = 100
+   const i_minimum_contribution = 100
    let request_1 = {
    }
    
@@ -15,7 +15,7 @@ describe('Campaign', ()=>{
       [deployer, user1, ...users] = await ethers.getSigners()
       const Factory = await ethers.getContractFactory('CampaignFactory');
       factory = await Factory.deploy();
-      await factory.createCampaign(name, minimum_contribution);
+      await factory.createCampaign(name, i_minimum_contribution);
 
       [campaignAddress] = await factory.getDeployedCampaigns()
       campaign = await ethers.getContractAt('Campaign', campaignAddress)
@@ -29,11 +29,11 @@ describe('Campaign', ()=>{
 
    describe('Deployment', async ()=>{
       it('Should track name and minimum contribution', async ()=>{
-         expect(await campaign.minimum_contribution()).to.equal(minimum_contribution)
+         expect(await campaign.i_minimum_contribution()).to.equal(i_minimum_contribution)
          expect(await campaign.name()).to.equal(name)
       })
       it('Marks caller as the campaign manager', async ()=>{
-         expect(await campaign.manager()).to.equal(deployer.address)
+         expect(await campaign.i_manager()).to.equal(deployer.address)
       })
    })
 
