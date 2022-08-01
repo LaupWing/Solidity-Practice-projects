@@ -33,7 +33,7 @@ contract Campaign{
    }
 
    Request[] public requests;
-   address public immutable manager;
+   address public immutable i_manager;
    uint public minimum_contribution;
    mapping (address => bool) public approvers;
    uint public goal;
@@ -43,7 +43,7 @@ contract Campaign{
    string public thumbnail;
 
    modifier restricted() {
-      require(msg.sender == manager, "Only manager allowed");
+      require(msg.sender == i_manager, "Only i_manager allowed");
       _;
    }
 
@@ -64,7 +64,7 @@ contract Campaign{
       string memory _description,
       string memory _thumbnail
    ){
-      manager = creator;
+      i_manager = creator;
       name = _name;
       description = _description;
       goal = _goal;
@@ -143,7 +143,7 @@ contract Campaign{
          minimum_contribution, 
          goal,
          address(this).balance,
-         manager,
+         i_manager,
          thumbnail,
          description,
          name
