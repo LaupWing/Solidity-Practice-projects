@@ -36,7 +36,7 @@ contract Campaign{
    address public immutable i_manager;
    uint public immutable i_minimum_contribution;
    mapping (address => bool) public approvers;
-   uint public i_goal;
+   uint public immutable i_goal;
    uint public approversCount;
    string public name;
    string public description;
