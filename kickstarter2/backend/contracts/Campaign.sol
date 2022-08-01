@@ -36,7 +36,7 @@ contract Campaign{
    address public immutable i_manager;
    uint public immutable i_minimum_contribution;
    mapping (address => bool) public approvers;
-   uint public goal;
+   uint public i_goal;
    uint public approversCount;
    string public name;
    string public description;
@@ -67,7 +67,7 @@ contract Campaign{
       i_manager = creator;
       name = _name;
       description = _description;
-      goal = _goal;
+      i_goal = _goal;
       thumbnail = _thumbnail;
       i_minimum_contribution = _minimum;
    }
@@ -141,7 +141,7 @@ contract Campaign{
    ){
       return (
          i_minimum_contribution, 
-         goal,
+         i_goal,
          address(this).balance,
          i_manager,
          thumbnail,
