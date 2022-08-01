@@ -34,7 +34,7 @@ contract Campaign{
 
    Request[] public requests;
    address public immutable i_manager;
-   uint public minimum_contribution;
+   uint public immutable i_minimum_contribution;
    mapping (address => bool) public approvers;
    uint public goal;
    uint public approversCount;
@@ -69,11 +69,11 @@ contract Campaign{
       description = _description;
       goal = _goal;
       thumbnail = _thumbnail;
-      minimum_contribution = _minimum;
+      i_minimum_contribution = _minimum;
    }
 
    function contribute() public payable{
-      require(msg.value > minimum_contribution,  "Minimum contribution not met");
+      require(msg.value > i_minimum_contribution,  "Minimum contribution not met");
       approvers[msg.sender] = true;
       approversCount++;
 
@@ -140,7 +140,7 @@ contract Campaign{
       string memory
    ){
       return (
-         minimum_contribution, 
+         i_minimum_contribution, 
          goal,
          address(this).balance,
          i_manager,
