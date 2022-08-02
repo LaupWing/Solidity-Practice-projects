@@ -1,6 +1,6 @@
-const { tasks } = require("hardhat")
+const { task } = require("hardhat/config")
 
-tasks("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
    const accounts = await hre.ethers.getSigners()
 
    for (const account of accounts) {
