@@ -7,7 +7,7 @@ describe('Campaign', ()=>{
    let factory
    const name = 'Fictive name lol'
    let deployer, user1, users
-   const minimum_contribution = 100000000
+   const minimum_contribution = 100
    const goal =  1000000000000000
    const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit dapibus diam, eu mollis magna molestie in. Pellentesque efficitur viverra augue, eu fermentum ante accumsan id. Mauris lacus est, interdum varius mi id, congue aliquam lectus.'
    const thumbnail = 'some_image_url'
@@ -46,16 +46,16 @@ describe('Campaign', ()=>{
       })
    })
 
-   // describe('Contribution', async ()=>{
-   //    it('Should successfully register new account with the correct contribution', async ()=>{
-   //       await campaign.connect(user1).contribute({value: 200})
-   //       expect((await campaign.approversCount()).toString()).to.equal('1')
-   //       expect(await campaign.approvers(user1.address)).to.be.true
-   //    })
-   //    it('Should revert with message when send incorrect contribution', async()=>{
-   //       await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
-   //    })
-   // })
+   describe('Contribution', async ()=>{
+      it('Should successfully register new account with the correct contribution', async ()=>{
+         await campaign.connect(user1).contribute({value: 200})
+         expect((await campaign.approversCount()).toString()).to.equal('1')
+         expect(await campaign.approvers(user1.address)).to.be.true
+      })
+      it('Should revert with message when send incorrect contribution', async()=>{
+         await expect(campaign.connect(user1).contribute({value:5})).to.be.revertedWith('Minimum contribution not met')
+      })
+   })
 
    // describe('Request', async ()=>{
    //    it('Should successfully create a new request', async ()=>{
