@@ -9,6 +9,7 @@
     "hardhat-gas-reporter": "^1.0.8"
   },
   "dependencies": {
-    "@chainlink/contracts": "^0.4.2"
+    "@chainlink/contracts": "^0.4.2",
+    "solidity-coverage": "^0.7.17-rc.0"
   }
 }
