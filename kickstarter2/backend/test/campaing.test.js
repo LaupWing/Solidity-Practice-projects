@@ -7,8 +7,8 @@ describe('Campaign', ()=>{
    let factory
    const name = 'Fictive name lol'
    let deployer, user1, users
-   const minimum_contribution = .1
-   const goal = 100
+   const minimum_contribution = 100000000
+   const goal =  1000000000000000
    const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit dapibus diam, eu mollis magna molestie in. Pellentesque efficitur viverra augue, eu fermentum ante accumsan id. Mauris lacus est, interdum varius mi id, congue aliquam lectus.'
    const thumbnail = 'some_image_url'
    let request_1 = {}
@@ -36,15 +36,15 @@ describe('Campaign', ()=>{
       }
    })
 
-   // describe('Deployment', async ()=>{
-   //    it('Should track name and minimum contribution', async ()=>{
-   //       expect(await campaign.i_minimum_contribution()).to.equal(i_minimum_contribution)
-   //       expect(await campaign.name()).to.equal(name)
-   //    })
-   //    it('Marks caller as the campaign manager', async ()=>{
-   //       expect(await campaign.i_manager()).to.equal(deployer.address)
-   //    })
-   // })
+   describe('Deployment', async ()=>{
+      it('Should track name and minimum contribution', async ()=>{
+         expect(await campaign.i_minimum_contribution()).to.equal(minimum_contribution)
+         expect(await campaign.name()).to.equal(name)
+      })
+      it('Marks caller as the campaign manager', async ()=>{
+         expect(await campaign.i_manager()).to.equal(deployer.address)
+      })
+   })
 
    // describe('Contribution', async ()=>{
    //    it('Should successfully register new account with the correct contribution', async ()=>{
