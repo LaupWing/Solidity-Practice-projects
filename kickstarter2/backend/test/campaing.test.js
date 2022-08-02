@@ -7,15 +7,24 @@ describe('Campaign', ()=>{
    let factory
    const name = 'Fictive name lol'
    let deployer, user1, users
-   const i_minimum_contribution = 100
-   let request_1 = {
-   }
+   const minimum_contribution = .1
+   const goal = 100
+   const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit dapibus diam, eu mollis magna molestie in. Pellentesque efficitur viverra augue, eu fermentum ante accumsan id. Mauris lacus est, interdum varius mi id, congue aliquam lectus.'
+   const thumbnail = 'some_image_url'
+   let request_1 = {}
    
    beforeEach(async ()=>{
-      [deployer, user1, ...users] = await ethers.getSigners()
+      [deployer, user1, ...users] = await ethers.getSigners();
+      
       const Factory = await ethers.getContractFactory('CampaignFactory');
       factory = await Factory.deploy();
-      await factory.createCampaign(name, i_minimum_contribution);
+      await factory.createCampaign(
+         name, 
+         minimum_contribution,
+         goal,
+         description,
+         thumbnail
+      );
 
       [campaignAddress] = await factory.getDeployedCampaigns()
       campaign = await ethers.getContractAt('Campaign', campaignAddress)
