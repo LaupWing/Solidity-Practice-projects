@@ -82,53 +82,53 @@ describe('Campaign', ()=>{
       })
    })
       
-   // describe('End to end', async ()=>{
+   describe('End to end', async ()=>{
       
-   //    it('Request can be approved', async()=>{
-   //       await campaign.connect(deployer).createRequest(
-   //          request_1.title, 
-   //          request_1.description, 
-   //          request_1.value, 
-   //          request_1.recipient
-   //       )
-   //       await campaign.connect(user1).contribute({value: 200})
-   //       await campaign.connect(users[0]).contribute({value: 200})
-   //       await campaign.connect(users[1]).contribute({value: 200})
-   //       await campaign.connect(user1).approveRequest(0)
-   //       await campaign.connect(users[0]).approveRequest(0)
+      it('Request can be approved', async()=>{
+         await campaign.connect(deployer).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )
+         await campaign.connect(user1).contribute({value: 200})
+         await campaign.connect(users[0]).contribute({value: 200})
+         await campaign.connect(users[1]).contribute({value: 200})
+         await campaign.connect(user1).approveRequest(0)
+         await campaign.connect(users[0]).approveRequest(0)
          
-   //       await campaign.connect(deployer).finalizeRequest(0)
-   //       expect(true)
-   //    })
-   //    it('Request can be denied', async()=>{
-   //       await campaign.connect(deployer).createRequest(
-   //          request_1.title, 
-   //          request_1.description, 
-   //          request_1.value, 
-   //          request_1.recipient
-   //       )
-   //       await campaign.connect(user1).contribute({value: 200})
-   //       await campaign.connect(users[0]).contribute({value: 200})
-   //       await campaign.connect(users[1]).contribute({value: 200})
-   //       await campaign.connect(user1).denyRequest(0)
-   //       await campaign.connect(users[0]).denyRequest(0)
+         await campaign.connect(deployer).finalizeRequest(0)
+         expect(true)
+      })
+      // it('Request can be denied', async()=>{
+      //    await campaign.connect(deployer).createRequest(
+      //       request_1.title, 
+      //       request_1.description, 
+      //       request_1.value, 
+      //       request_1.recipient
+      //    )
+      //    await campaign.connect(user1).contribute({value: 200})
+      //    await campaign.connect(users[0]).contribute({value: 200})
+      //    await campaign.connect(users[1]).contribute({value: 200})
+      //    await campaign.connect(user1).denyRequest(0)
+      //    await campaign.connect(users[0]).denyRequest(0)
          
-   //       await campaign.connect(deployer).finalizeRequest(0)
-   //       expect(true)
-   //    })
-   //    it('Request can NOT be approved', async()=>{
-   //       await campaign.connect(deployer).createRequest(
-   //          request_1.title, 
-   //          request_1.description, 
-   //          request_1.value, 
-   //          request_1.recipient
-   //       )
-   //       await campaign.connect(user1).contribute({value: 200})
-   //       await campaign.connect(users[0]).contribute({value: 200})
-   //       await campaign.connect(users[1]).contribute({value: 200})
-   //       await campaign.connect(user1).approveRequest(0)
+      //    await campaign.connect(deployer).finalizeRequest(0)
+      //    expect(true)
+      // })
+      it('Request can NOT be approved', async()=>{
+         await campaign.connect(deployer).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )
+         await campaign.connect(user1).contribute({value: 200})
+         await campaign.connect(users[0]).contribute({value: 200})
+         await campaign.connect(users[1]).contribute({value: 200})
+         await campaign.connect(user1).approveRequest(0)
          
-   //       await expect(campaign.connect(deployer).finalizeRequest(0)).to.be.revertedWith('Not enough people have approved this request')
-   //    })
-   // })
+         await expect(campaign.connect(deployer).finalizeRequest(0)).to.be.revertedWith('Not enough people have approved this request')
+      })
+   })
 })

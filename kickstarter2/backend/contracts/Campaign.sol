@@ -43,7 +43,7 @@ contract Campaign{
    string public thumbnail;
 
    modifier restricted() {
-      require(msg.sender == i_manager, "Only i_manager allowed");
+      require(msg.sender == i_manager, "Only manager allowed");
       _;
    }
 
