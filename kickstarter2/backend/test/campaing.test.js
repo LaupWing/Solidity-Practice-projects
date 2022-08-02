@@ -57,30 +57,30 @@ describe('Campaign', ()=>{
       })
    })
 
-   // describe('Request', async ()=>{
-   //    it('Should successfully create a new request', async ()=>{
-   //       await campaign.connect(deployer).createRequest(
-   //          request_1.title, 
-   //          request_1.description, 
-   //          request_1.value, 
-   //          request_1.recipient
-   //       )
+   describe('Request', async ()=>{
+      it('Should successfully create a new request', async ()=>{
+         await campaign.connect(deployer).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )
          
-   //       expect((await campaign.requests(0)).title).to.be.equal(request_1.title)
-   //       expect((await campaign.requests(0)).description).to.be.equal(request_1.description)
-   //       expect((await campaign.requests(0)).value).to.be.equal(request_1.value)
-   //       expect((await campaign.requests(0)).recipient).to.be.equal(request_1.recipient)
-   //    })
+         expect((await campaign.requests(0)).title).to.be.equal(request_1.title)
+         expect((await campaign.requests(0)).description).to.be.equal(request_1.description)
+         expect((await campaign.requests(0)).value).to.be.equal(request_1.value)
+         expect((await campaign.requests(0)).recipient).to.be.equal(request_1.recipient)
+      })
       
-   //    it('Should unsuccessfully create a new request', async ()=>{
-   //       await expect(campaign.connect(user1).createRequest(
-   //          request_1.title, 
-   //          request_1.description, 
-   //          request_1.value, 
-   //          request_1.recipient
-   //       )).to.be.revertedWith('Only manager allowed')
-   //    })
-   // })
+      it('Should unsuccessfully create a new request', async ()=>{
+         await expect(campaign.connect(user1).createRequest(
+            request_1.title, 
+            request_1.description, 
+            request_1.value, 
+            request_1.recipient
+         )).to.be.revertedWith('Only manager allowed')
+      })
+   })
       
    // describe('End to end', async ()=>{
       
