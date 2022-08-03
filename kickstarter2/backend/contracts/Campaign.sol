@@ -1,6 +1,8 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
 contract CampaignFactory {
    address[] public deployedCampaigns;
 
@@ -9,9 +11,10 @@ contract CampaignFactory {
       uint minimum,
       uint goal,
       string memory description,
-      string memory thumbnail
+      string memory thumbnail,
+      address priceFeedAddress
    ) public {
-      address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail));
+      address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail, priceFeedAddress));
       deployedCampaigns.push(newCampaign);
    }
 
@@ -41,6 +44,7 @@ contract Campaign{
    string public name;
    string public description;
    string public thumbnail;
+   AggregatorV3Interface public priceFeed;
 
    modifier restricted() {
       require(msg.sender == i_manager, "Only manager allowed");
@@ -62,7 +66,8 @@ contract Campaign{
       uint _goal,
       address creator,
       string memory _description,
-      string memory _thumbnail
+      string memory _thumbnail,
+      address priceFeedAddress
    ){
       i_manager = creator;
       name = _name;
@@ -70,6 +75,7 @@ contract Campaign{
       i_goal = _goal;
       thumbnail = _thumbnail;
       i_minimum_contribution = _minimum;
+      priceFeed = AggregatorV3Interface(priceFeedAddress);
    }
 
    function contribute() public payable{
