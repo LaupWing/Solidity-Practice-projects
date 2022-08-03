@@ -43,7 +43,10 @@ const Layout = ({children}) => {
          </>) : (
             <div className='flex flex-col flex-1 items-center justify-center'>
                <p className='text-slate-300 uppercase text-sm font-bold'>You need metamask to use this website</p>
-               <button className="btn bg-indigo-500 mt-4">Login Metamask</button>
+               <button 
+                  className="btn bg-indigo-500 mt-4"
+                  onClick={()=>dispatch(fetchWeb3())}
+               >Login Metamask</button>
             </div>
          )}
       </div>
