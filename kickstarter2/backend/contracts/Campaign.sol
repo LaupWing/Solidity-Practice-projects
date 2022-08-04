@@ -5,6 +5,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract CampaignFactory {
    address[] public deployedCampaigns;
+   AggregatorV3Interface public priceFeed;
 
    function createCampaign(
       string memory name, 
@@ -14,8 +15,12 @@ contract CampaignFactory {
       string memory thumbnail,
       address priceFeedAddress
    ) public {
-      address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail, priceFeedAddress));
+      address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail, priceFeed));
       deployedCampaigns.push(newCampaign);
+   }
+
+   constructor(address priceFeedAddress){
+      priceFeed = AggregatorV3Interface(priceFeedAddress);
    }
 
    function getDeployedCampaigns() public view returns (address[] memory){
@@ -67,7 +72,7 @@ contract Campaign{
       address creator,
       string memory _description,
       string memory _thumbnail,
-      address priceFeedAddress
+      AggregatorV3Interface _priceFeed
    ){
       i_manager = creator;
       name = _name;
@@ -75,7 +80,7 @@ contract Campaign{
       i_goal = _goal;
       thumbnail = _thumbnail;
       i_minimum_contribution = _minimum;
-      priceFeed = AggregatorV3Interface(priceFeedAddress);
+      priceFeed = _priceFeed;
    }
 
    function contribute() public payable{
