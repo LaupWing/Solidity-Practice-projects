@@ -4,8 +4,13 @@ require("solidity-coverage")
 require("hardhat-deploy")
 
 module.exports = {
-  solidity: "0.8.8",
-  gasReporter: {
-   enabled: true
-  }
+   solidity: {
+      compilers :[
+         {version:"0.8.8"},
+         {version:"0.6.6"}
+      ]
+   },
+   gasReporter: {
+      enabled: true
+   }
 };
