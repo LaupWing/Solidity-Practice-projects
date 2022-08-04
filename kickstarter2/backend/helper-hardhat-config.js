@@ -4,3 +4,7 @@ const networkConfig = {
       ethUsdPriceFeed: "0x0"
    }
 }
+
+module.exports = {
+   networkConfig
+}
