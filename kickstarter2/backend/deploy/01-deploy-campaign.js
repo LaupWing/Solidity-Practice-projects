@@ -3,6 +3,11 @@ module.exports = async({getNamedAccounts, deployments, network}) =>{
    const {deployer} = await getNamedAccounts()
    const chainId = network.config.chainId
 
+   if(true){
+
+   }else{
+      
+   }
 
    const campaign = await deploy("CampaignFactory", {
       from: deployer,
