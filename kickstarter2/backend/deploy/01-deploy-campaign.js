@@ -14,15 +14,9 @@ module.exports = async({getNamedAccounts, deployments}) =>{
    }else{
       ethUsdPriceFeedAddress = await networkConfig[chainId]["ethUsdPriceFeed"]
    }
-   
-   if(true){
-
-   }else{
-
-   }
 
    const campaign = await deploy("CampaignFactory", {
       from: deployer,
-      args: []
+      args: [ethUsdPriceFeedAddress]
    })
 }

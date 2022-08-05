@@ -12,8 +12,7 @@ contract CampaignFactory {
       uint minimum,
       uint goal,
       string memory description,
-      string memory thumbnail,
-      address priceFeedAddress
+      string memory thumbnail
    ) public {
       address newCampaign = address(new Campaign(name, minimum, goal, msg.sender, description, thumbnail, priceFeed));
       deployedCampaigns.push(newCampaign);
