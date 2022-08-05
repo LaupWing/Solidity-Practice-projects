@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "./PriceConverter.sol";
 
 contract CampaignFactory {
    address[] public deployedCampaigns;
@@ -38,6 +39,8 @@ contract Campaign{
       mapping(address => bool) approvals;
       mapping(address => bool) denials;
    }
+
+   using PriceConverter for uint256;
 
    Request[] public requests;
    address public immutable i_manager;
@@ -158,5 +161,9 @@ contract Campaign{
          description,
          name
       );
+   }
+
+   function ethPrice() public view returns(uint){
+      return PriceConverter.getPrice(priceFeed);
    }
 }

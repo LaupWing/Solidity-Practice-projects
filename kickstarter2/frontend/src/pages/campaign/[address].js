@@ -56,6 +56,7 @@ const CampaignDetail = () => {
       setName(_name)
       setMinimum(Number(ethers.utils.formatEther(_minimum.toString())))
       setInitialLoading(false)
+      console.log(await contract.ethPrice())
    }
    
    const getRequests = async ()=>{
