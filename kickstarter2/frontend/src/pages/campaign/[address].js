@@ -31,7 +31,7 @@ const CampaignDetail = () => {
    const [showCreateRequest, setShowCreateRequest] = useState(false)
 
    const fetchInfo = async ()=>{
-      const manager = await contract.manager()
+      const manager = await contract.i_manager()
       
       await getRequests()
       
@@ -56,7 +56,7 @@ const CampaignDetail = () => {
       setName(_name)
       setMinimum(Number(ethers.utils.formatEther(_minimum.toString())))
       setInitialLoading(false)
-      console.log(await contract.ethPrice())
+      console.log((await contract.ethPrice()).toString())
    }
    
    const getRequests = async ()=>{
