@@ -5,10 +5,10 @@ const path = require('path')
 const contractsDir = path.join(__dirname, '../../frontend/contractsData')
 
 module.exports = async({getNamedAccounts, deployments}) =>{
-   const {deploy, log, get} = deployments
+   const {deploy, get} = deployments
    const {deployer} = await getNamedAccounts()
    const chainId = network.config.chainId
-   console.log(networkConfig)
+   
    let ethUsdPriceFeedAddress
 
    if(developmentChains.includes(network.name)){
