@@ -1,6 +1,10 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("hardhat-deploy")
+require("dotenv").config()
 /** @type import('hardhat/config').HardhatUserConfig */
+
+const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
+
 module.exports = {
    solidity: {
       compilers:[
@@ -13,7 +17,9 @@ module.exports = {
       ]
    },
    networks:{
-
+      rinkeby:{
+         url: ''
+      }
    },
    namedAccounts:{
       deployer:{
