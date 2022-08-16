@@ -21,6 +21,10 @@ module.exports = async ({getNamedAccounts, deployments})=>{
       ],
       log: true
    })
+
+   if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
+      // Verify
+   }
    log("----------------------------------------------------")
 }
 
