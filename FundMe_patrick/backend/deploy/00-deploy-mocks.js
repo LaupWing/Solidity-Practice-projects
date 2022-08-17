@@ -4,7 +4,6 @@ const { developmentChains, DECIMALS, INITIAL_ANSWER } = require("../helper-hardh
 module.exports = async ({getNamedAccounts, deployments})=>{
    const {deploy, log} = deployments
    const {deployer} = await getNamedAccounts()
-   const chainId = network.config.chainId 
 
    if(developmentChains.includes(network.name)){
       log("Localho network detected! Deploying mocks")
