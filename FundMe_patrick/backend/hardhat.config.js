@@ -8,6 +8,8 @@ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || ""
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
 
+console.log(RINKEBY_RPC_URL)
+
 module.exports = {
    solidity: {
       compilers: [
@@ -40,7 +42,7 @@ module.exports = {
    namedAccounts: {
       deployer: {
          default: 0,
-         4: 1, // rinkeby
+         1: 0, // rinkeby
       }
    }
 };
