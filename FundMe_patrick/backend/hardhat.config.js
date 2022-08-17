@@ -5,7 +5,7 @@ require("dotenv").config()
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || ""
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
-const COINMARKET_API_KEY = process.env.COINMARKET_API_KEY || ""
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || ""
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
       currency: "USD",
       outputFile: "gas-report.txt",
       noColors: true,
-      // coinmarketcap: COINMARKETCAP_API_KEY,
+      coinmarketcap: COINMARKETCAP_API_KEY,
    },
    namedAccounts: {
       deployer: {
