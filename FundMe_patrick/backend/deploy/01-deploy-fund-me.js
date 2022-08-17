@@ -14,7 +14,7 @@ module.exports = async ({getNamedAccounts, deployments})=>{
    }else{
       ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
    }
-
+   console.log(ethUsdPriceFeedAddress)
    const args = [ethUsdPriceFeedAddress]
    const fundMe = await deploy("FundMe", {
       from: deployer,
@@ -23,9 +23,9 @@ module.exports = async ({getNamedAccounts, deployments})=>{
       waitConfirmations: network.config.blockConfirmations || 1
    })
 
-   if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
-      await verify(fundMe.address, args)
-   }
+   // if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
+   //    await verify(fundMe.address, args)
+   // }
    log("----------------------------------------------------")
 }
 
