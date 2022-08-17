@@ -23,14 +23,15 @@ module.exports = {
       rinkeby: {
          url: RINKEBY_RPC_URL,
          accounts: [PRIVATE_KEY],
-         chainId: 4
+         chainId: 4,
+         blockConfirmations: 6
       }
    },
    etherscan: {
       apiKeys: ETHERSCAN_API_KEY
    },
    gasReporter: {
-      enabled: true,
+      enabled: false,
       currency: "USD",
       outputFile: "gas-report.txt",
       noColors: true,

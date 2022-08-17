@@ -19,7 +19,8 @@ module.exports = async ({getNamedAccounts, deployments})=>{
    const fundMe = await deploy("FundMe", {
       from: deployer,
       args,
-      log: true
+      log: true,
+      waitConfirmations: network.config.blockConfirmations || 1
    })
 
    if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
