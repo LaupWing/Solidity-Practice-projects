@@ -11,7 +11,7 @@ contract FundMe {
 
    uint256 public constant MINIMUM_USD = 50 * 10**18;
    address private immutable i_owner;
-   address[] private s_funders;
+   address[] public s_funders;
    mapping(address => uint256) public s_addressToAmountFunded;
    AggregatorV3Interface public s_priceFeed;
 
