@@ -5,6 +5,7 @@ describe("FundMe", async function(){
    let fundMe
    let deployer
    let mockV3Aggregator
+   const sendValue = ethers.utils.parseEther("1")
 
    beforeEach(async ()=>{
 
@@ -27,6 +28,14 @@ describe("FundMe", async function(){
    describe("fund", async ()=>{
       it("Fails if you don't send enough ETH", async ()=>{
          await expect(fundMe.fund()).to.be.revertedWith("You need to spend more ETH!")
+      })
+
+      it("updated amount funded data structure", async ()=>{
+         await fundMe.fund({value: sendValue})
+         const response = await fundMe.s_addressToAmountFunded(
+            deployer
+         )
+         assert.equal(response.toString(), sendValue.toString())
       })
    })
 })
