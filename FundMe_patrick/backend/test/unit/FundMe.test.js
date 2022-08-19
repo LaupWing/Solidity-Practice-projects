@@ -76,7 +76,7 @@ describe("FundMe", async function(){
          const accounts = await ethers.getSigners()
 
          for(let i =1; i <6; i ++){
-            const fundMeConnectedContract = await fundMe.connnect(accounts[i])
+            const fundMeConnectedContract = await fundMe.connect(accounts[i])
             await fundMeConnectedContract.fund({value: sendValue})
          }
 
@@ -98,7 +98,7 @@ describe("FundMe", async function(){
             endingDeployerBalance.add(gasCost).toString()
          )
 
-         await expect(fundMe.funders(0)).to.be.reverted
+         await expect(fundMe.s_funders(0)).to.be.reverted
 
          for(let i =1; i <6; i ++){
             assert.equal(await fundMe.s_addressToAmountFunded(accounts[i].address), 0)
@@ -106,10 +106,10 @@ describe("FundMe", async function(){
       })
 
       it("Only allows the owner to withdraw", async ()=>{
-         const accounts = ethers.getSigners()
-         const attacker = accounts[0]
-         const attackerConnectedContract = await fundMe.connnect(attacker)
-         await expect(attackerConnectedContract.withdraw()).to.be.reverted
+         const accounts = await ethers.getSigners()
+         const attacker = accounts[1]
+         const attackerConnectedContract = await fundMe.connect(attacker)
+         await expect(attackerConnectedContract.withdraw()).to.be.revertedWith("FundMe__NotOwner")
 
       })
    })
