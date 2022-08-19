@@ -104,5 +104,13 @@ describe("FundMe", async function(){
             assert.equal(await fundMe.s_addressToAmountFunded(accounts[i].address), 0)
          }
       })
+
+      it("Only allows the owner to withdraw", async ()=>{
+         const accounts = ethers.getSigners()
+         const attacker = accounts[0]
+         const attackerConnectedContract = await fundMe.connnect(attacker)
+         await expect(attackerConnectedContract.withdraw()).to.be.reverted
+
+      })
    })
 })
