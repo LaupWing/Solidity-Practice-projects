@@ -11,9 +11,9 @@ contract FundMe {
 
    uint256 public constant MINIMUM_USD = 50 * 10**18;
    address private immutable i_owner;
-   address[] public s_funders;
-   mapping(address => uint256) public s_addressToAmountFunded;
-   AggregatorV3Interface public s_priceFeed;
+   address[] private s_funders;
+   mapping(address => uint256) private s_addressToAmountFunded;
+   AggregatorV3Interface private s_priceFeed;
 
    modifier onlyOwner() {
       // require(msg.sender == i_owner);
