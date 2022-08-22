@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 error Raffle__NotEnoughETHEntered();
 
-contract Raffle {
+contract Raffle is VRFConsumerBaseV2 {
    uint256 private immutable i_entranceFee;
    address payable[] private s_players;
 
@@ -22,6 +23,14 @@ contract Raffle {
       }
       s_players.push(payable(msg.sender));
       emit RaffleEnter(msg.sender);
+   }
+
+   function requestRandomWinner() external {
+
+   }
+
+   function fulfillRandomWords() internal override {
+      
    }
 
    function getEntranceFee() public view returns(uint256){
