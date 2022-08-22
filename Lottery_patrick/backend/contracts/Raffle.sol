@@ -13,7 +13,7 @@ contract Raffle is VRFConsumerBaseV2 {
       address indexed player
    );
 
-   constructor(uint256 entranceFee){
+   constructor(address vrfCoordinatorV2, uint256 entranceFee) VRFConsumerBaseV2(vrfCoordinatorV2){
       i_entranceFee = entranceFee;
    }
 
@@ -29,7 +29,7 @@ contract Raffle is VRFConsumerBaseV2 {
 
    }
 
-   function fulfillRandomWords() internal override {
+   function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
       
    }
 
