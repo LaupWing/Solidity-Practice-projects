@@ -10,6 +10,10 @@ contract Raffle is VRFConsumerBaseV2 {
    address payable[] private s_players;
    VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
    bytes32 private immutable i_gasLane;
+   uint64 private immutable i_subscribtionId;
+   uint32 private immutable i_callbackGasLimit;
+   uint16 private constant REQUEST_CONFIRMATIONS = 3;
+   uint16 private constant NUM_WORDS = 1;
 
    // Events
    event RaffleEnter(
@@ -19,11 +23,15 @@ contract Raffle is VRFConsumerBaseV2 {
    constructor(
       address vrfCoordinatorV2, 
       uint256 entranceFee,
-      bytes32 gasLane
+      bytes32 gasLane,
+      uint64 subscribtionId,
+      uint32 callbackGasLimit
    ) VRFConsumerBaseV2(vrfCoordinatorV2){
       i_entranceFee = entranceFee;
       i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
       i_gasLane = gasLane;
+      i_subscribtionId = subscribtionId;
+      i_callbackGasLimit = callbackGasLimit;
    }
 
    function enterRaffle() public payable{
@@ -41,10 +49,10 @@ contract Raffle is VRFConsumerBaseV2 {
    function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
       i_vrfCoordinator.requestRandomWords(
          i_gasLane, 
-         subId, 
-         minimumRequestConfirmations, 
-         callbackGasLimit, 
-         numWords
+         i_subscribtionId, 
+         REQUEST_CONFIRMATIONS, 
+         i_callbackGasLimit, 
+         NUM_WORDS
       );
    }
 
