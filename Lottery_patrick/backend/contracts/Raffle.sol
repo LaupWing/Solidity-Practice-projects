@@ -4,7 +4,9 @@ pragma solidity ^0.8.9;
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
+
 error Raffle__NotEnoughETHEntered();
+error Raffle__TransferFailed();
 
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    uint256 private immutable i_entranceFee;
@@ -19,6 +21,9 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    // Events
    event RaffleEnter(
       address indexed player
+   );
+   event RequestedRaffleWinner(
+      uint256 indexed requestId
    );
    event RequestedRaffleWinner(
       uint256 indexed requestId
@@ -71,6 +76,11 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       address payable recentWinner = s_players[indexOfWinner];
 
       s_recentWinner = recentWinner;
+      (bool success, ) = recentWinner.call{value: address(this).balance}(");
+
+      if(!success){
+         revert Raffle__TransferFailed();
+      }
    }
 
    function getEntranceFee() public view returns(uint256){
