@@ -15,7 +15,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    uint32 private immutable i_callbackGasLimit;
    uint16 private constant REQUEST_CONFIRMATIONS = 3;
    uint16 private constant NUM_WORDS = 1;
-
+   address private s_recentWinner;
    // Events
    event RaffleEnter(
       address indexed player
@@ -70,7 +70,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       uint256 indexOfWinner = randomWords[0] % s_players.length;
       address payable recentWinner = s_players[indexOfWinner];
 
-      
+      s_recentWinner = recentWinner;
    }
 
    function getEntranceFee() public view returns(uint256){
@@ -79,5 +79,9 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
    function getPlayer(uint256 index) public view returns(address){
       return s_players[index];
+   }
+
+   function getRecentWinner() public view returns(address){
+      return s_recentWinner;
    }
 }
