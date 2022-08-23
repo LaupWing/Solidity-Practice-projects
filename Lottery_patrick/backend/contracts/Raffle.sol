@@ -48,7 +48,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
    function checkUpkeep(
       bytes calldata /*checkData */
-      ) external override {
+   ) external override {
 
    }
 
@@ -63,7 +63,14 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       emit RequestedRaffleWinner(requestId);
    }
 
-   function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
+   function fulfillRandomWords(
+      uint256 /* requestId */, 
+      uint256[] memory randomWords
+   ) internal override {
+      uint256 indexOfWinner = randomWords[0] % s_players.length;
+      address payable recentWinner = s_players[indexOfWinner];
+
+      
    }
 
    function getEntranceFee() public view returns(uint256){
