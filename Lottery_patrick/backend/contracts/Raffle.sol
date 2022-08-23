@@ -3,9 +3,10 @@ pragma solidity ^0.8.9;
 
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 error Raffle__NotEnoughETHEntered();
 
-contract Raffle is VRFConsumerBaseV2 {
+contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    uint256 private immutable i_entranceFee;
    address payable[] private s_players;
    VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
@@ -43,6 +44,12 @@ contract Raffle is VRFConsumerBaseV2 {
       }
       s_players.push(payable(msg.sender));
       emit RaffleEnter(msg.sender);
+   }
+
+   function checkUpkeep(
+      bytes calldata /*checkData */
+      ) external override {
+
    }
 
    function requestRandomWinner() external {
