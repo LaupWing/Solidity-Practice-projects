@@ -25,8 +25,8 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    event RequestedRaffleWinner(
       uint256 indexed requestId
    );
-   event RequestedRaffleWinner(
-      uint256 indexed requestId
+   event WinnerPicked(
+      address indexed winner
    );
 
    constructor(
@@ -81,6 +81,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       if(!success){
          revert Raffle__TransferFailed();
       }
+      emit WinnerPicked(recentWinner);
    }
 
    function getEntranceFee() public view returns(uint256){
