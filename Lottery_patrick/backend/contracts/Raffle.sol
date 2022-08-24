@@ -10,6 +10,12 @@ error Raffle__TransferFailed();
 error Raffle__NotOpen();
 
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
+   enum RaffleState {
+      OPEN,
+      CLOSED,
+      CALCULATING
+   }
+
    uint256 private immutable i_entranceFee;
    address payable[] private s_players;
    VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
@@ -18,7 +24,10 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    uint32 private immutable i_callbackGasLimit;
    uint16 private constant REQUEST_CONFIRMATIONS = 3;
    uint16 private constant NUM_WORDS = 1;
+
    address private s_recentWinner;
+   RaffleState private s_raffleState; 
+
    // Events
    event RaffleEnter(
       address indexed player
