@@ -51,11 +51,15 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       i_gasLane = gasLane;
       i_subscribtionId = subscribtionId;
       i_callbackGasLimit = callbackGasLimit;
+      s_raffleState = RaffleState.OPEN;
    }
 
    function enterRaffle() public payable{
       if(msg.value < i_entranceFee){ 
          revert Raffle__NotEnoughETHEntered();
+      }
+      if(s_raffleState != RaffleState.OPEN){
+         revert Raffle__NotOpen(); 
       }
       s_players.push(payable(msg.sender));
       emit RaffleEnter(msg.sender);
@@ -68,6 +72,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    // }
 
    function requestRandomWinner() external {
+      s_raffleState = RaffleState.CALCULATING;
       uint256 requestId =  i_vrfCoordinator.requestRandomWords(
          i_gasLane, 
          i_subscribtionId, 
@@ -86,6 +91,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       address payable recentWinner = s_players[indexOfWinner];
 
       s_recentWinner = recentWinner;
+      s_raffleState = RaffleState.OPEN;
       (bool success, ) = recentWinner.call{value: address(this).balance}("");
 
       if(!success){
