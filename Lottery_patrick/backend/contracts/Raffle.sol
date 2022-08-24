@@ -51,11 +51,11 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       emit RaffleEnter(msg.sender);
    }
 
-   function checkUpkeep(
-      bytes calldata /*checkData */
-   ) external override {
+   // function checkUpkeep(
+   //    bytes calldata /*checkData */
+   // ) external override {
 
-   }
+   // }
 
    function requestRandomWinner() external {
       uint256 requestId =  i_vrfCoordinator.requestRandomWords(
@@ -76,7 +76,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       address payable recentWinner = s_players[indexOfWinner];
 
       s_recentWinner = recentWinner;
-      (bool success, ) = recentWinner.call{value: address(this).balance}(");
+      (bool success, ) = recentWinner.call{value: address(this).balance}("");
 
       if(!success){
          revert Raffle__TransferFailed();
