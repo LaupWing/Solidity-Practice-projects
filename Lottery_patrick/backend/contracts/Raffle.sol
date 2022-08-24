@@ -8,6 +8,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 error Raffle__NotEnoughETHEntered();
 error Raffle__TransferFailed();
 error Raffle__NotOpen();
+error Raffle__UpkeepNotNeeded();
 
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    enum RaffleState {
@@ -89,6 +90,10 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
    function performUpkeep(bytes calldata /* performData */) external override {
       (bool upkeepNeeded,) = checkUpkeep("");
+
+      if(!upkeepNeeded){
+         revert Raffle__UpkeepNotNeeded();
+      }
       s_raffleState = RaffleState.CALCULATING;
       uint256 requestId =  i_vrfCoordinator.requestRandomWords(
          i_gasLane, 
