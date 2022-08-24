@@ -122,6 +122,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
       s_players = new address payable[](0);
       s_recentWinner = recentWinner;
       s_raffleState = RaffleState.OPEN;
+      s_lastTimestamp = block.timestamp;
       (bool success, ) = recentWinner.call{value: address(this).balance}("");
 
       if(!success){
