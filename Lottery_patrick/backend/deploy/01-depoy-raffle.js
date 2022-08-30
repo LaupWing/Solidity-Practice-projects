@@ -7,7 +7,7 @@ module.exports = async ({getNamedAccounts, deployments})=>{
    const {deploy , log} = deployments
    const {chainId} = network.config
    const {deployer} = await getNamedAccounts()
-   let vrfCoordinatorV2Address, subscribionId
+   let vrfCoordinatorV2Address, subscriptionId
 
    if(developmentChains.includes(network.name)){
       const vrfCoordinatorV2Mock = await ethers.getContractAt("VRFCoordinatorV2Mock")
@@ -19,6 +19,7 @@ module.exports = async ({getNamedAccounts, deployments})=>{
       await vrfCoordinatorV2Mock.fundSubscription(subscribionId, VRF_SUB_FUND_AMOUNT)
    }else {
       vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
+      subscriptionId = networkConfig[chainId]["subscriptionId"] 
    }
    
    const {
@@ -28,7 +29,7 @@ module.exports = async ({getNamedAccounts, deployments})=>{
 
    const raffle = await deploy("Raffle", {
       from: deployer,
-      args: [vrfCoordinatorV2Address, raffleEntranceFee, gasLane],
+      args: [vrfCoordinatorV2Address, raffleEntranceFee, gasLane, subscriptionId],
       log: true,
       waitConfirmations: network.config.blockConfirmations || 1
    })
