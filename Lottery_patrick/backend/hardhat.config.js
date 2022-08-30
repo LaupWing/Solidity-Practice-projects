@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox")
+require("hardhat-deploy")
 require("dotenv").config()
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || ""
