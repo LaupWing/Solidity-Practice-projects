@@ -14,9 +14,8 @@ module.exports = async ({getNamedAccounts, deployments})=>{
       vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
       const transationResponse = await vrfCoordinatorV2Mock.createSubscription()
       const transationReceipt = await transationResponse.wait(1)
-      subscribionId = transationReceipt.events[0].args.subId
-
-      await vrfCoordinatorV2Mock.fundSubscription(subscribionId, VRF_SUB_FUND_AMOUNT)
+      subscriptionId = transationReceipt.events[0].args[0].toString()
+      await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, VRF_SUB_FUND_AMOUNT)
    }else {
       vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
       subscriptionId = networkConfig[chainId]["subscriptionId"] 
@@ -28,13 +27,19 @@ module.exports = async ({getNamedAccounts, deployments})=>{
       callbackGasLimit,
       interval
    } = networkConfig[chainId]
-   console.log(networkConfig[chainId])
-   // const raffle = await deploy("Raffle", {
-   //    from: deployer,
-   //    args: [vrfCoordinatorV2Address, raffleEntranceFee, gasLane, subscriptionId, callbackGasLimit, interval],
-   //    log: true,
-   //    waitConfirmations: network.config.blockConfirmations || 1
-   // })
+   
+   const raffle = await deploy("Raffle", {
+      from: deployer,
+      args: [
+         vrfCoordinatorV2Address, 
+         raffleEntranceFee, 
+         gasLane, 
+         subscriptionId, 
+         callbackGasLimit, 
+         interval],
+      log: true,
+      waitConfirmations: network.config.blockConfirmations || 1
+   })
 
    if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
       log("Verifying...")
