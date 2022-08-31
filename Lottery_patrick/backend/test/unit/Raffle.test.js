@@ -5,14 +5,15 @@ const {assert, expect} = require("chai")
 !developmentChains.includes(network.name) ? 
    describe.skip : 
    describe("Raffle Unit Tests", async ()=>{
-      let raffle, vrfCoordinatorV2Mock
+      let raffle, vrfCoordinatorV2Mock, raffleEntranceFee, deployer
       const chainId = network.config.chainId
 
       beforeEach(async ()=>{
-         const {deployer} = await getNamedAccounts()
+         deployer = (await getNamedAccounts()).deployer
          await deployments.fixture(["all"])
          raffle = await ethers.getContract("Raffle", deployer)
          vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock", deployer)
+         raffleEntranceFee = await raffle.getEntranceFee()
       })
 
       describe("constructor", ()=>{
@@ -31,6 +32,11 @@ const {assert, expect} = require("chai")
                raffle,
                `Raffle__NotEnoughETHEntered`
             )
+         })
+         it("records player when they enter", async ()=>{
+            await raffle.enterRaffle({value: raffleEntranceFee})
+            const playerFromContract = await raffle.getPlayer(0)
+            assert.equal(playerFromContract, deployer)
          })
       })
    })
