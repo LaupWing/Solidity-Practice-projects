@@ -38,5 +38,8 @@ const {assert, expect} = require("chai")
             const playerFromContract = await raffle.getPlayer(0)
             assert.equal(playerFromContract, deployer)
          })
+         it("emits event on enter", async ()=>{
+            await expect(raffle.enterRaffle({value: raffleEntranceFee})).to.emit(raffle, "RaffleEnter")
+         })
       })
    })
