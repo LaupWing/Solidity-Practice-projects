@@ -1,6 +1,6 @@
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const {developmentChains, networkConfig} = require("../../helper-hardhat-config")
-const {assert} = require("chai")
+const {assert, expect} = require("chai")
 
 !developmentChains.includes(network.name) ? 
    describe.skip : 
@@ -15,13 +15,22 @@ const {assert} = require("chai")
          vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock", deployer)
       })
 
-      describe("constructor", async ()=>{
+      describe("constructor", ()=>{
          it("initialize the raffle correctly", async ()=>{
             const raffleState = await raffle.getRaffleState()
             const interval = await raffle.getInterval()
 
             assert.equal(raffleState.toString(), "0")
             assert.equal(interval.toString(), networkConfig[chainId]["interval"])
+         })
+      })
+
+      describe("enterRaffle", ()=>{
+         it("reverts when you don't pay enough", async ()=>{
+            await expect(raffle.enterRaffle()).to.be.revertedWithCustomError(
+               raffle,
+               `Raffle__NotEnoughETHEntered`
+            )
          })
       })
    })
