@@ -1,5 +1,6 @@
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const {developmentChains} = require("../../helper-hardhat-config")
+const {assert} = require("chai")
 
 !developmentChains.includes(network.name) ? 
    describe.skip : 
@@ -15,7 +16,10 @@ const {developmentChains} = require("../../helper-hardhat-config")
 
       describe("constructor", async ()=>{
          it("initialize the raffle correclty", async ()=>{
+            const raffleState = await raffle.getRaffleState()
+            const interval = await raffle.getInterval()
             
+            assert.equal(raffleState.toString(), "0")
          })
       })
    })
