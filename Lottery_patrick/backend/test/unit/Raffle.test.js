@@ -140,11 +140,11 @@ const {assert, expect} = require("chai")
             const accounts = await ethers.getSigners()
 
             for(let i = startingAccountIndex; i < startingAccountIndex + additionalEntrants; i++){
-               const accountConnectedRaffle = raffle(accounts[i])
+               const accountConnectedRaffle = raffle.connect(accounts[i])
                await accountConnectedRaffle.enterRaffle({value: raffleEntranceFee})
             }
 
-            const startingTimestamp = await raffle.getLatestTimeStamp()
+            const startingTimestamp = await raffle.getLatestTimestamp()
             
             await new Promise(async (resolve, reject) =>{
                raffle.once("WinnerPicked", async ()=>{
