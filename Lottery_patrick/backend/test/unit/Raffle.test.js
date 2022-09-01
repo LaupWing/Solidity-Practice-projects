@@ -133,5 +133,16 @@ const {assert, expect} = require("chai")
                .be
                .revertedWith("nonexistent request")
          })
+
+         it("picks a winner, resets the lottery, and sends money", async ()=>{
+            const additionalEntrants = 3
+            const startingAccountIndex = 1 // because deployer is 0
+            const accounts = await ethers.getSigners()
+
+            for(let i = startingAccountIndex; i < startingAccountIndex + additionalEntrants; i++){
+               const accountConnectedRaffle = raffle(accounts[i])
+               await accountConnectedRaffle.enterRaffle({value: raffleEntranceFee})
+            }
+         })
       })
    })
