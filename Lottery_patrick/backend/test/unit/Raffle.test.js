@@ -123,5 +123,15 @@ const {assert, expect} = require("chai")
             await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
             await network.provider.send("evm_mine", [])
          })
+         it("can only be called after performUpkeep", async ()=>{
+            await expect(vrfCoordinatorV2Mock.fulfillRandomWords(0, raffle.address))
+               .to
+               .be
+               .revertedWith("nonexistent request")
+            await expect(vrfCoordinatorV2Mock.fulfillRandomWords(1, raffle.address))
+               .to
+               .be
+               .revertedWith("nonexistent request")
+         })
       })
    })
