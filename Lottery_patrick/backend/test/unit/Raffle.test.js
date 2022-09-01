@@ -144,12 +144,30 @@ const {assert, expect} = require("chai")
                await accountConnectedRaffle.enterRaffle({value: raffleEntranceFee})
             }
 
-            const startingTimestamp = await raffle.getLastTimeStamp()
+            const startingTimestamp = await raffle.getLatestTimeStamp()
             
             await new Promise(async (resolve, reject) =>{
-               raffle.once("WinnerPicked", ()=>{
+               raffle.once("WinnerPicked", async ()=>{
+                  try{
+                     const recentWinner = await raffle.getRecenetWinner()
+                     const raffleState = await raffle.getRaffleState()
+                     const endingTimeStamp = await raffle.getLatestTimeStamp()
+                     const numPlayers = await raffle.getNumberOfPlayers()
+                     assert.equal(numPlayers.toString(), "0")
+                     assert.equal(raffleState.toString(), "0")
+                     assert(endingTimeStamp > startingTimestamp)
+                  }catch(e){
+                     reject()
+                  }
                   resolve()
                })
+
+               const tx = await raffle.performUpkeep([])
+               const txReceipt = await tx.wait(1)
+               await vrfCoordinatorV2Mock.fulfillRandomWords(
+                  txReceipt.events[1].args.requestId, 
+                  raffle.address
+               )
             })
          })
       })
