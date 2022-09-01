@@ -17,8 +17,8 @@ error Raffle__UpkeepNotNeeded(
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
    enum RaffleState {
       OPEN,
-      CLOSED,
-      CALCULATING
+      CALCULATING,
+      CLOSED
    }
 
    uint256 private immutable i_entranceFee;
