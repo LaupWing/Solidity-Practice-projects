@@ -103,5 +103,17 @@ const {assert, expect} = require("chai")
                `Raffle__UpkeepNotNeeded`
             )
          })
+         it("updates the raffle state, emits and event, and calls the vrf coordinator" ,async ()=>{
+            await raffle.enterRaffle({value: raffle})
+            await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
+            await network.provider.send("evm_mine", [])
+            const txResponse = await raffle.performUpkeep([])
+            const txReceipt = await txResponse.wait(1)
+            const requestId = txReceipt.events[0].args.requestId
+            const raffleState = await raffle.getRaffleState()
+
+            assert(requestId.toNumber() > 0)
+            assert(raffleState.toNumber() == 0)
+         })
       })
    })
