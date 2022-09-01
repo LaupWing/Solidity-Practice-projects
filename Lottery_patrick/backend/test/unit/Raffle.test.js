@@ -88,4 +88,14 @@ const {assert, expect} = require("chai")
             assert(upkeepNeeded)
          })
       })
+
+      describe("performUpkeep", ()=>{
+         it("it can only run if checkupkeep is true", async ()=>{
+            await raffle.enterRaffle({value: raffleEntranceFee})
+            await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
+            await network.provider.send("evm_mine", [])
+            const tx = await raffle.performUpkeep([])
+            assert(tx)
+         })
+      })
    })
