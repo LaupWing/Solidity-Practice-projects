@@ -153,9 +153,21 @@ const {assert, expect} = require("chai")
                      const raffleState = await raffle.getRaffleState()
                      const endingTimeStamp = await raffle.getLatestTimeStamp()
                      const numPlayers = await raffle.getNumberOfPlayers()
+                     const winnerEndingBalance = await accounts[1].getBalance()
+
                      assert.equal(numPlayers.toString(), "0")
                      assert.equal(raffleState.toString(), "0")
                      assert(endingTimeStamp > startingTimestamp)
+
+                     assert.equal(
+                        winnerEndingBalance.toString(),
+                        winnerStartingBalance.add(
+                           raffleEntranceFee
+                              .mul(additionalEntrants)
+                              .add(raffleEntranceFee)
+                              .toString()
+                        )
+                     )
                   }catch(e){
                      reject()
                   }
@@ -164,6 +176,7 @@ const {assert, expect} = require("chai")
 
                const tx = await raffle.performUpkeep([])
                const txReceipt = await tx.wait(1)
+               const winnerStartingBalance = await accounts[1].getBalance()
                await vrfCoordinatorV2Mock.fulfillRandomWords(
                   txReceipt.events[1].args.requestId, 
                   raffle.address
