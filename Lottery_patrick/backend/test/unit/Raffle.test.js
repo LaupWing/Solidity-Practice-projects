@@ -143,6 +143,14 @@ const {assert, expect} = require("chai")
                const accountConnectedRaffle = raffle(accounts[i])
                await accountConnectedRaffle.enterRaffle({value: raffleEntranceFee})
             }
+
+            const startingTimestamp = await raffle.getLastTimeStamp()
+            
+            await new Promise(async (resolve, reject) =>{
+               raffle.once("WinnerPicked", ()=>{
+                  resolve()
+               })
+            })
          })
       })
    })
