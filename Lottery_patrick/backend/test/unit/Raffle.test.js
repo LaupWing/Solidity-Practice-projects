@@ -47,10 +47,10 @@ const {assert, expect} = require("chai")
             await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
             await network.provider.send("evm_mine", [])
             await raffle.performUpkeep([])
-            // await expect(raffle.enterRaffle({value: raffleEntranceFee})).revertedWithCustomError(
-            //    raffle,
-            //    `Raffle__NotOpen`
-            // )
+            await expect(raffle.enterRaffle({value: raffleEntranceFee})).revertedWithCustomError(
+               raffle,
+               `Raffle__NotOpen`
+            )
          })
       })
    })
