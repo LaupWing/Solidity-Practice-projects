@@ -97,5 +97,11 @@ const {assert, expect} = require("chai")
             const tx = await raffle.performUpkeep([])
             assert(tx)
          })
+         it("reverts when checkupkeep is false", async ()=>{
+            await expect(raffle.performUpkeep([])).revertedWithCustomError(
+               raffle,
+               `Raffle__UpkeepNotNeeded`
+            )
+         })
       })
    })
