@@ -113,7 +113,15 @@ const {assert, expect} = require("chai")
             const raffleState = await raffle.getRaffleState()
 
             assert(requestId.toNumber() > 0)
-            assert(raffleState.toNumber() == 0)
+            assert(raffleState.toString() == "1")
+         })
+      })
+
+      describe("fulfillRandomwords", ()=>{
+         beforeEach(async ()=>{
+            await raffle.enterRaffle({value: raffleEntranceFee})
+            await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
+            await network.provider.send("evm_mine", [])
          })
       })
    })
