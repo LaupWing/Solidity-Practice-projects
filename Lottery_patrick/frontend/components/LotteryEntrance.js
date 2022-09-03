@@ -9,6 +9,8 @@ const LotteryEntrance = () => {
    const chainId = parseInt(chainIdHex)
    const raffleAddress = chainId in contractAddresses? contractAddresses[chainId][0] : null
    const [entranceFee, seEntranceFee] = useState("")
+   const [numPlayers, setNumPlayers] = useState("")
+   const [recentWinner, setRecentWinner] = useState("")
 
    const dispatch = useNotification()
 
@@ -16,14 +18,27 @@ const LotteryEntrance = () => {
       abi,
       contractAddress: raffleAddress,
       functionName: "enterRaffle",
+      params: {},
       msgValue: entranceFee
    })
-
+   
    const {runContractFunction: getEntranceFee} = useWeb3Contract({
       abi,
       contractAddress: raffleAddress,
       functionName: "enterRaffle",
-      msgValue: 0
+      params: {}
+   })
+   const {runContractFunction: getNumberPlayers} = useWeb3Contract({
+      abi,
+      contractAddress: raffleAddress,
+      functionName: "getNumberPlayers",
+      params: {}
+   })
+   const {runContractFunction: getRecentWinner} = useWeb3Contract({
+      abi,
+      contractAddress: raffleAddress,
+      functionName: "getRecentWinner",
+      params: {}
    })
 
    const handleSuccess = async (tx) =>{
@@ -45,6 +60,8 @@ const LotteryEntrance = () => {
       if(isWeb3Enabled){
          async function updateUI(){
             seEntranceFee((await getEntranceFee()).toString())
+            setNumPlayers((await getNumberPlayers()).toString())
+            setRecentWinner((await getRecentWinner()).toString())
          }
          updateUI()
       }
