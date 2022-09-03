@@ -57,13 +57,13 @@ const LotteryEntrance = () => {
       })
    }
 
+   const updateUI =  async()=>{
+      seEntranceFee((await getEntranceFee()).toString())
+      setNumPlayers((await getNumberOfPlayers()).toString())
+      setRecentWinner((await getRecentWinner()).toString())
+   }
    useEffect(()=>{
       if(isWeb3Enabled){
-         async function updateUI(){
-            seEntranceFee((await getEntranceFee()).toString())
-            setNumPlayers((await getNumberOfPlayers()).toString())
-            setRecentWinner((await getRecentWinner()).toString())
-         }
          updateUI()
       }
    },[isWeb3Enabled])
