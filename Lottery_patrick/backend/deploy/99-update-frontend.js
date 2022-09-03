@@ -7,7 +7,13 @@ const FRONTEND_ABI_FILE = "../frontend/constants/abi.json"
 module.exports = async () =>{
    if(process.env.UPDATE_FRONTEND){
       updateContractAddresses()
+      updateAbi()
    }
+}
+
+async function updateAbi(){
+   const raffle = await ethers.getContract("Raffle")
+   fs.writeFileSync(FRONTEND_ABI_FILE, raffle.interface.format(ethers.utils.FormatTypes.json))
 }
 
 async function updateContractAddresses(){
