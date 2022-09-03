@@ -78,7 +78,9 @@ const LotteryEntrance = () => {
                      onError: (error) =>{ console.log(error)}
                   })
                }}>Enter Raffle</button>
-               {ethers.utils.formatUnits(entranceFee, "ethers")} ETH
+               Entrance Fee{ethers.utils.formatUnits(entranceFee, "ethers")} ETH
+               Players: {numPlayers}
+               Recent Winner: {recentWinner}
             </div>
          ):( 
             <div>
