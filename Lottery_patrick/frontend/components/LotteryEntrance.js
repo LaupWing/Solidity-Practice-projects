@@ -33,7 +33,21 @@ const LotteryEntrance = () => {
    },[isWeb3Enabled])
 
    return (
-      <div>Hi from Lottery {ethers.utils.formatUnits(entranceFee, "ethers")}</div>
+      <div>
+         Hi from Lottery
+         {raffleAddress ? (
+            <div>
+               <button onClick={async ()=>{
+                  await enterRaffle()
+               }}>Enter Raffle</button>
+               {ethers.utils.formatUnits(entranceFee, "ethers")} ETH
+            </div>
+         ):( 
+            <div>
+               No Raffle Address detected
+            </div>
+         )}
+      </div>
    )
 }
 
