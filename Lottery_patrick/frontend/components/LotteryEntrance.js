@@ -45,6 +45,7 @@ const LotteryEntrance = () => {
    const handleSuccess = async (tx) =>{
       await tx.wait(1)
       handleNewNotification(tx)
+      updateUI()
    }
 
    const handleNewNotification = ()=>{
