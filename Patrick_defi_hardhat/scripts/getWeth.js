@@ -18,9 +18,10 @@ const getWeth = async () => {
    const wethBalance = await iWeth.balanceOf(deployer)
    console.log(`Got ${wethBalance.toString()} WETH`)
 
-   
+
 }
 
 module.exports = {
-   getWeth
+   getWeth,
+   AMOUNT
 }
