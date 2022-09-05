@@ -1,5 +1,7 @@
-const main = async ()=>{
+const { getWeth } = require("./getWeth")
 
+const main = async ()=>{
+   await getWeth()
 }
 
 main()
