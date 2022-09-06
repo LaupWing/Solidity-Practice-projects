@@ -26,6 +26,10 @@ const main = async ()=>{
    let {availableBorrowsETH, totalDebtETH} = await getBorrowUserData(lendingPool, deployer)
 }
 
+const getDaiPrice = async ()=>{
+   
+}
+
 const approveErc20 = async (
    erc20Address, 
    spenderAddress, 
