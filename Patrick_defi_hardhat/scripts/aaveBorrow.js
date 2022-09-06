@@ -27,6 +27,23 @@ const main = async ()=>{
    const daiPrice = await getDaiPrice()
    const amountDaiToBorrow = availableBorrowsETH.toString() * 0.95 * (1/ daiPrice.toNumber())
    console.log(`You can borrow ${amountDaiToBorrow} DAI`)
+   const amountDaiToBorrowWei = ethers.utils.parseEther(amountDaiToBorrow.toString())
+
+   const daiTokenAddress = "0x6b175474e89094c44da98b954eedeac495271d0f"
+
+   await borrowDai(daiTokenAddress, lendingPool, amountDaiToBorrowWei, deployer)
+   await getBorrowUserData(lendingPool, deployer)
+}
+
+const borrowDai = async (
+   daiAddress, 
+   lendingPool,
+   amountDaiToBorrowWei,
+   account
+) =>{
+   const borrowTx = await lendingPool.borrow(daiAddress, amountDaiToBorrowWei, 1, 0, account)
+   await borrowTx.wait(1)
+   console.log("You have borrowed!")
 }
 
 const getDaiPrice = async ()=>{
