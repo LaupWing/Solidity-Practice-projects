@@ -24,10 +24,20 @@ const main = async ()=>{
    )
    console.log("Deposited!")
    let {availableBorrowsETH, totalDebtETH} = await getBorrowUserData(lendingPool, deployer)
+   const daiPrice = await getDaiPrice()
+   const amountDaiToBorrow = availableBorrowsETH.toString() * 0.95 * (1/ daiPrice.toNumber())
+   console.log(`You can borrow ${amountDaiToBorrow} DAI`)
 }
 
 const getDaiPrice = async ()=>{
-   
+   const daiEthPriceFeed = await ethers.getContractAt(
+      "AggregatorV3Interface",
+      "0x773616E4d11A78F511299002da57A0a94577F1f4"
+   )
+
+   const price = (await daiEthPriceFeed.latestRoundData())[1]
+   console.log(`DAI/ETH price is ${price.toString()}`)
+   return price
 }
 
 const approveErc20 = async (
@@ -48,7 +58,6 @@ const approveErc20 = async (
 }
 
 const getBorrowUserData =  async (lendingPool, account)=>{
-   console.log("heh")
    try{
       const {totalCollateralETH, totalDebtETH, availableBorrowsETH} = await lendingPool.getUserAccountData(account)
       console.log(`You have ${totalCollateralETH} worth of ETH deposited`)
