@@ -23,7 +23,7 @@ const main = async ()=>{
       0
    )
    console.log("Deposited!")
-   let {availableBorrowsETH, totalDebtETH} = getBorrowUserData()
+   let {availableBorrowsETH, totalDebtETH} = await getBorrowUserData(lendingPool, deployer)
 }
 
 const approveErc20 = async (
@@ -44,11 +44,16 @@ const approveErc20 = async (
 }
 
 const getBorrowUserData =  async (lendingPool, account)=>{
-   const {totalCollateralETH, totalDebtETH, availableBorrowsETH} = await lendingPool.getUserAccountData(account)
-   console.log(`You have ${totalCollateralETH} worth of ETH deposited`)
-   console.log(`You have ${totalDebtETH} worth of ETH borrowed`)
-   console.log(`You can borrow ${availableBorrowsETH} worth of ETH`)
-   return {availableBorrowsETH, totalDebtETH}
+   console.log("heh")
+   try{
+      const {totalCollateralETH, totalDebtETH, availableBorrowsETH} = await lendingPool.getUserAccountData(account)
+      console.log(`You have ${totalCollateralETH} worth of ETH deposited`)
+      console.log(`You have ${totalDebtETH} worth of ETH borrowed`)
+      console.log(`You can borrow ${availableBorrowsETH} worth of ETH`)
+      return {availableBorrowsETH, totalDebtETH}
+   }catch(e){
+      console.log(e)
+   }
 }
 
 const getLendingPool = async (account)=>{
