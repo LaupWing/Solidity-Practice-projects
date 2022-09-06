@@ -86,9 +86,9 @@ const approveErc20 = async (
 const getBorrowUserData =  async (lendingPool, account)=>{
    try{
       const {totalCollateralETH, totalDebtETH, availableBorrowsETH} = await lendingPool.getUserAccountData(account)
-      console.log(`You have ${totalCollateralETH} worth of ETH deposited`)
-      console.log(`You have ${totalDebtETH} worth of ETH borrowed`)
-      console.log(`You can borrow ${availableBorrowsETH} worth of ETH`)
+      console.log(`You have ${ethers.utils.formatUnits(totalCollateralETH, "ether")} worth of ETH deposited`)
+      console.log(`You have ${ethers.utils.formatUnits(totalDebtETH, "ether")} worth of ETH borrowed`)
+      console.log(`You can borrow ${ethers.utils.formatUnits(availableBorrowsETH, "ether")} worth of ETH`)
       return {availableBorrowsETH, totalDebtETH}
    }catch(e){
       console.log(e)
