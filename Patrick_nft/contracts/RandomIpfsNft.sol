@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 
-error RandomIpfsNft_RangeOutOfBounds;
+error RandomIpfsNft__RangeOutOfBounds;
 
 contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
    enum Breed {
@@ -69,7 +69,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
          }
          cumulativeSum += chanceArray[i];
       }
-      revert RandomIpfsNft_RangeOutOfBounds;
+      revert RandomIpfsNft__RangeOutOfBounds;
    }
 
    function getChanceArray() public pure returns(uint256[3] memory){
