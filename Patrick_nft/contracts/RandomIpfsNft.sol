@@ -7,6 +7,12 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 
 contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
+   enum Breed {
+      PUG,
+      SHIBA_INU,
+      ST_BERNARD
+   }
+
    VRFCoordinatorV2Interface private immutable i_vrfCoordinator; 
    uint64 private immutable i_subscriptionId;
    bytes32 private immutable i_gasLane;
@@ -48,6 +54,19 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
       address dogOwner = s_requestIdToSender[requestId];
       uint256 newTokenId = s_tokenCounter;
       _safeMint(dogOwner, newTokenId);
+      uint256 moddedRng = randomWords[0] & MAX_CHANCE_VALUE;
+   }
+
+   function getBreedFromModdedRng(uint256 moddedRng) public pure returns(Breed){
+      uint256 cumulativeSum = 0;
+      uint256[3] memory chanceArray = getChanceArray();
+
+      for(uint256 i=0; i<chanceArray.length; i++){
+         if(moddedRng >= cumulativeSum && moddedRng < cumulativeSum + chanceArray[i]){
+            return Breed(i);
+         }
+         cumulativeSum += chanceArray[i];
+      }
    }
 
    function getChanceArray() public pure returns(uint256[3] memory){
