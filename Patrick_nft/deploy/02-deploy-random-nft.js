@@ -13,7 +13,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
    let tokenUris
 
    if(process.env.UPLOAD_TO_PINATA === "true"){
-      tokenUris = await handleTokenUris()
+      // tokenUris = await handleTokenUris()
    }
 
    if(developmentChains.includes(network.name)){
