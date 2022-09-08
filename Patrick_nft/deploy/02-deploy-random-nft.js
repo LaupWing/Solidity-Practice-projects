@@ -9,6 +9,11 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
    const chainId = network.config.chainId
 
    let vrfCoordinatorV2Address, subscribtionId
+   let tokenUris
+
+   if(process.env.UPLOAD_TO_PINATA === "true"){
+      tokenUris = await handleTokenUris()
+   }
 
    if(developmentChains.includes(network.name)){
       const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
@@ -30,4 +35,10 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       // tokenUri
       networkConfig[chainId].mintFee,
    ]
+}
+
+async function handleTokenUris(){
+   tokenUris =[]
+
+   return tokenUris
 }
