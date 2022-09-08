@@ -11,16 +11,16 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
 
    if(chainId == 31337){
       log("Local network detected! Deploying mocks...")
-      await deploy("VRFCoordinatorV2Mock", {
-         from: deployer,
-         log: true,
-         args: [BASE_FEE, GAS_PRICE_LINK]
-      })
-      await deploy("MockV3Aggregator", {
-         from: deployer,
-         log: true,
-         args: [DECIMALS, INITIAL_PRICE]
-      })
+      // await deploy("VRFCoordinatorV2Mock", {
+      //    from: deployer,
+      //    log: true,
+      //    args: [BASE_FEE, GAS_PRICE_LINK]
+      // })
+      // await deploy("MockV3Aggregator", {
+      //    from: deployer,
+      //    log: true,
+      //    args: [DECIMALS, INITIAL_PRICE]
+      // })
 
       log("Mocks deployed!!!")
       log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
