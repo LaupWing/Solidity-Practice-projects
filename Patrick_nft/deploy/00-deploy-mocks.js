@@ -14,6 +14,11 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       await deploy("VRFCoordinatorV2Mock", {
          from: deployer,
          log: true,
+         args: [BASE_FEE, GAS_PRICE_LINK]
+      })
+      await deploy("MockV3Aggregator", {
+         from: deployer,
+         log: true,
          args: [DECIMALS, INITIAL_PRICE]
       })
 
