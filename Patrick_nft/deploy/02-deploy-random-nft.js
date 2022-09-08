@@ -36,7 +36,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
    //    // tokenUri
    //    networkConfig[chainId].mintFee,
    // ]
-   await storeImages("../images")
+   await storeImages("./images")
 }
 
 async function handleTokenUris(){
