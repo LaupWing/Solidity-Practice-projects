@@ -43,7 +43,7 @@ const { developmentChains } = require("../helper-hardhat-config")
       })
 
       describe("fulfillRandomWords", ()=>{
-         if("mints NFT after random number is returned", async()=>{
+         it("mints NFT after random number is returned", async()=>{
             await new Promise(async (resolve,reject)=>{
                randomIpfsNft.once("NftMinted", async ()=>{
                   try{
@@ -71,5 +71,9 @@ const { developmentChains } = require("../helper-hardhat-config")
                }
             })
          })
+      })
+
+      describe("getBreedFromModdedRng", ()=>{
+         
       })
    })
