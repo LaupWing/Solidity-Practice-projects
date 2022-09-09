@@ -49,6 +49,19 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       // tokenUri
       networkConfig[chainId].mintFee,
    ]
+
+   const randomIpfsNft = await deploy("RandomIpfsNft", {
+      from: deployer,
+      args,
+      log: true,
+      waitConfirmations: network.config.blockConfirmations || 1
+   })
+   log("--------------------------------")
+   if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY){
+      log("Verifying...")
+      await verify(randomIpfsNft.address, args)
+      log("-------------------------------------")
+   }
 }
 
 async function handleTokenUris(){
