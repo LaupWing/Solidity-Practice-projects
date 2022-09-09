@@ -1,5 +1,5 @@
 const { network, ethers, deployments } = require("hardhat")
-const {assert} = require("chai")
+const {assert, expect} = require("chai")
 const { developmentChains } = require("../helper-hardhat-config")
 
 !developmentChains.includes(network.name)
@@ -24,7 +24,21 @@ const { developmentChains } = require("../helper-hardhat-config")
          })
       })
 
-      describe("Mint NFT", ()=>{
+      describe("requestNft", ()=>{
+         it("fails if payment isn't sent with the request", async ()=>{
+            await expect(randomIpfsNft.requestNft()).to.be.reverted
+         })
+
+         it("reverts if payment amoutn is less than the mint fee", async ()=>{
+            const fee = await randomIpfsNft.getMintFee()
+            await expect(randomIpfsNft.requestNft({value: fee.sub(ethers.utils.parseEther("0.0001"))}))
+               .to.be.reverted
+         })
          
+         it("emits an event and kicks off a random word request", async ()=>{
+            const fee = await randomIpfsNft.getMintFee()
+            await expect(randomIpfsNft.requestNft({value: fee.toString()}))
+               .to.emit(randomIpfsNft, "NftRequested")
+         })
       })
    })
