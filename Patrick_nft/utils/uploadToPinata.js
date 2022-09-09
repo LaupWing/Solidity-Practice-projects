@@ -13,6 +13,7 @@ async function storeImages(imagesFilePath){
    let responses = []
 
    for (fileIndex in files){
+      console.log(`Working on ${files[fileIndex]}`)
       const readableStreamForFile = fs.createReadStream(`${fullImagesPath}/${files[fileIndex]}`)
 
       try{
