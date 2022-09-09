@@ -46,7 +46,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       subscribtionId,
       networkConfig[chainId].gasLane,
       networkConfig[chainId].callbackGasLimit,
-      // tokenUri
+      tokenUris,
       networkConfig[chainId].mintFee,
    ]
 
@@ -77,6 +77,8 @@ async function handleTokenUris(){
       console.log(`Succesfully uploaded ${tokenUriMetadata.name}`)
       tokenUris.push(`ipfs://${metadataUploadResponse.IpfsHash}`)
    }
+   console.log("Token uris are ::::")
+   console.log(tokenUris)
    console.log("Token Uri's uploaded")
    return tokenUris
 }
