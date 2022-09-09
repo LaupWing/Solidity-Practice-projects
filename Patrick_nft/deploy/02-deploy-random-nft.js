@@ -1,6 +1,6 @@
 const { network, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../helper-hardhat-config")
-const { storeImages } = require("../utils/uploadToPinata")
+const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata")
 const { verify } = require("../utils/verify")
 
 const imageLocation = "./images"
@@ -49,12 +49,20 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       // tokenUri
       networkConfig[chainId].mintFee,
    ]
-   await storeImages(imageLocation)
 }
 
 async function handleTokenUris(){
    tokenUris =[]
-
+   const {responses, files} = await storeImages(imageLocation)
+   for(responseIndex in responses){
+      let tokenUriMetadata = {...metadataTemplate}
+      tokenUriMetadata.name = files[responseIndex].replace(".png", "")
+      tokenUriMetadata.description = `An adorable ${tokenUriMetadata.meta}`
+      tokenUriMetadata.image = `ipfs://${responses[responseIndex].IpfsHash}`
+      console.log(`Uploading ${tokenUriMetadata.name}...`)
+      await storeTokenUriMetadata(tokenUriMetadata)
+      console.log(`Succesfully uploaded ${tokenUriMetadata.name}`)
+   }
    return tokenUris
 }
 
