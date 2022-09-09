@@ -3,6 +3,19 @@ const { developmentChains, networkConfig } = require("../helper-hardhat-config")
 const { storeImages } = require("../utils/uploadToPinata")
 const { verify } = require("../utils/verify")
 
+const imageLocation = "./images"
+
+const metadataTemplate = {
+   name: "",
+   description: "",
+   image: "",
+   attributes :[
+      {
+         trait_type: "Cuteness",
+         value: 100
+      }
+   ]
+}
 
 module.exports = async ({getNamedAccounts, deployments}) =>{
    const {deploy, log} = deployments
@@ -17,26 +30,26 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
    }
 
    if(developmentChains.includes(network.name)){
-      // const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
-      // vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
-      // const tx = await vrfCoordinatorV2Mock.createSubscription()
-      // const txReceipt = await tx.wait(1)
-      // subscribtionId = txReceipt.events[0].args.subId
+      const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+      vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
+      const tx = await vrfCoordinatorV2Mock.createSubscription()
+      const txReceipt = await tx.wait(1)
+      subscribtionId = txReceipt.events[0].args.subId
       
    }else{
       vrfCoordinatorV2Address =  networkConfig[chainId].vrfCoordinatorV2
       subscribtionId =  networkConfig[chainId].subscribtionId
    }
    log("--------------------")
-   // const args = [
-   //    vrfCoordinatorV2Address, 
-   //    subscribtionId,
-   //    networkConfig[chainId].gasLane,
-   //    networkConfig[chainId].callbackGasLimit,
-   //    // tokenUri
-   //    networkConfig[chainId].mintFee,
-   // ]
-   await storeImages("./images")
+   const args = [
+      vrfCoordinatorV2Address, 
+      subscribtionId,
+      networkConfig[chainId].gasLane,
+      networkConfig[chainId].callbackGasLimit,
+      // tokenUri
+      networkConfig[chainId].mintFee,
+   ]
+   await storeImages(imageLocation)
 }
 
 async function handleTokenUris(){
@@ -44,5 +57,6 @@ async function handleTokenUris(){
 
    return tokenUris
 }
+
 
 module.exports.tags = ["all", "randomipfs", "main"]
