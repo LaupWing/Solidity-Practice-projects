@@ -26,7 +26,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
    let tokenUris
 
    if(process.env.UPLOAD_TO_PINATA === "true"){
-      // tokenUris = await handleTokenUris()
+      tokenUris = await handleTokenUris()
    }
 
    if(developmentChains.includes(network.name)){
@@ -52,7 +52,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
 }
 
 async function handleTokenUris(){
-   tokenUris =[]
+   const tokenUris =[]
    const {responses, files} = await storeImages(imageLocation)
    for(responseIndex in responses){
       let tokenUriMetadata = {...metadataTemplate}
@@ -60,9 +60,11 @@ async function handleTokenUris(){
       tokenUriMetadata.description = `An adorable ${tokenUriMetadata.meta}`
       tokenUriMetadata.image = `ipfs://${responses[responseIndex].IpfsHash}`
       console.log(`Uploading ${tokenUriMetadata.name}...`)
-      await storeTokenUriMetadata(tokenUriMetadata)
+      const metadataUploadResponse = await storeTokenUriMetadata(tokenUriMetadata)
       console.log(`Succesfully uploaded ${tokenUriMetadata.name}`)
+      tokenUris.push(`ipfs://${metadataUploadResponse.IpfsHash}`)
    }
+   console.log("Token Uri's uploaded")
    return tokenUris
 }
 
