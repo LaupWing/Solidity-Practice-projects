@@ -74,7 +74,7 @@ async function handleTokenUris(){
    for(responseIndex in responses){
       let tokenUriMetadata = {...metadataTemplate}
       tokenUriMetadata.name = files[responseIndex].replace(".png", "")
-      tokenUriMetadata.description = `An adorable ${tokenUriMetadata.meta}`
+      tokenUriMetadata.description = `An adorable ${tokenUriMetadata.name}`
       tokenUriMetadata.image = `ipfs://${responses[responseIndex].IpfsHash}`
       console.log(`Uploading ${tokenUriMetadata.name}...`)
       const metadataUploadResponse = await storeTokenUriMetadata(tokenUriMetadata)
