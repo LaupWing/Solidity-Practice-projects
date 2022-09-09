@@ -16,14 +16,18 @@ const metadataTemplate = {
       }
    ]
 }
-
+const FUND_AMOUNT = ethers.utils.parseUnits("10", "ether")
+let tokenUris = [
+   'ipfs://QmWYYsJXaaW2ic96MLv2UzvN2KjncCVRfCRjBXvs6t7mmw',
+   'ipfs://QmNj8gzyr5vzRwUD74xqfmiw46JM58fGivUT3BXvRDpAmQ',
+   'ipfs://QmZEPS1a2TqnuSEeaq1LmVWPAFSLgoG1rLxbxV4n61jrgq'
+ ]
 module.exports = async ({getNamedAccounts, deployments}) =>{
    const {deploy, log} = deployments
    const {deployer} = await getNamedAccounts()
    const chainId = network.config.chainId
 
    let vrfCoordinatorV2Address, subscribtionId
-   let tokenUris
 
    if(process.env.UPLOAD_TO_PINATA === "true"){
       tokenUris = await handleTokenUris()
@@ -35,7 +39,7 @@ module.exports = async ({getNamedAccounts, deployments}) =>{
       const tx = await vrfCoordinatorV2Mock.createSubscription()
       const txReceipt = await tx.wait(1)
       subscribtionId = txReceipt.events[0].args.subId
-      
+      await vrfCoordinatorV2Mock.fundSubscription(subscribtionId, FUND_AMOUNT)
    }else{
       vrfCoordinatorV2Address =  networkConfig[chainId].vrfCoordinatorV2
       subscribtionId =  networkConfig[chainId].subscribtionId
