@@ -26,6 +26,10 @@ contract DynamicSvgNft is ERC721 {
       s_tokenCounter = s_tokenCounter + 1;
    }
 
+   function _baseURI() internal pure override returns(string memory){
+      return "data:application/json;base64,";
+   }
+
    function tokenURI(uint256 tokenId) public view override returns (string memory){
       require(_exists(tokenId), "URI Query for nonexistent token");
 
