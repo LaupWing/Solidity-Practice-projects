@@ -38,6 +38,24 @@ const lowTokenUri =
       })
 
       describe("mintNft", ()=>{
-         
+         it("emits an event and creates the NFT", async ()=>{
+            const highValue = ethers.utils.parseEther("1")
+            await expect(dynamicSvgNft.mintNft(highValue).to.emit(
+               dynamicSvgNft,
+               "CreatedNFT"
+            ))
+            const tokenCounter = await dynamicSvgNft.getTokenCounter()
+            assert.equal(tokenCounter.toString(), "1")
+            const tokenURI = await dynamicSvgNft.tokenURI(0)
+            assert.equal(tokenURI, highTokenUri)
+         })
+
+         it("shifts the token uri to lower when the price doesn't surpass the highvalue", async ()=>{
+            const highValue = ethers.utils.parseEther("100000000")
+            const txResponse = await dynamicSvgNft.mintNft(highValue)
+            await txResponse.wait(1)
+            const tokenUri = await dynamicSvgNft.tokenURI(0)
+            assert.equal(tokenUri, lowTokenUri)
+         })
       })
    })
