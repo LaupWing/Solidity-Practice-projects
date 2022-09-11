@@ -36,4 +36,8 @@ const lowTokenUri =
             assert.equal(priceFeed, mockV3Aggregator.address)
          })
       })
+
+      describe("mintNft", ()=>{
+         
+      })
    })
