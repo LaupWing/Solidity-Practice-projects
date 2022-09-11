@@ -33,15 +33,15 @@ contract DynamicSvgNft is ERC721 {
    function tokenURI(uint256 tokenId) public view override returns (string memory){
       require(_exists(tokenId), "URI Query for nonexistent token");
 
-      if (!_exists(tokenId)) {
-         revert ERC721Metadata__URI_QueryFor_NonExistentToken();
-      }
-      (, int256 price, , , ) = i_priceFeed.latestRoundData();
+      // if (!_exists(tokenId)) {
+      //    revert ERC721Metadata__URI_QueryFor_NonExistentToken();
+      // }
+      // (, int256 price, , , ) = i_priceFeed.latestRoundData();
       string memory imageURI = i_lowImageURI;
 
-      if (price >= s_tokenIdToHighValues[tokenId]) {
-         imageURI = i_highImageURI;
-      }
+      // if (price >= s_tokenIdToHighValues[tokenId]) {
+      //    imageURI = i_highImageURI;
+      // }
 
       return
          string(
@@ -49,14 +49,14 @@ contract DynamicSvgNft is ERC721 {
                   _baseURI(),
                   Base64.encode(
                      bytes(
-                           abi.encodePacked(
-                              '{"name":"',
-                              name(), // You can add whatever name here
-                              '", "description":"An NFT that changes based on the Chainlink Feed", ',
-                              '"attributes": [{"trait_type": "coolness", "value": 100}], "image":"',
-                              imageURI,
-                              '"}'
-                           )
+                        abi.encodePacked(
+                           '{"name":"',
+                           name(), // You can add whatever name here
+                           '", "description":"An NFT that changes based on the Chainlink Feed", ',
+                           '"attributes": [{"trait_type": "coolness", "value": 100}], "image":"',
+                           imageURI,
+                           '"}'
+                        )
                      )
                   )
                )
