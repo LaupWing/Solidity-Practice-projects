@@ -11,6 +11,7 @@ contract DynamicSvgNft is ERC721 {
    string private i_highImageURI;
    string private constant base64EncodedSvgPrefix = "data:image/svg+xml;base64";
    AggregatorV3Interface internal immutable i_priceFeed;
+   mapping(uint256 => int256) public s_tokenIdToHighValue;
 
    constructor(
       address priceFeedAddress,
@@ -28,7 +29,8 @@ contract DynamicSvgNft is ERC721 {
       return string(abi.encodePacked(base64EncodedSvgPrefix, svgBase64Encoded));
    }
 
-   function mintNft() public{
+   function mintNft(int256 highValue) public{
+      s_tokenIdToHighValue[s_tokenCounter] = highValue;
       _safeMint(msg.sender, s_tokenCounter);
       s_tokenCounter = s_tokenCounter + 1;
    }
@@ -43,12 +45,12 @@ contract DynamicSvgNft is ERC721 {
       // if (!_exists(tokenId)) {
       //    revert ERC721Metadata__URI_QueryFor_NonExistentToken();
       // }
-      // (, int256 price, , , ) = i_priceFeed.latestRoundData();
+      (, int256 price, , , ) = i_priceFeed.latestRoundData();
       string memory imageURI = i_lowImageURI;
 
-      // if (price >= s_tokenIdToHighValues[tokenId]) {
-      //    imageURI = i_highImageURI;
-      // }
+      if (price >= s_tokenIdToHighValue[tokenId]) {
+         imageURI = i_highImageURI;
+      }
 
       return
          string(
