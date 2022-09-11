@@ -33,10 +33,12 @@ contract DynamicSvgNft is ERC721 {
          revert ERC721Metadata__URI_QueryFor_NonExistentToken();
       }
       (, int256 price, , , ) = i_priceFeed.latestRoundData();
-      string memory imageURI = s_lowImageURI;
+      string memory imageURI = i_lowImageURI;
+
       if (price >= s_tokenIdToHighValues[tokenId]) {
-         imageURI = s_highImageURI;
+         imageURI = i_highImageURI;
       }
+
       return
          string(
                abi.encodePacked(
