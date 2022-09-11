@@ -3,7 +3,7 @@ const { developmentChains, networkConfig } = require("../helper-hardhat-config")
 const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata")
 const { verify } = require("../utils/verify")
 
-const imageLocation = "./images"
+const imageLocation = "./images/random"
 
 const metadataTemplate = {
    name: "",
