@@ -69,6 +69,35 @@ const {developmentChains} = require("../../helper-hardhat-config")
       })
    })
 
+   describe("buyItem", async ()=>{
+      it("reverts if the item isnt listed", async ()=>{
+         await expect(
+            nftMarketplace.buyItem(basicNft.address, TOKEN_ID)
+         ).to.be.revertedWith("NotListed")
+      })
+
+      it("reverts if the price isnt met", async ()=>{
+         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+         await expect(
+            nftMarketplace.buyItem(basicNft.address, TOKEN_ID)
+         ).to.be.revertedWith("PriceNotMet")
+      })
+
+      it("transfers the nft to the buyer and updates internal proceeds record", async ()=>{
+         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+         nftMarketplace = nftMarketplace.connect(player)
+         expect(
+            await nftMarketplace.buyItem(basicNft.address, TOKEN_ID, { value: PRICE})
+         ).to.emit("ItemBought")
+         const newOwner = await basicNft.ownerOf(TOKEN_ID)
+         const deployerProceeds = await nftMarketplace.getProceeds(deployer.address)
+         assert(newOwner.toString() == player.address)
+         assert(deployerProceeds.toString() == PRICE.toString())
+      })
+   })
+
+
+   
    // it("lists and can be bought", async ()=>{
    //    await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
    //    const playerConnectedNftMarketplace = nftMarketplace.connect(player)
