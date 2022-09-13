@@ -50,6 +50,9 @@ module.exports = {
       deployer:{
          default:0,
          1: 0
+      },
+      player:{
+         default: 1
       }
    }
 }
