@@ -47,15 +47,37 @@ const {developmentChains} = require("../../helper-hardhat-config")
          assert(listing.seler.toString() == deployer.address)
       })
    })
-   it("lists and can be bought", async ()=>{
-      await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
-      const playerConnectedNftMarketplace = nftMarketplace.connect(player)
-      await playerConnectedNftMarketplace.buyItem(basicNft.address, TOKEN_ID, {value: PRICE})
-      const newOwner = await basicNft.ownerOf(TOKEN_ID)
-      const deployerProceeds = await nftMarketplace.getProceeds(deployer)
 
-      assert(newOwner.toString() == player.address)
-      assert(deployerProceeds.toString() ==  PRICE.toString())
+   describe("cancelListing", ()=>{
+      it("reverts if there is no listing", async ()=>{
+         const error = `NotListed("${basicNft.address}, ${TOKEN_ID}")`
+         await expect(nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.be.revertedWith(error)
+      })
+
+      it("reverts if anyone but the owner tries to call", async()=>{
+         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+         nftMarketplace = nftMarketplaceContract.connect(player)
+         await basicNft.approve(user.address, TOKEN_ID)
+         await expect(nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.be.revertedWith("NotOwner")
+      })
+
+      it("emits event and remove listing", async ()=>{
+         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+         expect(await nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.emit("ItemCanceled")
+         const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID)
+         assert(listing.price.toString() == "0")
+      })
    })
+
+   // it("lists and can be bought", async ()=>{
+   //    await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+   //    const playerConnectedNftMarketplace = nftMarketplace.connect(player)
+   //    await playerConnectedNftMarketplace.buyItem(basicNft.address, TOKEN_ID, {value: PRICE})
+   //    const newOwner = await basicNft.ownerOf(TOKEN_ID)
+   //    const deployerProceeds = await nftMarketplace.getProceeds(deployer)
+
+   //    assert(newOwner.toString() == player.address)
+   //    assert(deployerProceeds.toString() ==  PRICE.toString())
+   // })
    
 })
