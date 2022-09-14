@@ -1,9 +1,18 @@
+import Link from 'next/link'
 import React from 'react'
 import { ConnectButton } from 'web3uikit'
 
 const Header = () => {
    return (
-      <ConnectButton/>
+      <nav> 
+         <Link href={"/"}>
+            <a>NFT Marketplace</a>
+         </Link>
+         <Link href={"/sell-nft"}>
+            <a>Sell NFT</a>
+         </Link>
+         <ConnectButton/>
+      </nav>
    )
 }
 
