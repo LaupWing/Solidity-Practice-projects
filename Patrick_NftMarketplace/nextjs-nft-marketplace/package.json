@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain w1uzkhzrflxf.usemoralis.com --frpcPath ./frp/frcp"
   },
   "dependencies": {
     "moralis": "^2.4.0",
