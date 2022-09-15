@@ -124,6 +124,22 @@ async function main() {
          "type": "event"
       }
    }
+
+   const listedResponse = await Moralis.Cloud.run("watchContractEvent", itemListedOptions, {
+      userMasterKey: true
+   })
+   const boughtResponse = await Moralis.Cloud.run("watchContractEvent", itemBoughtOptions, {
+      userMasterKey: true
+   })
+   const canceledResponse = await Moralis.Cloud.run("watchContractEvent", itemCanceledOptions, {
+      userMasterKey: true
+   })
+
+   if(listedResponse.success && canceledResponse.success && boughtResponse.success){
+      console.log("Success! Database updated with watching events")
+   }else {
+      console.log("Something went wrong")
+   }
 }
 
 main()
