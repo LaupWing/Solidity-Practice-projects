@@ -11,9 +11,9 @@ module.exports = async ()=>{
 
 async function updateContractAddresses(){
    try{
-      const nftMarketplace = await ethers.getContract("NftMarketplace")
-      console.log(nftMarketplace)
       const chainId = network.config.chainId.toString()
+      console.log(chainId)
+      const nftMarketplace = await ethers.getContract("NftMarketplace")
       const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, "utf-8"))
    
       if(chainId in contractAddresses){
