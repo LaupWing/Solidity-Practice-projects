@@ -10,20 +10,96 @@ const appId = process.env.NEXT_PUBLIC_APP_ID
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
 const masterKey = process.env.masterKey
 
-async function main(){
-   await Moralis.start({serverUrl, appId, masterKey})
+async function main() {
+   await Moralis.start({ serverUrl, appId, masterKey })
    console.log(`Working with contractaddress ${contractAddress}`)
 
    const itemListedOptions = {
       chainId: moralisChainId,
       sync_historical: true,
-      topic: "ItemListed(address,address,uint256,uint256)" 
+      topic: "ItemListed(address,address,uint256,uint256)",
+      abi: {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "seller",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "nftAddress",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "uint256",
+               "name": "tokenId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "price",
+               "type": "uint256"
+            }
+         ],
+         "name": "ItemListed",
+         "type": "event"
+      },
+      tableName: "ItemListed"
+   }
+
+   let itemBoughtOptions = {
+      chainId: moralisChainId,
+      sync_historical: true,
+      topic: "ItemBought(address,address,uint256,uint256)",
+      abi: {
+
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "buyer",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "nftAddress",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "uint256",
+               "name": "tokenId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "price",
+               "type": "uint256"
+            }
+         ],
+         "name": "ItemBought",
+         "type": "event"
+      },
+      tableName: "ItemBought"
+   }
+
+   let itemCanceledOptions = {
+      chainId: moralisChainId,
+      sync_historical: true,
    }
 }
 
 main()
-   .then(()=> process.exit(0))
-   .catch(err=>{
+   .then(() => process.exit(0))
+   .catch(err => {
       console.error(err)
       process.exit(1)
    })
