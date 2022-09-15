@@ -16,6 +16,7 @@ async function main() {
 
    const itemListedOptions = {
       chainId: moralisChainId,
+      address: contractAddress,
       sync_historical: true,
       topic: "ItemListed(address,address,uint256,uint256)",
       abi: {
@@ -54,6 +55,7 @@ async function main() {
 
    let itemBoughtOptions = {
       chainId: moralisChainId,
+      address: contractAddress,
       sync_historical: true,
       topic: "ItemBought(address,address,uint256,uint256)",
       abi: {
@@ -93,7 +95,34 @@ async function main() {
 
    let itemCanceledOptions = {
       chainId: moralisChainId,
+      address: contractAddress,
       sync_historical: true,
+      topic: "ItemCanceled(address,address,uint256)",
+      abi: {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "seller",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "nftAddress",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "uint256",
+               "name": "tokenId",
+               "type": "uint256"
+            }
+         ],
+         "name": "ItemCanceled",
+         "type": "event"
+      }
    }
 }
 
