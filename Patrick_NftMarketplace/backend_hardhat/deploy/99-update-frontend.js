@@ -12,10 +12,10 @@ module.exports = async ()=>{
 async function updateContractAddresses(){
    try{
       const chainId = network.config.chainId.toString()
-      console.log(chainId)
-      const nftMarketplace = await ethers.getContract("NftMarketplace")
       const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, "utf-8"))
-   
+      console.log(contractAddresses)
+      const nftMarketplace = await ethers.getContract("NftMarketplace")
+      console.log(nftMarketplace)
       if(chainId in contractAddresses){
          if(!contractAddresses[chainId]["NftMarketplace"].includes(nftMarketplace.address)){
             contractAddresses[chainId]["NftMarketplace"].push(nftMarketplace.address)
