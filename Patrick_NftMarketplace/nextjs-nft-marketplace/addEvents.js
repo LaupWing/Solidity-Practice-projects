@@ -1,4 +1,4 @@
-const Moralis = require("moralis/node")
+const Moralis = require("moralis-v1/node")
 require("dotenv").config()
 const contractAddresses = require("./constants/networkMapping.json")
 
@@ -6,8 +6,8 @@ const chainId = process.env.chainId || 31337
 const moralisChainId = chainId == "31337" ? "1337" : chainId
 const contractAddress = contractAddresses[chainId]["NftMarketplace"][0]
 
-const appId = process.env.NEXT_PUBLIC_APP_ID
-const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+const appId = process.env.NEXT_PUBLIC_MORALIS_APP_ID
+const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER
 const masterKey = process.env.masterKey
 
 async function main() {
@@ -126,13 +126,13 @@ async function main() {
    }
 
    const listedResponse = await Moralis.Cloud.run("watchContractEvent", itemListedOptions, {
-      userMasterKey: true
+      useMasterKey: true
    })
    const boughtResponse = await Moralis.Cloud.run("watchContractEvent", itemBoughtOptions, {
-      userMasterKey: true
+      useMasterKey: true
    })
    const canceledResponse = await Moralis.Cloud.run("watchContractEvent", itemCanceledOptions, {
-      userMasterKey: true
+      useMasterKey: true
    })
 
    if(listedResponse.success && canceledResponse.success && boughtResponse.success){
