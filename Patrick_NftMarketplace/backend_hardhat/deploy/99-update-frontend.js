@@ -5,7 +5,7 @@ const frontEndContractsFile = "../nextjs-nft-marketplace/constants/networkMappin
 
 module.exports = async ()=>{
    if(process.env.UPDATE_FRONTEND){
-      updateContractAddresses()
+      await updateContractAddresses()
    }
 }
 
@@ -13,16 +13,16 @@ async function updateContractAddresses(){
    try{
       const chainId = network.config.chainId.toString()
       const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, "utf-8"))
-      console.log(contractAddresses)
       const nftMarketplace = await ethers.getContract("NftMarketplace")
-      console.log(nftMarketplace)
+
       if(chainId in contractAddresses){
          if(!contractAddresses[chainId]["NftMarketplace"].includes(nftMarketplace.address)){
             contractAddresses[chainId]["NftMarketplace"].push(nftMarketplace.address)
-         }else{
-            contractAddresses[chainId] = {
-               NftMarketplace: [nftMarketplace.address]
-            }
+         }
+      }
+      else{
+         contractAddresses[chainId] = {
+            NftMarketplace: [nftMarketplace.address]
          }
       }
       fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses))
