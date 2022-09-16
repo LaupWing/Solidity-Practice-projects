@@ -8,10 +8,11 @@ Moralis.Cloud.afterSave("ItemListed", async (request)=>{
    logger.info(confirmed)
    if(confirmed){
       logger.info("Found item")
+      log.info("loggin request")
+      log.info(request.object)
       const ActiveItem = Moralis.Object.extend("ActiveItem")
 
       const activeItem = new ActiveItem()
-      log.info(request)
       // activeItem.set("marketplaceAddress", request.object.get("address"))
       // activeItem.set("nftAddress", request.object.get("nftAddress"))
       // activeItem.set("price", request.object.get("price"))
