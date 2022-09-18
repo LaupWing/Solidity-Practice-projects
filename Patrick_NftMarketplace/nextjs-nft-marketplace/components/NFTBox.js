@@ -7,6 +7,20 @@ import {} from "e"
 import { Card } from 'web3uikit'
 import { ethers } from 'ethers'
 
+const truncateString = (fullStr, strLen) =>{
+   if(fullStr.length < strLen)   return fullStr
+
+   const seperator = "..."
+   let seperatorLength = seperator.length
+   const charsToShow = strLen - seperatorLength
+   const frontChars = Math.ceil(charsToShow / 2)
+   const backChars = Math.floor(charsToShow / 2)
+
+   return (
+      fullStr.substring(0, frontChars) + seperator + fullStr.substring(fullStr.length -backChars)
+   )
+}
+
 const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}) => {
    const [imageURI, setImageURI] = useState("")
    const {isWeb3Enabled} = useMoralis()
@@ -45,7 +59,7 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
    }, [isWeb3Enabled])
 
    const isOwnedByUser = seller === account || seller === undefined
-   const formattedSellerAddress = isOwnedByUser ? "You" : seller
+   const formattedSellerAddress = isOwnedByUser ? "You" : truncateString(seller, 15)
 
    return (
       <div>
