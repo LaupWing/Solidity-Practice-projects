@@ -27,6 +27,7 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
    const {isWeb3Enabled} = useMoralis()
    const [tokenName, setTokenName] = useState("")
    const [tokenDescription, setTokenDescription] = useState("")
+   const [showModal, setShowModal] = useState(false)
 
    const {runContractFunction: getTokenURI} = useWeb3Contract({
       abi: basicNftAbi,
@@ -62,15 +63,26 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
    const isOwnedByUser = seller === account || seller === undefined
    const formattedSellerAddress = isOwnedByUser ? "You" : truncateString(seller, 15)
 
+   const handleCardClick = ()=>{
+      isOwnedByUser ? setShowModal(true) : console.log("Let's buy")
+   }
+
    return (
       <div>
          <div>
             {imageURI ? (
                <div>
                   <UpdateListingModal
-                     isVisible={true}
+                     isVisible={showModal}
+                     tokenId={tokenId}
+                     nftMarketplaceAddress={marketplaceAddress}
+                     nftAddress={nftAddress}
                   />
-                  <Card title={tokenName} description={tokenDescription}>
+                  <Card 
+                     title={tokenName} 
+                     description={tokenDescription}
+                     onClick={handleCardClick}
+                  >
                      <div className="flex flex-col items-end gap-2 p-2">
                         <div>
                            #{tokenId}
