@@ -18,6 +18,16 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
 
    const updateUI = async ()=>{
       const tokenUri = await getTokenURI()
+      console.log(`The TokenURI is ${tokenUri}`)
+
+      if(tokenUri){
+         // IPFS Gateway: A server that will return IPFS files from a "normal" URL.
+         const requestURL = tokenUri.replace("ipfs://", "https://ipfs.io/ipfs/")
+         const tokenURIResponse = await (await fetch(requestURL)).json()
+         const imageURI = tokenURIResponse.image
+         const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+         setImageURI(imageURIURL)
+      }
    }
 
    useEffect(()=>{
