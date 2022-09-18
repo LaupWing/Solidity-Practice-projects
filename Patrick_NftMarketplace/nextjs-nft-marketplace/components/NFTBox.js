@@ -6,6 +6,7 @@ import Image from 'next/image'
 import {} from "e"
 import { Card } from 'web3uikit'
 import { ethers } from 'ethers'
+import UpdateListingModal from './UpdateListingModal'
 
 const truncateString = (fullStr, strLen) =>{
    if(fullStr.length < strLen)   return fullStr
@@ -65,21 +66,26 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
       <div>
          <div>
             {imageURI ? (
-               <Card title={tokenName} description={tokenDescription}>
-                  <div className="flex flex-col items-end gap-2 p-2">
-                     <div>
-                        #{tokenId}
+               <div>
+                  <UpdateListingModal
+                     isVisible={true}
+                  />
+                  <Card title={tokenName} description={tokenDescription}>
+                     <div className="flex flex-col items-end gap-2 p-2">
+                        <div>
+                           #{tokenId}
+                        </div>
+                        <div className="italix text-sm">Owned by {formattedSellerAddress}</div>
+                        <Image 
+                           loader={()=>imageURI}
+                           src={imageURI}
+                           width="200"
+                           height={"200"}
+                        />
+                        <div>{ethers.utils.formatUnits(price, "ether")} ETH</div>
                      </div>
-                     <div className="italix text-sm">Owned by {formattedSellerAddress}</div>
-                     <Image 
-                        loader={()=>imageURI}
-                        src={imageURI}
-                        width="200"
-                        height={"200"}
-                     />
-                     <div>{ethers.utils.formatUnits(price, "ether")} ETH</div>
-                  </div>
-               </Card>
+                  </Card>
+               </div>
             ) : (
                <div>Loading</div>
             )}
