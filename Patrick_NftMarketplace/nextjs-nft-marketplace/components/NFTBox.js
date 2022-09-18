@@ -7,7 +7,7 @@ import {} from "e"
 import { Card } from 'web3uikit'
 import { ethers } from 'ethers'
 
-const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
+const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}) => {
    const [imageURI, setImageURI] = useState("")
    const {isWeb3Enabled} = useMoralis()
    const [tokenName, setTokenName] = useState("")
