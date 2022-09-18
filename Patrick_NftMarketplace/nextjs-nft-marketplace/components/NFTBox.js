@@ -49,17 +49,19 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
          <div>
             {imageURI ? (
                <Card title={tokenName} description={tokenDescription}>
-                  <div>
-                     #{tokenId}
+                  <div className="flex flex-col items-end gap-2 p-2">
+                     <div>
+                        #{tokenId}
+                     </div>
+                     <div className="italix text-sm">Owned by {seller}</div>
+                     <Image 
+                        loader={()=>imageURI}
+                        src={imageURI}
+                        width="200"
+                        height={"200"}
+                     />
+                     <div>{ethers.utils.formatUnits(price, "ether")} ETH</div>
                   </div>
-                  <div className="italix text-sm">Owned by {seller}</div>
-                  <Image 
-                     loader={()=>imageURI}
-                     src={imageURI}
-                     width="200"
-                     height={"200"}
-                  />
-                  <div>{ethers.utils.formatUnits(price, "ether")} ETH</div>
                </Card>
             ) : (
                <div>Loading</div>

@@ -9,24 +9,26 @@ export default function Home() {
    )
 
    return (
-      <div className={styles.container}>
-         {fetchingListedNfts ?  
-            (<div>Loading...</div>) : 
-            listedNfts.map((nft) => {
-               console.log(nft.attributes)
-               const {price, nftAddress, tokenId, marketplaceAddress, seller} = nft.attributes
-               return (
-                  <div>
-                     Price: {price}. NftAddress: {nftAddress}. TokenId: {tokenId}. Seller: {seller}
-                     <NFTBox
-                        price={price}
-                        nftAddress={nftAddress}
-                        marketplaceAddress={marketplaceAddress}
-                        seller={seller}
-                     />
-                  </div>
-               )
-            })}     
+      <div className="container mx-auto">
+         <h1 className="p-4 font-bold text-2xl">Recently Listed</h1>
+         <div className="flex flex-wrap">
+            {fetchingListedNfts ?  
+               (<div>Loading...</div>) : 
+               listedNfts.map((nft) => {
+                  console.log(nft.attributes)
+                  const {price, nftAddress, tokenId, marketplaceAddress, seller} = nft.attributes
+                  return (
+                     <div>
+                        <NFTBox
+                           price={price}
+                           nftAddress={nftAddress}
+                           marketplaceAddress={marketplaceAddress}
+                           seller={seller}
+                        />
+                     </div>
+                  )
+               })}     
+         </div>
       </div>
    )
 }
