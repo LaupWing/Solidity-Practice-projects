@@ -3,10 +3,15 @@ import { useMoralis, useWeb3Contract } from 'react-moralis'
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import basicNftAbi from "../constants/BasicNft.json"
 import Image from 'next/image'
+import {} from "e"
+import { Card } from 'web3uikit'
+import { ethers } from 'ethers'
 
 const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
    const [imageURI, setImageURI] = useState("")
    const {isWeb3Enabled} = useMoralis()
+   const [tokenName, setTokenName] = useState("")
+   const [tokenDescription, setTokenDescription] = useState("")
 
    const {runContractFunction: getTokenURI} = useWeb3Contract({
       abi: basicNftAbi,
@@ -28,6 +33,8 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
          const imageURI = tokenURIResponse.image
          const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
          setImageURI(imageURIURL)
+         setTokenName(tokenURIResponse.name)
+         setTokenDescription(tokenURIResponse.description)
       }
    }
 
@@ -40,12 +47,23 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller}) => {
    return (
       <div>
          <div>
-            {imageURI ? (<div><Image 
-               loader={()=>imageURI}
-               src={imageURI}
-               width="200"
-               height={"200"}
-            /></div>) : (<div>Loading</div>) }
+            {imageURI ? (
+               <Card title={tokenName} description={tokenDescription}>
+                  <div>
+                     #{tokenId}
+                  </div>
+                  <div className="italix text-sm">Owned by {seller}</div>
+                  <Image 
+                     loader={()=>imageURI}
+                     src={imageURI}
+                     width="200"
+                     height={"200"}
+                  />
+                  <div>{ethers.utils.formatUnits(price, "ether")} ETH</div>
+               </Card>
+            ) : (
+               <div>Loading</div>
+            )}
          </div>
       </div>
    )
