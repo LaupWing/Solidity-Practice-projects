@@ -1,4 +1,5 @@
 import { useMoralisQuery } from 'react-moralis'
+import NFTBox from '../components/NFTBox'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -15,7 +16,15 @@ export default function Home() {
                console.log(nft.attributes)
                const {price, nftAddress, tokenId, marketplaceAddress, seller} = nft.attributes
                return (
-                  <div>Price: {price}. NftAddress: {nftAddress}. TokenId: {tokenId}. Seller: {seller}</div>
+                  <div>
+                     Price: {price}. NftAddress: {nftAddress}. TokenId: {tokenId}. Seller: {seller}
+                     <NFTBox
+                        price={price}
+                        nftAddress={nftAddress}
+                        marketplaceAddress={marketplaceAddress}
+                        seller={seller}
+                     />
+                  </div>
                )
             })}     
       </div>
