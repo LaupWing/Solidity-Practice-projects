@@ -44,6 +44,9 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
       }
    }, [isWeb3Enabled])
 
+   const isOwnedByUser = seller === account || seller === undefined
+   const formattedSellerAddress = isOwnedByUser ? "You" : seller
+
    return (
       <div>
          <div>
@@ -53,7 +56,7 @@ const NFTBox = ({price, nftAddress, seller, marketplaceAddress, seller, tokenId}
                      <div>
                         #{tokenId}
                      </div>
-                     <div className="italix text-sm">Owned by {seller}</div>
+                     <div className="italix text-sm">Owned by {formattedSellerAddress}</div>
                      <Image 
                         loader={()=>imageURI}
                         src={imageURI}

@@ -3,7 +3,7 @@ import NFTBox from '../components/NFTBox'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-   const {isWeb3Enabled} = useMoralis()
+   const {isWeb3Enabled, account} = useMoralis()
    const {data: listedNfts, isFetching: fetchingListedNfts} = useMoralisQuery(
       "ActiveItem",
       (query) => query.limit(10).descending("tokenId")
