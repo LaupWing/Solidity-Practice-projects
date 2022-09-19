@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Form } from 'web3uikit'
+import { Form, useNotification } from 'web3uikit'
 import styles from '../styles/Home.module.css'
 
 import networkMapping from "../constants/networkMapping.json"
@@ -14,6 +14,7 @@ export default function Home() {
 
    const chainString = chainId ? parseInt(chainId).toString() : "31337"
    const marketplaceAddress = networkMapping[chainId].NftMarketplace[0]
+   const dispatch = useNotification()
 
    const {runContractFunction} = useWeb3Contract()
 
@@ -61,8 +62,13 @@ export default function Home() {
       })
    }
 
-   const handleListSuccess = () =>{
-      
+   const handleListSuccess = async () =>{
+      dispatch({
+         type: "success",
+         message: "NFT listing",
+         title: "NFT listed",
+         position: "topR"
+      })
    }
 
    return (
